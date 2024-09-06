@@ -1,0 +1,231 @@
+{% extends 'base.html' %}
+{% block head_content %}
+<title>Dashboard</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+{% endblock head_content %}
+
+{% block container %}
+
+<h1 class="title-interanual"><i class="fa-solid fa-grip"></i> Valores Interanuales</h1>
+    <a href="#">
+      <div class="card-report">
+        <h5 class="title">Venta supermercado</h5>
+        <p class="num" id="super-inter">
+         
+        </p>
+        <p class="descripcion" id="descripcion">ultimos datos tomados actualizados</p>
+      </div>
+
+    </a>
+    
+    <a href="#">
+      <div class="card-report">
+        <h5 class="title">Venta supermercado sin inflacion</h5>
+        <p class="num" id="super-inter-sf">
+          
+        </p>
+        <p class="descripcion" id="descripcion">ultimos datos tomados actualizados </p>
+      </div>
+    </a>
+    
+    <a href="#">
+      <div class="card-report">
+        <h5 class="title">Venta de autos nuevos</h5>
+       
+        <p class="num" id="auto-patente">
+          
+          </p>
+      
+        <p class="descripcion" id="descripcion">ultimos datos tomados actualizados </p>
+      </div>
+
+    </a>
+    
+    <a href="#">
+      <div class="card-report">
+        <h5 class="title">Transferencia autos usados</h5>
+        <p class="num" id="trasnf-autos-usados">
+          
+        </p>
+        <p class="descripcion" id="descripcion">ultimos datos tomados actualizados </p>
+      </div>
+
+    </a>
+  
+  <a href="#">
+    <div class="card-report">
+      <h5 class="title">Venta de motos nuevas</h5>
+      <p class="num" id="moto-patente">
+        
+      </p>
+      <p class="descripcion" id="descripcion">ultimos datos tomados actualizados </p>
+    </div>
+
+  </a>
+  
+  <a href="#">
+    <div class="card-report">
+      <h5 class="title">Transferencia de motos usadas</h5>
+      <p class="num" id="transf-moto-usada">
+        
+      </p>
+      <p class="descripcion" id="descripcion">ultimos datos tomados actualizados </p>
+    </div>
+
+  </a>
+  
+  <a href="#">
+    <div class="card-report">
+      <h5 class="title">Evolucion empleo - sector privado</h5>
+      <p class="num" id="empleo-sector-priv">
+        
+      </p>
+      <p class="descripcion" id="descripcion">ultimos datos tomados actualizados </p>
+    </div>
+
+  </a>
+  
+  <a href="#">
+    <div class="card-report">
+      <h5 class="title">Remuneracion - sector privado</h5>
+      <p class="num" id="remun-prom">
+        
+      </p>
+      <p class="descripcion" id="descripcion">ultimos datos tomados actualizados </p>
+    </div>
+
+  </a>
+  
+  <a href="#">
+    <div class="card-report">
+      <h5 class="title">Base imponible </h5>
+      <p class="num" id="base-imp-inter">
+        
+      </p>
+      <p class="descripcion" id="descripcion">ultimos datos tomados actualizados </p>
+    </div>
+  
+  </a>
+
+  <a href="#">
+    <div class="card-report">
+      <h5 class="title">Recaudacion tributaria</h5>
+      <p class="num" id="recaudacion-tri-inter">
+        
+      </p>
+      <p class="descripcion" id="descripcion">ultimos datos tomados actualizados </p>
+    </div>
+  
+  </a>
+   
+<h1 class="title-interanual"><i class="fa-solid fa-grip"></i> Valores Intermensuales</h1>
+<a href="#">
+  <div class="card-report">
+    <h5 class="title">Venta supermercado</h5>
+    <p class="num" id="super-interm">
+      
+    </p>
+    <p class="descripcion" id="descripcion">ultimos datos tomados actualizados </p>
+  </div>
+
+</a>
+
+<a href="#">
+  <div class="card-report">
+    <h5 class="title">Venta supermercado sin inflacion</h5>
+    <p class="num" id="super-interm-sf">
+      
+    </p>
+    <p class="descripcion" id="descripcion">ultimos datos tomados actualizados </p>
+  </div>
+
+</a>
+
+<a href="#">
+  <div class="card-report">
+    <h5 class="title">Venta de autos nuevos</h5>
+    <p class="num" id="auto-patente-interm">
+     
+    </p>
+    <p class="descripcion" id="descripcion">ultimos datos tomados actualizados </p>
+  </div>
+
+</a>
+
+<a href="#">
+  <div class="card-report">
+    <h5 class="title">Transferencia autos usados</h5>
+    <p class="num" id="trasnf-autos-usados-interm">
+     
+    </p>
+    <p class="descripcion" id="descripcion">ultimos datos tomados actualizados </p>
+  </div>
+
+</a>
+
+<a href="#">
+  <div class="card-report">
+    <h5 class="title">Venta de motos nuevas</h5>
+    <p class="num" id="moto-patente-interm">
+      
+    </p>
+    <p class="descripcion" id="descripcion">ultimos datos tomados actualizados </p>
+  </div>
+
+</a>
+
+<a href="#">
+  <div class="card-report">
+    <h5 class="title">Transferencia de motos usadas</h5>
+    <p class="num" id="transf-moto-usada-interm">
+      
+    </p>
+    <p class="descripcion" id="descripcion">ultimos datos tomados actualizados </p>
+  </div>
+
+</a>
+
+<a href="#">
+  <div class="card-report">
+    <h5 class="title">Evolucion empleo - sector privado</h5>
+    <p class="num" id="empleo-sector-priv-interm">
+     
+    </p>
+    <p class="descripcion" id="descripcion">ultimos datos tomados actualizados </p>
+  </div>
+
+</a>
+
+<a href="#">
+  <div class="card-report">
+    <h5 class="title">Remuneracion - sector privado</h5>
+    <p class="num" id="remun-prom-interm">
+     
+    </p>
+    <p class="descripcion" id="descripcion">ultimos datos tomados actualizados </p>
+  </div>
+
+</a>
+
+<a href="#">
+  <div class="card-report">
+    <h5 class="title">Base imponible </h5>
+    <p class="num" id="base-imp-interm">
+      
+    </p>
+    <p class="descripcion" id="descripcion">ultimos datos tomados actualizados </p>
+  </div>
+
+</a>
+
+
+
+<script>
+
+
+</script>
+
+
+{% endblock container %}
+
+

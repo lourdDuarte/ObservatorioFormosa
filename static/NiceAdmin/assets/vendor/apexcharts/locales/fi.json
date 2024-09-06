@@ -1,0 +1,43 @@
+{
+  "name": "fi",
+  "options": {
+    "months": [
+      "Tammikuu",
+      "Helmikuu",
+      "Maaliskuu",
+      "Huhtikuu",
+      "Toukokuu",
+      "Kesäkuu",
+      "Heinäkuu",
+      "Elokuu",
+      "Syyskuu",
+      "Lokakuu",
+      "Marraskuu",
+      "Joulukuu"
+    ],
+    "shortMonths": [
+      "Tammi",
+      "Helmi",
+      "Maalis",
+      "Huhti",
+      "Touko",
+      "Kesä",
+      "Heinä",
+      "Elo",
+      "Syys",
+      "Loka",
+      "Marras",
+      "Joulu"
+    ],
+    "days": [
+      "Sunnuntai",
+      "Maanantai",
+      "Tiistai",
+      "Keskiviikko",
+      "Torstai",
+      "Perjantai",
+      "Lauantai"
+    ],
+    "shortDays": ["Su", "Ma", "Ti", "Ke", "To", "Pe", "La"]
+  }
+}
