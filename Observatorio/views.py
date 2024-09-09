@@ -13,3 +13,9 @@ def panel(request):
     }
     print(context)
     return render (request, 'panel.html', context)
+
+
+
+def prueba(request):
+
+    return render (request, 'prueba.html')

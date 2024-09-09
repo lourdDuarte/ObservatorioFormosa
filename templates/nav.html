@@ -1,166 +1,37 @@
+  <div class="sidebar" data-color="purple" data-background-color="black" data-image="../assets/img/sidebar-2.jpg">
 
+  <div class="logo" style="background:#181818"><a href="#" class="simple-text logo-normal">
+      Observatorio Economico
+    </a></div>
+  <div class="sidebar-wrapper" style="background:#181818">
+    <ul class="nav">
+      <li class="nav-item ">
+        <a class="nav-link" href="{% url 'panel' %}">
+          <i class="material-icons" style="color:#1294ff">dashboard</i>
+          <p style="color:#ffffff">Panel</p>
+        </a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" href="{% url 'prueba' %}">
+          <i class="material-icons" style="color:#1294ff">shopping_cart</i>
 
-
-  <!-- ======= Header ======= -->
-  <header id="header" class="header fixed-top d-flex align-items-center">
-
-    <div class="d-flex align-items-center justify-content-between">
-      <a href="#" class="logo d-flex align-items-center">
-        <span class="d-none d-lg-block">Observatorio Formosa</span>
-      </a>
-    
-    </div>
-
-  </header><!-- End Header -->
-
-  <!-- ======= Sidebar ======= -->
-  <aside id="sidebar" class="sidebar">
-
-    <ul class="sidebar-nav" id="sidebar-nav">
-            <li class="nav-item">
-                <a class="nav-link " href="#">
-                <i class="bi bi-grid"></i>
-                <span>Panel principal</span>
-                </a>
-            </li><!-- End Dashboard Nav -->
-            <li class="nav-item">
-              <a class="nav-link " href="#">
-              <i class="fa-solid fa-paperclip"></i>
-              <span>Informes</span>
-              </a>
-          </li><!-- End Dashboard Nav -->
-          <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
-              <i class="bi bi-gem"></i><span>IPC</span><i class="bi bi-chevron-down ms-auto"></i>
-            </a>
-            <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-              <li>
-                <a href="#">
-                  <i class="bi bi-circle"></i><span>ipc</span>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <i class="bi bi-circle"></i><span>ipc-nea</span>
-                </a>
-              </li>
-              
-            </ul>
-          </li><!-- End Icons Nav -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-                  <i class="fa-solid fa-cart-shopping"></i><span>Supermecados</span><i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                  <li>
-                    <a href= "#">
-                      <i class="bi bi-circle"></i><span>Evolucion en porcentaje</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="bi bi-circle"></i><span>Evolucion en porcentaje sin inflacion</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="bi bi-circle"></i><span>Ventas de Formosa / Var. IPC región NEA</span>
-                    </a>
-                  </li>
-                  
-                </ul>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-                  <i class="fa-solid fa-car"></i><span>Autos</span><i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                  <li>
-                    <a href="#">
-                      <i class="bi bi-circle"></i><span>Venta</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="bi bi-circle"></i><span>Transeferncia</span>
-                    </a>
-                  </li>
-                  
-                </ul>
-              </li><!-- End Forms Nav -->
-
-              <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-                  <i class="fa-solid fa-motorcycle"></i><span>Motos</span><i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                  <li>
-                    <a href="#">
-                      <i class="bi bi-circle"></i><span>Venta</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="bi bi-circle"></i><span>Transferencia</span>
-                    </a>
-                  </li>
-                </ul>
-              </li><!-- End Tables Nav -->
-              <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
-                  <i class="fa-solid fa-briefcase"></i><span>Empleo</span><i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                  <li>
-                    <a href="#">
-                      <i class="bi bi-circle"></i><span>Evolucion</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="bi bi-circle"></i><span>Remuneracion promedio de sector privado</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="bi bi-circle"></i><span>Remuneracion trabajadores de sector privado/IPC</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="bi bi-circle"></i><span>Asalariados del sector privado</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="bi bi-circle"></i><span>Trabajo en sector construccion - variacion </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="bi bi-circle"></i><span>Trabajo en sector construccion - evolucion </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="bi bi-circle"></i><span>Salario promedio sector construccion</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="bi bi-circle"></i><span>Cantidad empresas en sector construccion</span>
-                    </a>
-                  </li>
-                </ul>
-              </li><!-- End Charts Nav -->
-           
-             
-        <li class="nav-item">
-            <a class="nav-link collapsed" href= "#">
-            <i class="bi bi-menu-button-wide"></i><span>Salir</span>
-            </a>
-        </li><!-- End Components Nav -->
+          <p style="color:#ffffff">Supermercado</p>
+        </a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" href="./tables.html">
+          <i class="material-icons" style="color:#1294ff">equalizer</i>
+          <p style="color:#ffffff">IPC</p>
+        </a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" href="./typography.html">
+          <i class="material-icons" style="color:#1294ff">construction</i>
+          <p style="color:#ffffff">Construccion</p>
+        </a>
+      </li>
+      
+      
     </ul>
-
-  </aside>
-
+  </div>
+</div>

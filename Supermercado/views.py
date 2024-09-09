@@ -4,5 +4,10 @@ from Supermercado.models import *
 
 # Create your views here.
 def datos_supermercado_panel():
-    indicador = obtener_consulta_indicadores(Indicadores)
+    año = obtener_año_actual()
+    indicador = Indicadores.objects.select_related('mes').values(
+        'mes__mes',  
+        'variacion_interanual',
+        'variacion_intermensual').filter(año_id=año, valor_id=1).order_by('-id').first()
+    
     return indicador

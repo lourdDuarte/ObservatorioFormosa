@@ -1,231 +1,168 @@
 {% extends 'base.html' %}
 {% block head_content %}
 <title>Dashboard</title>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 {% endblock head_content %}
 
 {% block container %}
-
-<h1 class="title-interanual"><i class="fa-solid fa-grip"></i> Valores Interanuales</h1>
-    <a href="#">
-      <div class="card-report">
-        <h5 class="title">Venta supermercado</h5>
-        <p class="num" id="super-inter">
-         
-        </p>
-        <p class="descripcion" id="descripcion">ultimos datos tomados actualizados</p>
-      </div>
-
-    </a>
-    
-    <a href="#">
-      <div class="card-report">
-        <h5 class="title">Venta supermercado sin inflacion</h5>
-        <p class="num" id="super-inter-sf">
+<div class="main-panel">
+  <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top " id="navigation-example">
+    <div class="container-fluid">
+      
+      <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation" data-target="#navigation-example">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="navbar-toggler-icon icon-bar"></span>
+        <span class="navbar-toggler-icon icon-bar"></span>
+        <span class="navbar-toggler-icon icon-bar"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end">
+        <ul class="navbar-nav">
           
-        </p>
-        <p class="descripcion" id="descripcion">ultimos datos tomados actualizados </p>
-      </div>
-    </a>
-    
-    <a href="#">
-      <div class="card-report">
-        <h5 class="title">Venta de autos nuevos</h5>
-       
-        <p class="num" id="auto-patente">
           
-          </p>
-      
-        <p class="descripcion" id="descripcion">ultimos datos tomados actualizados </p>
-      </div>
-
-    </a>
-    
-    <a href="#">
-      <div class="card-report">
-        <h5 class="title">Transferencia autos usados</h5>
-        <p class="num" id="trasnf-autos-usados">
           
-        </p>
-        <p class="descripcion" id="descripcion">ultimos datos tomados actualizados </p>
+        </ul>
       </div>
-
-    </a>
-  
-  <a href="#">
-    <div class="card-report">
-      <h5 class="title">Venta de motos nuevas</h5>
-      <p class="num" id="moto-patente">
-        
-      </p>
-      <p class="descripcion" id="descripcion">ultimos datos tomados actualizados </p>
     </div>
-
-  </a>
-  
-  <a href="#">
-    <div class="card-report">
-      <h5 class="title">Transferencia de motos usadas</h5>
-      <p class="num" id="transf-moto-usada">
-        
-      </p>
-      <p class="descripcion" id="descripcion">ultimos datos tomados actualizados </p>
-    </div>
-
-  </a>
-  
-  <a href="#">
-    <div class="card-report">
-      <h5 class="title">Evolucion empleo - sector privado</h5>
-      <p class="num" id="empleo-sector-priv">
-        
-      </p>
-      <p class="descripcion" id="descripcion">ultimos datos tomados actualizados </p>
-    </div>
-
-  </a>
-  
-  <a href="#">
-    <div class="card-report">
-      <h5 class="title">Remuneracion - sector privado</h5>
-      <p class="num" id="remun-prom">
-        
-      </p>
-      <p class="descripcion" id="descripcion">ultimos datos tomados actualizados </p>
-    </div>
-
-  </a>
-  
-  <a href="#">
-    <div class="card-report">
-      <h5 class="title">Base imponible </h5>
-      <p class="num" id="base-imp-inter">
-        
-      </p>
-      <p class="descripcion" id="descripcion">ultimos datos tomados actualizados </p>
-    </div>
-  
-  </a>
-
-  <a href="#">
-    <div class="card-report">
-      <h5 class="title">Recaudacion tributaria</h5>
-      <p class="num" id="recaudacion-tri-inter">
-        
-      </p>
-      <p class="descripcion" id="descripcion">ultimos datos tomados actualizados </p>
-    </div>
-  
-  </a>
-   
-<h1 class="title-interanual"><i class="fa-solid fa-grip"></i> Valores Intermensuales</h1>
-<a href="#">
-  <div class="card-report">
-    <h5 class="title">Venta supermercado</h5>
-    <p class="num" id="super-interm">
+  </nav>
+    <div class="content">
+      <div class="container-fluid">
       
-    </p>
-    <p class="descripcion" id="descripcion">ultimos datos tomados actualizados </p>
-  </div>
-
-</a>
-
-<a href="#">
-  <div class="card-report">
-    <h5 class="title">Venta supermercado sin inflacion</h5>
-    <p class="num" id="super-interm-sf">
+        <div class="card card-plain">
+          <div class="card-header card-header-primary"  style ="background:#0a6ebd;">
+            <h4 class="card-title">Valores intereanuales</h4>
+            
+          </div>
+  
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+          <div class="card card-stats">
+            <div class="card-header card-header-warning card-header-icon">
+              <div class="card-icon">
+                <i class="material-icons">shopping_cart</i>
+              </div>
+              <p class="card-category">OPERACIONES EN SUPERMERCADO</p>
+              <h3 class="card-title" style="color:#fff">{{indicadores_supermercado.variacion_interanual}}
+                
+              </h3>
+            </div>
+            <div class="card-footer">
+              <div class="stats">
+                <i class="material-icons" style="color:#fff">date_range</i><p  style="color:#fff"> Ultima actualizacion: {{indicadores_supermercado.mes__mes}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+          <div class="card card-stats">
+            <div class="card-header card-header-success card-header-icon">
+              <div class="card-icon">
+                <i class="material-icons">equalizer</i>
+              </div>
+              <p class="card-category">IPC</p>
+              <h3 class="card-title">$34,245</h3>
+            </div>
+            <div class="card-footer">
+              <div class="stats">
+                <i class="material-icons" style="color:#fff">date_range</i><p  style="color:#fff"> Ultima actualizacion: </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+          <div class="card card-stats">
+            <div class="card-header card-header-danger card-header-icon">
+              <div class="card-icon">
+                <i class="material-icons" >construction</i>
+              </div>
+              <p class="card-category">Sector construccion</p>
+              <h3 class="card-title">75</h3>
+            </div>
+            <div class="card-footer">
+              <div class="stats">
+                <i class="material-icons" style="color:#fff">date_range</i><p  style="color:#fff"> Ultima actualizacion: </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
       
-    </p>
-    <p class="descripcion" id="descripcion">ultimos datos tomados actualizados </p>
-  </div>
-
-</a>
-
-<a href="#">
-  <div class="card-report">
-    <h5 class="title">Venta de autos nuevos</h5>
-    <p class="num" id="auto-patente-interm">
-     
-    </p>
-    <p class="descripcion" id="descripcion">ultimos datos tomados actualizados </p>
-  </div>
-
-</a>
-
-<a href="#">
-  <div class="card-report">
-    <h5 class="title">Transferencia autos usados</h5>
-    <p class="num" id="trasnf-autos-usados-interm">
-     
-    </p>
-    <p class="descripcion" id="descripcion">ultimos datos tomados actualizados </p>
-  </div>
-
-</a>
-
-<a href="#">
-  <div class="card-report">
-    <h5 class="title">Venta de motos nuevas</h5>
-    <p class="num" id="moto-patente-interm">
+      <div class="container-fluid">
       
-    </p>
-    <p class="descripcion" id="descripcion">ultimos datos tomados actualizados </p>
-  </div>
-
-</a>
-
-<a href="#">
-  <div class="card-report">
-    <h5 class="title">Transferencia de motos usadas</h5>
-    <p class="num" id="transf-moto-usada-interm">
+        <div class="card card-plain">
+          <div class="card-header card-header-primary"  style ="background:#0a6ebd;">
+            <h4 class="card-title">Valores interemensuales</h4>
+            
+          </div>
+  
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+          <div class="card card-stats">
+            <div class="card-header card-header-warning card-header-icon">
+              <div class="card-icon">
+                <i class="material-icons">shopping_cart</i>
+              </div>
+              <p class="card-category">OPERACIONES EN SUPERMERCADO</p>
+              <h3 class="card-title" style="color:#fff">{{indicadores_supermercado.variacion_intermensual}}
+                
+              </h3>
+            </div>
+            <div class="card-footer">
+              <div class="stats">
+                <i class="material-icons" style="color:#fff">date_range</i><p  style="color:#fff"> Ultima actualizacion: {{indicadores_supermercado.mes__mes}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+          <div class="card card-stats">
+            <div class="card-header card-header-success card-header-icon">
+              <div class="card-icon">
+                <i class="material-icons">equalizer</i>
+              </div>
+              <p class="card-category">IPC</p>
+              <h3 class="card-title">$34,245</h3>
+            </div>
+            <div class="card-footer">
+              <div class="stats">
+                <i class="material-icons" style="color:#fff">date_range</i><p  style="color:#fff"> Ultima actualizacion: </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+          <div class="card card-stats">
+            <div class="card-header card-header-danger card-header-icon">
+              <div class="card-icon">
+                <i class="material-icons" >construction</i>
+              </div>
+              <p class="card-category">Sector construccion</p>
+              <h3 class="card-title">75</h3>
+            </div>
+            <div class="card-footer">
+              <div class="stats">
+                <i class="material-icons" style="color:#fff">date_range</i><p  style="color:#fff"> Ultima actualizacion: </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
       
-    </p>
-    <p class="descripcion" id="descripcion">ultimos datos tomados actualizados </p>
-  </div>
-
-</a>
-
-<a href="#">
-  <div class="card-report">
-    <h5 class="title">Evolucion empleo - sector privado</h5>
-    <p class="num" id="empleo-sector-priv-interm">
-     
-    </p>
-    <p class="descripcion" id="descripcion">ultimos datos tomados actualizados </p>
-  </div>
-
-</a>
-
-<a href="#">
-  <div class="card-report">
-    <h5 class="title">Remuneracion - sector privado</h5>
-    <p class="num" id="remun-prom-interm">
-     
-    </p>
-    <p class="descripcion" id="descripcion">ultimos datos tomados actualizados </p>
-  </div>
-
-</a>
-
-<a href="#">
-  <div class="card-report">
-    <h5 class="title">Base imponible </h5>
-    <p class="num" id="base-imp-interm">
       
-    </p>
-    <p class="descripcion" id="descripcion">ultimos datos tomados actualizados </p>
+      
+    </div>
   </div>
-
-</a>
-
-
-
-<script>
-
-
-</script>
-
-
+ 
+  <script>
+    const x = new Date().getFullYear();
+    let date = document.getElementById('date');
+    date.innerHTML = '&copy; ' + x + date.innerHTML;
+  </script>
+</div>
 {% endblock container %}
 
 
