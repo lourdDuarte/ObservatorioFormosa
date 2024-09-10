@@ -59,12 +59,21 @@
               <div class="card-icon">
                 <i class="material-icons">equalizer</i>
               </div>
-              <p class="card-category">IPC</p>
-              <h3 class="card-title">$34,245</h3>
-            </div>
+              <p class="card-category">IPC (NEA)</p>
+              <h3 class="card-title" style="color:#fff">
+                {% for indicador in indicadores_ipc %}
+                  {% if indicador.comparacion_temporal_id == 2  %}
+                     {{indicador.porcentaje}}
+                 
+                  
+                  
+               
+              </div>
             <div class="card-footer">
               <div class="stats">
-                <i class="material-icons" style="color:#fff">date_range</i><p  style="color:#fff"> Ultima actualizacion: </p>
+                <i class="material-icons" style="color:#fff">date_range</i><p  style="color:#fff"> Ultima actualizacion: {{indicador.mes__mes}}</p>
+                {% endif %}
+                {% endfor %}
               </div>
             </div>
           </div>
@@ -75,7 +84,39 @@
               <div class="card-icon">
                 <i class="material-icons" >construction</i>
               </div>
-              <p class="card-category">Sector construccion</p>
+              <p class="card-category">PUESTOS EN SECTOR CONSTRUCCION</p>
+              <h3 class="card-title">75</h3>
+            </div>
+            <div class="card-footer">
+              <div class="stats">
+                <i class="material-icons" style="color:#fff">date_range</i><p  style="color:#fff"> Ultima actualizacion: </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+          <div class="card card-stats">
+            <div class="card-header card-header-warning card-header-icon">
+              <div class="card-icon">
+                <i class="material-icons" >time_to_leave</i>
+              </div>
+              <p class="card-category">PATENTAMIENTO AUTOS</p>
+              <h3 class="card-title">75</h3>
+            </div>
+            <div class="card-footer">
+              <div class="stats">
+                <i class="material-icons" style="color:#fff">date_range</i><p  style="color:#fff"> Ultima actualizacion: </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+          <div class="card card-stats">
+            <div class="card-header card-header-success card-header-icon">
+              <div class="card-icon">
+                <i class="material-icons" >time_to_leave</i>
+              </div>
+              <p class="card-category">PATENTAMIENTO MOTOS</p>
               <h3 class="card-title">75</h3>
             </div>
             <div class="card-footer">
@@ -123,12 +164,21 @@
               <div class="card-icon">
                 <i class="material-icons">equalizer</i>
               </div>
-              <p class="card-category">IPC</p>
-              <h3 class="card-title">$34,245</h3>
-            </div>
+              <p class="card-category">IPC (NEA)</p>
+              <h3 class="card-title" style="color:#fff">
+                {% for indicador in indicadores_ipc %}
+                  {% if indicador.comparacion_temporal_id == 1  %}
+                     {{indicador.porcentaje}}
+                 
+                  
+                  
+               
+              </div>
             <div class="card-footer">
               <div class="stats">
-                <i class="material-icons" style="color:#fff">date_range</i><p  style="color:#fff"> Ultima actualizacion: </p>
+                <i class="material-icons" style="color:#fff">date_range</i><p  style="color:#fff"> Ultima actualizacion: {{indicador.mes__mes}}</p>
+                {% endif %}
+                {% endfor %}
               </div>
             </div>
           </div>
@@ -139,7 +189,39 @@
               <div class="card-icon">
                 <i class="material-icons" >construction</i>
               </div>
-              <p class="card-category">Sector construccion</p>
+              <p class="card-category">PUESTOS EN SECTOR CONSTRUCCION</p>
+              <h3 class="card-title">75</h3>
+            </div>
+            <div class="card-footer">
+              <div class="stats">
+                <i class="material-icons" style="color:#fff">date_range</i><p  style="color:#fff"> Ultima actualizacion: </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+          <div class="card card-stats">
+            <div class="card-header card-header-warning card-header-icon">
+              <div class="card-icon">
+                <i class="material-icons" >time_to_leave</i>
+              </div>
+              <p class="card-category">PATENTAMIENTO AUTOS</p>
+              <h3 class="card-title">75</h3>
+            </div>
+            <div class="card-footer">
+              <div class="stats">
+                <i class="material-icons" style="color:#fff">date_range</i><p  style="color:#fff"> Ultima actualizacion: </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+          <div class="card card-stats">
+            <div class="card-header card-header-success card-header-icon">
+              <div class="card-icon">
+                <i class="material-icons" >time_to_leave</i>
+              </div>
+              <p class="card-category">PATENTAMIENTO MOTOS</p>
               <h3 class="card-title">75</h3>
             </div>
             <div class="card-footer">

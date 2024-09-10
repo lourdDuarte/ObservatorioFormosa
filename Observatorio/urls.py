@@ -24,5 +24,6 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('panel/', observatorio.panel, name='panel'),
-    path('prueba/', observatorio.prueba, name='prueba')
+    path('prueba/', observatorio.prueba, name='prueba'),
+    path('consulta/', observatorio.gestor_consultas, name='consulta')
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

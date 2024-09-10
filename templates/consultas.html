@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% block head_content %}
+<title>Dashboard</title>
+{% endblock head_content %}
+
+{% block container %}
+<div class="main-panel">
+    <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top " id="navigation-example">
+      <div class="container-fluid">
+        
+        <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation" data-target="#navigation-example">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="navbar-toggler-icon icon-bar"></span>
+          <span class="navbar-toggler-icon icon-bar"></span>
+          <span class="navbar-toggler-icon icon-bar"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end">
+          <ul class="navbar-nav">
+            
+            
+            
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="content">
+        <div class="container-fluid">
+        
+          <div class="card card-plain">
+            <div class="card-header card-header-primary"  style ="background:#0a6ebd;">
+              <h4 class="card-title">Gestor de consultas del Observatorio economico de Formosa</h4>
+              
+            </div>
+            </div>
+           
+        </div>
+        <!-- <form >
+            <div class="formulario-consulta">
+                <select name="" id="">Tabla 1</select>
+                <select name="" id="">Tabla 2</select>
+                <button type="submit" >
+                    <i class="material-icons">Consultar</i>
+                    
+                </button>
+            </div>
+              
+            
+          </form> -->
+        <div class="row">
+            <div class="col-md-6">
+              <div class="card">
+                <div class="card-body">
+                    <table id="datatablesSimple" style="margin-bottom:2em;">
+                        <thead>
+                            <tr>
+                                <th >#</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                    
+                       
+                        <tr>
+                            <td>#</td>
+                            
+                        </tr>
+                       
+                    
+                    
+                    
+                    
+                    
+                    
+                        </tbody>
+                    </table> 
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                  <div class="card-body">
+
+                    <table >
+                        <thead>
+                            <tr>
+                                {% for encabezado in encabezados %}
+                                    <th>{{ encabezado }}</th>
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                                <tr>
+                                    {% for dato in datos %}
+                                        <td>{{ dato }}</td> <!-- Usar 'get' para acceder al valor -->
+                                    {% endfor %}
+                                </tr>
+                           
+                        </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            
+        </div>
+    </div>
+</div>
+
+
+{% endblock container %}
+
+

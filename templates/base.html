@@ -17,7 +17,9 @@
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="{% static 'Dark/assets/demo/demo.css'  %}" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/fontawesome.min.css" integrity="sha512-KVdV5HNnN1f6YOANbRuNxyCnqyPICKUmQusEkyeRg4X0p8K1xCdbHs32aA7pWo6WqMZk0wAzl29cItZh8oBPYQ==" crossorigin="anonymous" referrerpolicy="no-referrer" /></head>
-<body class="dark-edition">
+    <link href="{% static 'css/style-table.min.css' %} " rel="stylesheet">
+
+    <body class="dark-edition">
     <div class="wrapper ">
         {% include "nav.html" %}
     
@@ -27,9 +29,10 @@
         {% endblock%}
         
     </div>
-    
+   
 <!--   Core JS Files   -->
 <script src="{% static 'Dark/assets/js/core/jquery.min.js' %}"></script>
+
 <script src="{% static 'Dark/assets/js/core/popper.min.js' %}"></script>
 <script src="{% static 'Dark/assets/js/core/bootstrap-material-design.min.js' %}"></script>
 <script src="https://unpkg.com/default-passive-events"></script>
@@ -46,7 +49,10 @@
 <script src="{% static 'Dark/assets/js/material-dashboard.js' %}"></script>
 <!-- Material Dashboard DEMO methods, don't include it in your project! -->
 <script src="{% static 'Dark/assets/demo/demo.js' %}"></script>
+<script src="{% static 'js/simple-datatables.min.js' %}" crossorigin="anonymous"></script>
+<script src="{% static 'js/datatables-simple-demo.js' %}"></script>
 <script>
+
   $(document).ready(function() {
     $().ready(function() {
       $sidebar = $('.sidebar');
