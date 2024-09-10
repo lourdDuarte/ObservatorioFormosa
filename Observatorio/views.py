@@ -37,7 +37,7 @@ def gestor_consultas(request):
         solo_valores = []
         for fila in datos:
             # Extraer solo los valores de los campos, excluyendo 'id'
-            valores = [valor for clave, valor in fila.items() if clave != 'id']
+            valores = [valor for clave, valor in fila.items()]
             solo_valores.append(valores)
 
         print(encabezados)

@@ -79,8 +79,7 @@
             <div class="col-md-6">
                 <div class="card">
                   <div class="card-body">
-
-                    <table >
+                    <table id="datatablesSimpledos" style="margin-bottom:2em;">
                         <thead>
                             <tr>
                                 {% for encabezado in encabezados %}
@@ -89,15 +88,46 @@
                             </tr>
                         </thead>
                         <tbody>
-                            
+                    
+                       
+                            {% for fila in datos %}
+                            <tr>
+                                {% for valor in fila %}
+                                    <td>{{ valor }}</td>
+                                {% endfor %}
+                            </tr>
+                            {% endfor %}
+                       
+                    
+                    
+                    
+                    
+                    
+                    
+                        </tbody>
+                    </table> 
+
+
+
+
+                    {% comment %} <table>
+                        <thead>
+                            <tr>
+                                {% for encabezado in encabezados %}
+                                    <th>{{ encabezado }}</th>
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for fila in datos %}
                                 <tr>
-                                    {% for dato in datos %}
-                                        <td>{{ dato }}</td> <!-- Usar 'get' para acceder al valor -->
+                                    {% for valor in fila %}
+                                        <td>{{ valor }}</td>
                                     {% endfor %}
                                 </tr>
-                           
+                            {% endfor %}
                         </tbody>
-                    </table>
+                    </table> {% endcomment %}
                   </div>
                 </div>
               </div>
