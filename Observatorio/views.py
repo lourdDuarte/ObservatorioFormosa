@@ -26,9 +26,16 @@ def prueba(request):
 
 
 def gestor_consultas(request):
-
-    
-    resultados = Ipc.objects.filter(año_id=2).values()
+    if request.method == "POST":
+        select = request.POST['consulta']
+        print("pppppppppppp " + select)
+    resultados = Ipc.objects.select_related('mes','año','valor','comparacion_temporal').values(
+        'mes__mes',
+        'año__año',
+        'valor__valor',
+        'comparacion_temporal__tipo_comparacion',
+        'porcentaje'
+    ).filter(año_id=2)
     
     if resultados.exists():
         encabezados = list(resultados[0].keys())

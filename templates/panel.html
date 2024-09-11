@@ -25,6 +25,7 @@
   </nav>
     <div class="content">
       <div class="container-fluid">
+ 
       
         <div class="card card-plain">
           <div class="card-header card-header-primary"  style ="background:#0a6ebd;">
@@ -61,19 +62,19 @@
               </div>
               <p class="card-category">IPC (NEA)</p>
               <h3 class="card-title" style="color:#fff">
-                {% for indicador in indicadores_ipc %}
+                {% comment %} {% for indicador in indicadores_ipc %}
                   {% if indicador.comparacion_temporal_id == 2  %}
-                     {{indicador.porcentaje}}
-                 
+                     {{indicador.porcentaje}} {% endcomment %}
+                    76.0
                   
                   
                
               </div>
             <div class="card-footer">
               <div class="stats">
-                <i class="material-icons" style="color:#fff">date_range</i><p  style="color:#fff"> Ultima actualizacion: {{indicador.mes__mes}}</p>
-                {% endif %}
-                {% endfor %}
+                <i class="material-icons" style="color:#fff">date_range</i><p  style="color:#fff"> Ultima actualizacion: Julio
+                  {% comment %} {{indicador.mes__mes}}{% endcomment %} </p> 
+                
               </div>
             </div>
           </div>
@@ -85,11 +86,11 @@
                 <i class="material-icons" >construction</i>
               </div>
               <p class="card-category">PUESTOS EN SECTOR CONSTRUCCION</p>
-              <h3 class="card-title">75</h3>
+              <h3 class="card-title" style="color:#fff">-64.4</h3>
             </div>
             <div class="card-footer">
               <div class="stats">
-                <i class="material-icons" style="color:#fff">date_range</i><p  style="color:#fff"> Ultima actualizacion: </p>
+                <i class="material-icons" style="color:#fff">date_range</i><p  style="color:#fff"> Ultima actualizacion: Junio </p>
               </div>
             </div>
           </div>
@@ -101,11 +102,11 @@
                 <i class="material-icons" >time_to_leave</i>
               </div>
               <p class="card-category">PATENTAMIENTO AUTOS</p>
-              <h3 class="card-title">75</h3>
+              <h3 class="card-title" style="color:#fff">-30.40</h3>
             </div>
             <div class="card-footer">
               <div class="stats">
-                <i class="material-icons" style="color:#fff">date_range</i><p  style="color:#fff"> Ultima actualizacion: </p>
+                <i class="material-icons" style="color:#fff">date_range</i><p  style="color:#fff"> Ultima actualizacion: Agosto</p>
               </div>
             </div>
           </div>
@@ -117,11 +118,11 @@
                 <i class="material-icons" >time_to_leave</i>
               </div>
               <p class="card-category">PATENTAMIENTO MOTOS</p>
-              <h3 class="card-title">75</h3>
+              <h3 class="card-title" style="color:#fff">8.1</h3>
             </div>
             <div class="card-footer">
               <div class="stats">
-                <i class="material-icons" style="color:#fff">date_range</i><p  style="color:#fff"> Ultima actualizacion: </p>
+                <i class="material-icons" style="color:#fff">date_range</i><p  style="color:#fff"> Ultima actualizacion: Agosto</p>
               </div>
             </div>
           </div>
@@ -166,19 +167,20 @@
               </div>
               <p class="card-category">IPC (NEA)</p>
               <h3 class="card-title" style="color:#fff">
-                {% for indicador in indicadores_ipc %}
+                {% comment %} {% for indicador in indicadores_ipc %}
                   {% if indicador.comparacion_temporal_id == 1  %}
-                     {{indicador.porcentaje}}
-                 
+                     {{indicador.porcentaje}} {% endcomment %}
+                 4.6
                   
                   
                
               </div>
             <div class="card-footer">
               <div class="stats">
-                <i class="material-icons" style="color:#fff">date_range</i><p  style="color:#fff"> Ultima actualizacion: {{indicador.mes__mes}}</p>
-                {% endif %}
-                {% endfor %}
+                <i class="material-icons" style="color:#fff">date_range</i><p  style="color:#fff"> Ultima actualizacion: Julio
+                  {% comment %} {{indicador.mes__mes}}{% endcomment %}</p> 
+                {% comment %} {% endif %}
+                {% endfor %} {% endcomment %}
               </div>
             </div>
           </div>
@@ -190,11 +192,11 @@
                 <i class="material-icons" >construction</i>
               </div>
               <p class="card-category">PUESTOS EN SECTOR CONSTRUCCION</p>
-              <h3 class="card-title">75</h3>
+              <h3 class="card-title" style="color:#fff">0.6</h3>
             </div>
             <div class="card-footer">
               <div class="stats">
-                <i class="material-icons" style="color:#fff">date_range</i><p  style="color:#fff"> Ultima actualizacion: </p>
+                <i class="material-icons" style="color:#fff">date_range</i><p  style="color:#fff"> Ultima actualizacion: Junio </p>
               </div>
             </div>
           </div>
@@ -206,11 +208,11 @@
                 <i class="material-icons" >time_to_leave</i>
               </div>
               <p class="card-category">PATENTAMIENTO AUTOS</p>
-              <h3 class="card-title">75</h3>
+              <h3 class="card-title" style="color:#fff">-13.9</h3>
             </div>
             <div class="card-footer">
               <div class="stats">
-                <i class="material-icons" style="color:#fff">date_range</i><p  style="color:#fff"> Ultima actualizacion: </p>
+                <i class="material-icons" style="color:#fff">date_range</i><p  style="color:#fff"> Ultima actualizacion: Agosto </p>
               </div>
             </div>
           </div>
@@ -222,11 +224,11 @@
                 <i class="material-icons" >time_to_leave</i>
               </div>
               <p class="card-category">PATENTAMIENTO MOTOS</p>
-              <h3 class="card-title">75</h3>
+              <h3 class="card-title" style="color:#fff">0.1</h3>
             </div>
             <div class="card-footer">
               <div class="stats">
-                <i class="material-icons" style="color:#fff">date_range</i><p  style="color:#fff"> Ultima actualizacion: </p>
+                <i class="material-icons" style="color:#fff">date_range</i><p  style="color:#fff"> Ultima actualizacion: Agosto </p>
               </div>
             </div>
           </div>

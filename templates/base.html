@@ -17,8 +17,15 @@
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="{% static 'Dark/assets/demo/demo.css'  %}" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/fontawesome.min.css" integrity="sha512-KVdV5HNnN1f6YOANbRuNxyCnqyPICKUmQusEkyeRg4X0p8K1xCdbHs32aA7pWo6WqMZk0wAzl29cItZh8oBPYQ==" crossorigin="anonymous" referrerpolicy="no-referrer" /></head>
-    <link href="{% static 'css/style-table.min.css' %} " rel="stylesheet">
-
+    {% comment %} <link href="{% static 'css/style-table.min.css' %} " rel="stylesheet"> {% endcomment %}
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdn.datatables.net/2.1.5/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/fixedcolumns/5.0.1/js/dataTables.fixedColumns.js"></script>
+    <script src="https://cdn.datatables.net/fixedcolumns/5.0.1/js/fixedColumns.dataTables.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.1.2/js/dataTables.buttons.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.1.2/js/buttons.dataTables.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.1.2/js/buttons.colVis.min.js"></script>
+    <link rel="stylesheet" href="{% static 'css/dataTables.min.css' %}">
     <body class="dark-edition">
     <div class="wrapper ">
         {% include "nav.html" %}
@@ -41,6 +48,7 @@
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <!--  Google Maps Plugin    -->
 <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+
 <!-- Chartist JS -->
 <script src="{% static 'Dark/assets/js/plugins/chartist.min.js' %}"></script>
 <!--  Notifications Plugin    -->
@@ -49,10 +57,39 @@
 <script src="{% static 'Dark/assets/js/material-dashboard.js' %}"></script>
 <!-- Material Dashboard DEMO methods, don't include it in your project! -->
 <script src="{% static 'Dark/assets/demo/demo.js' %}"></script>
-<script src="{% static 'js/simple-datatables.min.js' %}" crossorigin="anonymous"></script>
-<script src="{% static 'js/datatables-simple-demo.js' %}"></script>
+{% comment %} <script src="{% static 'js/simple-datatables.min.js' %}" crossorigin="anonymous"></script>
+<script src="{% static 'js/datatables-simple-demo.js' %}"></script> {% endcomment %}
 <script>
+  new DataTable('#example', {
+    fixedColumns: {
+        start: 2
+    },
+    layout: {
+        topStart: {
+            buttons: ['colvis']
+        }
+    },
+    paging: true,
+    scrollCollapse: true,
+    scrollX: true,
+    scrollY: 300
 
+});
+new DataTable('#exampledos', {
+    fixedColumns: {
+        start: 2
+    },
+    layout: {
+        topStart: {
+            buttons: ['colvis']
+        }
+    },
+    paging: true,
+    scrollCollapse: true,
+    scrollX: true,
+    scrollY: 300
+
+});
   $(document).ready(function() {
     $().ready(function() {
       $sidebar = $('.sidebar');

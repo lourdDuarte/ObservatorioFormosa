@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 {% block head_content %}
 <title>Dashboard</title>
+<style>
+    .table-th{
+        color: azure;
+    }
+</style>
 {% endblock head_content %}
 
 {% block container %}
@@ -25,118 +30,94 @@
     </nav>
     <div class="content">
         <div class="container-fluid">
-        
+           
           <div class="card card-plain">
             <div class="card-header card-header-primary"  style ="background:#0a6ebd;">
               <h4 class="card-title">Gestor de consultas del Observatorio economico de Formosa</h4>
               
             </div>
             </div>
+            <div>
+                <form  method= "POST" action="{% url 'consulta' %}">
+                    {% csrf_token %}
+                    <select class="form-select" name="consulta" multiple aria-label="multiple select example">
+                        <option selected>Tablas disponibles</option>
+                        <option value="Moto">patentamiento moto</option>
+                        <option value="Auto">patentamiento auto</option>
+                        <option value="Puesto sector construccion">puestos en sector construcción </option>
+                        <option value="Salario sector construccion">salario en sector construcción </option>
+                        <option value="Sector construccion">sector construcción general</option>
+                      </select>
+                      <br>
+                      <button type="submit" class="btn btn-light">Consultar</button>
+
+                </form>
+                  
+            </div>
            
         </div>
-        <!-- <form >
-            <div class="formulario-consulta">
-                <select name="" id="">Tabla 1</select>
-                <select name="" id="">Tabla 2</select>
-                <button type="submit" >
-                    <i class="material-icons">Consultar</i>
-                    
-                </button>
-            </div>
-              
-            
-          </form> -->
+    
         <div class="row">
+          
             <div class="col-md-6">
-              <div class="card">
-                <div class="card-body">
-                    <table id="datatablesSimple" style="margin-bottom:2em;">
-                        <thead>
-                            <tr>
-                                <th >#</th>
-                                
-                            </tr>
-                        </thead>
-                        <tbody>
-                    
-                       
-                        <tr>
-                            <td>#</td>
-                            
-                        </tr>
-                       
-                    
-                    
-                    
-                    
-                    
-                    
-                        </tbody>
-                    </table> 
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-                <div class="card">
-                  <div class="card-body">
-                    <table id="datatablesSimpledos" style="margin-bottom:2em;">
-                        <thead>
-                            <tr>
-                                {% for encabezado in encabezados %}
+                <div class="card" >
+                  
+                  <table id="example" class="stripe row-border order-column" style="width:100%">
+                    <thead>
+                        <tr style="color: aliceblue;" >
+                            {% for encabezado in encabezados %}
                                     <th>{{ encabezado }}</th>
-                                {% endfor %}
-                            </tr>
-                        </thead>
-                        <tbody>
-                    
-                       
-                            {% for fila in datos %}
-                            <tr>
-                                {% for valor in fila %}
-                                    <td>{{ valor }}</td>
-                                {% endfor %}
-                            </tr>
                             {% endfor %}
-                       
-                    
-                    
-                    
-                    
-                    
-                    
-                        </tbody>
-                    </table> 
-
-
-
-
-                    {% comment %} <table>
-                        <thead>
-                            <tr>
-                                {% for encabezado in encabezados %}
-                                    <th>{{ encabezado }}</th>
-                                {% endfor %}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for fila in datos %}
-                                <tr>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for fila in datos %}
+                                <tr style="color: aliceblue;">
                                     {% for valor in fila %}
                                         <td>{{ valor }}</td>
                                     {% endfor %}
                                 </tr>
                             {% endfor %}
-                        </tbody>
-                    </table> {% endcomment %}
-                  </div>
+                   
+                        
+                    </tbody>
+                </table>
                 </div>
-              </div>
-            
+            </div> 
+            <div class="col-md-6">
+                <div class="card" >
+                  
+                  <table id="exampledos" class="stripe row-border order-column" style="width:100%">
+                    <thead>
+                        <tr style="color: aliceblue;" >
+                            {% for encabezado in encabezados %}
+                                    <th>{{ encabezado }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for fila in datos %}
+                                <tr style="color: aliceblue;">
+                                    {% for valor in fila %}
+                                        <td>{{ valor }}</td>
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                   
+                        
+                    </tbody>
+                </table>
+                </div>
+            </div> 
+             
         </div>
     </div>
 </div>
 
+<script>
 
+   
+</script>
 {% endblock container %}
 
 
