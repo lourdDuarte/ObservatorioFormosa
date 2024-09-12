@@ -1,5 +1,5 @@
 from django.db import models
-from Año.models import *
+from Anio.models import *
 from Valor.models import *
 from Mes.models import *
 
@@ -18,7 +18,7 @@ class TipoVehiculo(models.Model):
         return self.tipo_vehiculo
     
 class Indicadores(models.Model):
-    año = models.ForeignKey(Año, on_delete=models.CASCADE, related_name='+')
+    anio = models.ForeignKey(Anio, on_delete=models.CASCADE, related_name='+')
     mes = models.ForeignKey(Mes, on_delete=models.CASCADE, related_name='+')
     valor = models.ForeignKey(Valor, on_delete=models.CASCADE, related_name='+')
     movimiento_vehicular = models.ForeignKey(TipoMovimiento, on_delete=models.CASCADE, related_name='+')

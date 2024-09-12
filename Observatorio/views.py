@@ -29,11 +29,11 @@ def gestor_consultas(request):
     if request.method == "POST":
         select = request.POST['consulta']
         print("pppppppppppp " + select)
-    resultados = Indicadores.objects.select_related('mes','año','valor').values(
+    resultados = Indicadores.objects.select_related('mes','anio','valor').values(
         'mes__mes',
-        'año__año',
+        'anio__anio',
        
-    ).filter(año_id=2)
+    ).filter(anio_id=2)
     
     if resultados.exists():
         encabezados = list(resultados[0].keys())

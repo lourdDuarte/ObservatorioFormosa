@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'Sector_construccion',
     'Supermercado',
     'Mes',
-    'Año',
+    'Anio',
     'Valor',
     'Comparacion_temporal'
 ]

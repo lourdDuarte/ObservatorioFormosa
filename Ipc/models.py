@@ -1,5 +1,5 @@
 from django.db import models
-from Año.models import *
+from Anio.models import *
 from Valor.models import *
 from Mes.models import *
 from Comparacion_temporal.models import *
@@ -15,7 +15,7 @@ class TipoDivision(models.Model):
     
 
 class Indicadores(models.Model):
-    año = models.ForeignKey(Año, on_delete=models.CASCADE, related_name='+')
+    anio = models.ForeignKey(Anio, on_delete=models.CASCADE, related_name='+')
     mes = models.ForeignKey(Mes, on_delete=models.CASCADE, related_name='+')
     valor = models.ForeignKey(Valor, on_delete=models.CASCADE, related_name='+')
     variacion_mensual = models.CharField(max_length=200, null=False, blank=False)
@@ -25,7 +25,7 @@ class Indicadores(models.Model):
         return str(self.variacion_interanual) + "-" + str(self.variacion_mensual)
     
 class Indicadores_division(models.Model):
-    año = models.ForeignKey(Año, on_delete=models.CASCADE, related_name='+')
+    anio = models.ForeignKey(Anio, on_delete=models.CASCADE, related_name='+')
     mes = models.ForeignKey(Mes, on_delete=models.CASCADE, related_name='+')
     valor = models.ForeignKey(Valor, on_delete=models.CASCADE, related_name='+')
     division_ipc =  models.ForeignKey(TipoDivision, on_delete=models.CASCADE, related_name='+')
