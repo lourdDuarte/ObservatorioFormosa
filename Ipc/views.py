@@ -4,10 +4,9 @@ from Ipc.models import *
 # Create your views here.
 def datos_ipc_panel():
     año = obtener_año_actual()
-    indicador = Ipc.objects.select_related('mes').values(
+    indicador = Indicadores.objects.select_related('mes').values(
     'mes__mes',  
-    'porcentaje',
-    'comparacion_temporal_id'
+    
     ).filter(año_id=2, valor_id=3).order_by('-id')[:2]
 
     # indicador_interanual = indicadores.filter(comparacion_temporal_id=2).first()

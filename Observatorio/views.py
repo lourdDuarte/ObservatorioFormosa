@@ -29,12 +29,10 @@ def gestor_consultas(request):
     if request.method == "POST":
         select = request.POST['consulta']
         print("pppppppppppp " + select)
-    resultados = Ipc.objects.select_related('mes','año','valor','comparacion_temporal').values(
+    resultados = Indicadores.objects.select_related('mes','año','valor').values(
         'mes__mes',
         'año__año',
-        'valor__valor',
-        'comparacion_temporal__tipo_comparacion',
-        'porcentaje'
+       
     ).filter(año_id=2)
     
     if resultados.exists():
