@@ -29,7 +29,7 @@
       
         <div class="card card-plain">
           <div class="card-header card-header-primary"  style ="background:#0a6ebd;">
-            <h4 class="card-title">Valores intereanuales</h4>
+            <h4 class="card-title">Ultimos datos actualizados</h4>
             
           </div>
   
@@ -43,9 +43,8 @@
                 <i class="material-icons">shopping_cart</i>
               </div>
               <p class="card-category">OPERACIONES EN SUPERMERCADO</p>
-              <h3 class="card-title" style="color:#fff">{{indicadores_supermercado.variacion_interanual}}
-                
-              </h3>
+              <h4 class="card-title" style="color:#fff; font-size: 16px">valor interanual: {{indicadores_supermercado.variacion_interanual}}</h4>
+              <h4 class="card-title" style="color:#fff; font-size: 16px">valor intermensual: {{indicadores_supermercado.variacion_intermensual}}</h4>
             </div>
             <div class="card-footer">
               <div class="stats">
@@ -65,7 +64,9 @@
                 {% comment %} {% for indicador in indicadores_ipc %}
                   {% if indicador.comparacion_temporal_id == 2  %}
                      {{indicador.porcentaje}} {% endcomment %}
-                    76.0
+                     <h4 class="card-title" style="color:#fff; font-size: 16px">valor interanual: 76.0</h4>
+                     <h4 class="card-title" style="color:#fff; font-size: 16px">valor intermensual: 4.6</h4>
+       
                   
                   
                
@@ -86,7 +87,10 @@
                 <i class="material-icons" >construction</i>
               </div>
               <p class="card-category">PUESTOS EN SECTOR CONSTRUCCION</p>
-              <h3 class="card-title" style="color:#fff">-64.4</h3>
+              <h4 class="card-title" style="color:#fff; font-size: 16px">valor interanual: -64.4</h4>
+              <h4 class="card-title" style="color:#fff; font-size: 16px">valor intermensual: 0.6</h4>
+
+              
             </div>
             <div class="card-footer">
               <div class="stats">
@@ -102,7 +106,9 @@
                 <i class="material-icons" >time_to_leave</i>
               </div>
               <p class="card-category">PATENTAMIENTO AUTOS</p>
-              <h3 class="card-title" style="color:#fff">-30.40</h3>
+              <h4 class="card-title" style="color:#fff; font-size: 16px">valor interanual: -30.40</h4>
+              <h4 class="card-title" style="color:#fff; font-size: 16px">valor intermensual: -13.9</h4>
+              
             </div>
             <div class="card-footer">
               <div class="stats">
@@ -118,7 +124,8 @@
                 <i class="material-icons" >time_to_leave</i>
               </div>
               <p class="card-category">PATENTAMIENTO MOTOS</p>
-              <h3 class="card-title" style="color:#fff">8.1</h3>
+              <h4 class="card-title" style="color:#fff; font-size: 16px">valor interanual: 8.1</h4>
+              <h4 class="card-title" style="color:#fff; font-size: 16px">valor intermensual: 0.1</h4>
             </div>
             <div class="card-footer">
               <div class="stats">
@@ -130,111 +137,6 @@
         
       </div>
       
-      <div class="container-fluid">
-      
-        <div class="card card-plain">
-          <div class="card-header card-header-primary"  style ="background:#0a6ebd;">
-            <h4 class="card-title">Valores interemensuales</h4>
-            
-          </div>
-  
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
-          <div class="card card-stats">
-            <div class="card-header card-header-warning card-header-icon">
-              <div class="card-icon">
-                <i class="material-icons">shopping_cart</i>
-              </div>
-              <p class="card-category">OPERACIONES EN SUPERMERCADO</p>
-              <h3 class="card-title" style="color:#fff">{{indicadores_supermercado.variacion_intermensual}}
-                
-              </h3>
-            </div>
-            <div class="card-footer">
-              <div class="stats">
-                <i class="material-icons" style="color:#fff">date_range</i><p  style="color:#fff"> Ultima actualizacion: {{indicadores_supermercado.mes__mes}}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
-          <div class="card card-stats">
-            <div class="card-header card-header-success card-header-icon">
-              <div class="card-icon">
-                <i class="material-icons">equalizer</i>
-              </div>
-              <p class="card-category">IPC (NEA)</p>
-              <h3 class="card-title" style="color:#fff">
-                {% comment %} {% for indicador in indicadores_ipc %}
-                  {% if indicador.comparacion_temporal_id == 1  %}
-                     {{indicador.porcentaje}} {% endcomment %}
-                 4.6
-                  
-                  
-               
-              </div>
-            <div class="card-footer">
-              <div class="stats">
-                <i class="material-icons" style="color:#fff">date_range</i><p  style="color:#fff"> Ultima actualizacion: Julio
-                  {% comment %} {{indicador.mes__mes}}{% endcomment %}</p> 
-                {% comment %} {% endif %}
-                {% endfor %} {% endcomment %}
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
-          <div class="card card-stats">
-            <div class="card-header card-header-danger card-header-icon">
-              <div class="card-icon">
-                <i class="material-icons" >construction</i>
-              </div>
-              <p class="card-category">PUESTOS EN SECTOR CONSTRUCCION</p>
-              <h3 class="card-title" style="color:#fff">0.6</h3>
-            </div>
-            <div class="card-footer">
-              <div class="stats">
-                <i class="material-icons" style="color:#fff">date_range</i><p  style="color:#fff"> Ultima actualizacion: Junio </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
-          <div class="card card-stats">
-            <div class="card-header card-header-warning card-header-icon">
-              <div class="card-icon">
-                <i class="material-icons" >time_to_leave</i>
-              </div>
-              <p class="card-category">PATENTAMIENTO AUTOS</p>
-              <h3 class="card-title" style="color:#fff">-13.9</h3>
-            </div>
-            <div class="card-footer">
-              <div class="stats">
-                <i class="material-icons" style="color:#fff">date_range</i><p  style="color:#fff"> Ultima actualizacion: Agosto </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
-          <div class="card card-stats">
-            <div class="card-header card-header-success card-header-icon">
-              <div class="card-icon">
-                <i class="material-icons" >time_to_leave</i>
-              </div>
-              <p class="card-category">PATENTAMIENTO MOTOS</p>
-              <h3 class="card-title" style="color:#fff">0.1</h3>
-            </div>
-            <div class="card-footer">
-              <div class="stats">
-                <i class="material-icons" style="color:#fff">date_range</i><p  style="color:#fff"> Ultima actualizacion: Agosto </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-      </div>
       
       
       

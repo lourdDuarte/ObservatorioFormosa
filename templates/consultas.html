@@ -41,7 +41,7 @@
                 <form  method= "POST" action="{% url 'consulta' %}">
                     {% csrf_token %}
                     <select class="form-select" name="consulta" multiple aria-label="multiple select example">
-                        <option selected>Tablas disponibles</option>
+                       
                         <option value="Moto">patentamiento moto</option>
                         <option value="Auto">patentamiento auto</option>
                         <option value="Puesto sector construccion">puestos en sector construcción </option>

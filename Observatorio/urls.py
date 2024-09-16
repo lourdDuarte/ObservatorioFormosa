@@ -25,5 +25,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('panel/', observatorio.panel, name='panel'),
     path('prueba/', observatorio.prueba, name='prueba'),
-    path('consulta/', observatorio.gestor_consultas, name='consulta')
+    path('consulta/', observatorio.gestor_consultas, name='consulta'),
+    path('supermercado-panel/', supermercado.panel_supermercado, name='consulta')
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

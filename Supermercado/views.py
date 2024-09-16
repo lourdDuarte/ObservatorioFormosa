@@ -11,3 +11,12 @@ def datos_supermercado_panel():
         'variacion_intermensual').filter(anio_id=anio, valor_id=1).order_by('-id').first()
     
     return indicador
+
+def panel_supermercado(request):
+    # ************* indicadores actuales **************
+    
+
+
+
+
+    return render (request,'Supermercado/panel.html')

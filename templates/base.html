@@ -25,7 +25,9 @@
     <script src="https://cdn.datatables.net/buttons/3.1.2/js/dataTables.buttons.js"></script>
     <script src="https://cdn.datatables.net/buttons/3.1.2/js/buttons.dataTables.js"></script>
     <script src="https://cdn.datatables.net/buttons/3.1.2/js/buttons.colVis.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <link rel="stylesheet" href="{% static 'css/dataTables.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/own-style.css' %}">
     <body class="dark-edition">
     <div class="wrapper ">
         {% include "nav.html" %}
@@ -46,8 +48,7 @@
 <script src="{% static 'Dark/assets/js/plugins/perfect-scrollbar.jquery.min.js' %}"></script>
 <!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
-<!--  Google Maps Plugin    -->
-<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+
 
 <!-- Chartist JS -->
 <script src="{% static 'Dark/assets/js/plugins/chartist.min.js' %}"></script>
@@ -59,6 +60,7 @@
 <script src="{% static 'Dark/assets/demo/demo.js' %}"></script>
 {% comment %} <script src="{% static 'js/simple-datatables.min.js' %}" crossorigin="anonymous"></script>
 <script src="{% static 'js/datatables-simple-demo.js' %}"></script> {% endcomment %}
+
 <script>
   new DataTable('#example', {
     fixedColumns: {

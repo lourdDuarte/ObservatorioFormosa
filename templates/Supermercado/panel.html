@@ -1,0 +1,265 @@
+{% extends 'base.html' %}
+{% block head_content %}
+<title>Dashboard</title>
+{% endblock head_content %}
+
+{% block container %}
+<div class="main-panel">
+  <div class="button-card">
+    <button type="button" class="btn btn-secondary">Indicadores</button>
+    <button type="button" class="btn btn-secondary">Variacion</button>
+    <button type="button" class="btn btn-secondary">Participacion</button>
+  </div>
+  <div class="content-chart">
+
+    <div class="card-chart">
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, quis. Cum dolore quo tempore quasi distinctio odit reprehenderit, nam doloribus non ea iure quis voluptatibus veritatis! Esse, porro expedita optio molestiae laboriosam maxime! Quia cum atque, sit sint velit quisquam.</p>
+
+      <div id="chart" style="width: 850px; margin: 0px auto;" ></div>
+    </div>
+    {% comment %} <div class="card-chart">
+      <div id="chart2" style="width: 530px;" ></div>
+    </div>
+    <div class="card-chart">
+      <div id="chart3" style="width: 530px;" ></div>
+    </div> {% endcomment %}
+  </div>
+    
+    
+
+</div>
+
+
+
+<script>
+
+    var options = {
+        series: [
+        {
+          name: "High - 2013",
+          data: [28, 29, 33, 36, 32, 32, 33]
+        },
+        {
+          name: "Low - 2013",
+          data: [12, 11, 14, 18, 17, 13, 13]
+        }
+      ],
+        chart: {
+        height: 350,
+        type: 'line',
+        dropShadow: {
+          enabled: true,
+          color: '#000',
+          top: 18,
+          left: 7,
+          blur: 10,
+          opacity: 0.2
+        },
+        zoom: {
+          enabled: false
+        },
+        toolbar: {
+          show: false
+        }
+      },
+      colors: ['#77B6EA', '#545454'],
+      dataLabels: {
+        enabled: true,
+      },
+      stroke: {
+        curve: 'smooth'
+      },
+      title: {
+        text: 'Average High & Low Temperature',
+        align: 'left'
+      },
+      grid: {
+        borderColor: '#e7e7e7',
+        row: {
+          colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+          opacity: 0.5
+        },
+      },
+      markers: {
+        size: 1
+      },
+      xaxis: {
+        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+        title: {
+          text: 'Month'
+        }
+      },
+      yaxis: {
+        title: {
+          text: 'Temperature'
+        },
+        min: 5,
+        max: 40
+      },
+      legend: {
+        position: 'top',
+        horizontalAlign: 'right',
+        floating: true,
+        offsetY: -25,
+        offsetX: -5
+      }
+      };
+
+      var chart = new ApexCharts(document.querySelector("#chart"), options);
+      chart.render();
+
+      var options = {
+        series: [
+        {
+          name: "High - 2013",
+          data: [28, 29, 33, 36, 32, 32, 33]
+        },
+        {
+          name: "Low - 2013",
+          data: [12, 11, 14, 18, 17, 13, 13]
+        }
+      ],
+        chart: {
+        height: 350,
+        type: 'line',
+        dropShadow: {
+          enabled: true,
+          color: '#000',
+          top: 18,
+          left: 7,
+          blur: 10,
+          opacity: 0.2
+        },
+        zoom: {
+          enabled: false
+        },
+        toolbar: {
+          show: false
+        }
+      },
+      colors: ['#77B6EA', '#545454'],
+      dataLabels: {
+        enabled: true,
+      },
+      stroke: {
+        curve: 'smooth'
+      },
+      title: {
+        text: 'Average High & Low Temperature',
+        align: 'left'
+      },
+      grid: {
+        borderColor: '#e7e7e7',
+        row: {
+          colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+          opacity: 0.5
+        },
+      },
+      markers: {
+        size: 1
+      },
+      xaxis: {
+        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+        title: {
+          text: 'Month'
+        }
+      },
+      yaxis: {
+        title: {
+          text: 'Temperature'
+        },
+        min: 5,
+        max: 40
+      },
+      legend: {
+        position: 'top',
+        horizontalAlign: 'right',
+        floating: true,
+        offsetY: -25,
+        offsetX: -5
+      }
+      };
+
+      var chart = new ApexCharts(document.querySelector("#chart2"), options);
+      chart.render();
+
+
+      var options = {
+        series: [
+        {
+          name: "High - 2013",
+          data: [28, 29, 33, 36, 32, 32, 33]
+        },
+        {
+          name: "Low - 2013",
+          data: [12, 11, 14, 18, 17, 13, 13]
+        }
+      ],
+        chart: {
+        height: 350,
+        type: 'line',
+        dropShadow: {
+          enabled: true,
+          color: '#000',
+          top: 18,
+          left: 7,
+          blur: 10,
+          opacity: 0.2
+        },
+        zoom: {
+          enabled: false
+        },
+        toolbar: {
+          show: false
+        }
+      },
+      colors: ['#77B6EA', '#545454'],
+      dataLabels: {
+        enabled: true,
+      },
+      stroke: {
+        curve: 'smooth'
+      },
+      title: {
+        text: 'Average High & Low Temperature',
+        align: 'left'
+      },
+      grid: {
+        borderColor: '#e7e7e7',
+        row: {
+          colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+          opacity: 0.5
+        },
+      },
+      markers: {
+        size: 1
+      },
+      xaxis: {
+        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+        title: {
+          text: 'Month'
+        }
+      },
+      yaxis: {
+        title: {
+          text: 'Temperature'
+        },
+        min: 5,
+        max: 40
+      },
+      legend: {
+        position: 'top',
+        horizontalAlign: 'right',
+        floating: true,
+        offsetY: -25,
+        offsetX: -5
+      }
+      };
+
+      var chart = new ApexCharts(document.querySelector("#chart3"), options);
+      chart.render();
+
+</script>
+{% endblock container %}
+
+

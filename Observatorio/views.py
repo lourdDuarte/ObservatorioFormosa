@@ -27,35 +27,38 @@ def prueba(request):
 
 def gestor_consultas(request):
     if request.method == "POST":
-        select = request.POST['consulta']
-        print("pppppppppppp " + select)
-    resultados = Indicadores.objects.select_related('mes','anio','valor').values(
-        'mes__mes',
-        'anio__anio',
+        seleccionados = request.POST.getlist('consulta') 
        
-    ).filter(anio_id=2)
-    
-    if resultados.exists():
-        encabezados = list(resultados[0].keys())
-        datos = list(resultados)
-        # Para obtener solo los valores de cada registro, excluyendo 'id'
-        solo_valores = []
-        for fila in datos:
-            # Extraer solo los valores de los campos, excluyendo 'id'
-            valores = [valor for clave, valor in fila.items()]
-            solo_valores.append(valores)
+        if 'Moto' in seleccionados:
+            resultados = Indicadores.objects.select_related('mes','anio','valor').values(
+            'mes__mes',
+            'anio__anio',
+            ).filter(anio_id=2)
+            print(resultados)
+        if 'Auto' in seleccionados:
+            print('Auto')
+        if 'Puesto sector construccion' in seleccionados:
+            print('Puesto sector construccion')
+        if 'Salario sector construccion' in seleccionados:
+            print('Salario sector construccion')
+        if 'Sector construccion' in seleccionados:
+            print('Sector construccion')
+            
+        if resultados.exists():
+            encabezados = list(resultados[0].keys())
+            datos = list(resultados)
+           
+            solo_valores = []
+            for fila in datos:
+              
+                valores = [valor for clave, valor in fila.items()]
+                solo_valores.append(valores)
 
-        print(encabezados)
-        print("***********************************")
-        print(solo_valores)
-        return render(request, 'consultas.html', {
-            'encabezados': encabezados,
-            'datos': solo_valores
-        })
-    else:
-        return render(request, 'consultas.html', {
-            'encabezados': [],
-            'datos': []
-        })
-    
+            
+            return render(request, 'consultas.html', {
+                'encabezados': encabezados,
+                'datos': solo_valores
+            })
+        
+    return render(request, 'consultas.html')
     
