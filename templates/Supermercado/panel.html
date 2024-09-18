@@ -11,34 +11,46 @@
 
     <div class="card-chart">
 
-      <div id="chart" style="width: 530px; margin-left: 1em;  " ></div>
+      <div id="chart" style="width: 830px; margin: 0px auto  " ></div>
     
     
-      <div id="chart2" style="width: 530px; margin-left: 1em;  " ></div>
+     
     
     
-      <div id="chart3" style="width: 530px; margin-left: 1em; " ></div>
+    
     </div> 
   </div>
   
-
-    <div class="card-chart-pie">
-      <h4> Venta total por articulo </h4>
-      <div id="chart-articulos" style="width: 540px; margin: 0px auto; " ></div>
-      
-    
-    
-      
-    </div> 
-    <div class="card-chart-line">
+  <div class="content">
+    <h2 style="margin-left: 3.5em; color:#fff">Ventas</h2>
+    <div class="card-chart-ventas">
      
       <div id="chart-articulos2" style="width: 600px; margin: 0px auto; " ></div>
     
     
       
     </div> 
-  
+    <div class="card-chart-ventas">
+     
+      <div id="chart2" style="width: 750px; margin-left: 1em;  " ></div>
+    
+    
+      
+    </div> 
+    <div class="card-chart-ventas">
+     
+      <h4 style="margin: 2em"> Venta total por articulo </h4>
+      <div id="chart-articulos" style="width: 540px; margin: 0px auto; padding-top:5em " ></div>
+      
+    
+      
+    </div> 
+    
 
+
+  </div>
+
+    
     
     
 
@@ -112,12 +124,12 @@
     var options = {
         series: [
         {
-          name: "High - 2013",
-          data: [28, 29, 33, 36, 32, 32, 33]
+          name: "Intermensual",
+          data: [-11.4, -10.8, 10.1]
         },
         {
-          name: "Low - 2013",
-          data: [12, 11, 14, 18, 17, 13, 13]
+          name: "Interanual",
+          data: [13.8,14.6,14.8]
         }
       ],
         chart: {
@@ -160,16 +172,14 @@
         size: 1
       },
       xaxis: {
-        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+        categories: ['Enero', 'Febrero', 'Marzo'],
         title: {
-          text: 'Month'
+          text: 'Meses'
         }
       },
       yaxis: {
-        title: {
-          text: 'Temperature'
-        },
-        min: 5,
+       
+        min:-20,
         max: 40
       },
       legend: {
@@ -187,12 +197,12 @@
       var options = {
         series: [
         {
-          name: "High - 2013",
-          data: [28, 29, 33, 36, 32, 32, 33]
+          name: "Intermensual",
+          data: [-5.8,-0.7,-13.4,-8.9,7.2,13.2]
         },
         {
-          name: "Low - 2013",
-          data: [12, 11, 14, 18, 17, 13, 13]
+          name: "Interanual",
+          data: [153.4,172.9,189.3,151.9,156.4,154.6]
         }
       ],
         chart: {
@@ -235,17 +245,15 @@
         size: 1
       },
       xaxis: {
-        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+        categories: ['Enero', 'Febrero','Marzo','Abril','Mayo','Junio'],
         title: {
-          text: 'Month'
+          text: 'Meses'
         }
       },
       yaxis: {
-        title: {
-          text: 'Temperature'
-        },
-        min: 5,
-        max: 40
+        
+        min: -25,
+        max: 200
       },
       legend: {
         position: 'top',
@@ -260,77 +268,7 @@
       chart.render();
 
 
-      var options = {
-        series: [
-        {
-          name: "High - 2013",
-          data: [28, 29, 33, 36, 32, 32, 33]
-        },
-        {
-          name: "Low - 2013",
-          data: [12, 11, 14, 18, 17, 13, 13]
-        }
-      ],
-        chart: {
-        height: 350,
-        type: 'line',
-        dropShadow: {
-          enabled: true,
-          color: '#000',
-          top: 18,
-          left: 7,
-          blur: 10,
-          opacity: 0.2
-        },
-        zoom: {
-          enabled: false
-        },
-        toolbar: {
-          show: false
-        }
-      },
-      colors: ['#77B6EA', '#545454'],
-      dataLabels: {
-        enabled: true,
-      },
-      stroke: {
-        curve: 'smooth'
-      },
-      title: {
-        text: 'Acumulado y participacion de ventas',
-        align: 'left'
-      },
-      grid: {
-        borderColor: '#e7e7e7',
-        row: {
-          colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
-          opacity: 0.5
-        },
-      },
-      markers: {
-        size: 1
-      },
-      xaxis: {
-        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
-        title: {
-          text: 'Month'
-        }
-      },
-      yaxis: {
-        min: -10,
-        max: 80
-      },
-      legend: {
-        position: 'top',
-        horizontalAlign: 'right',
-        floating: true,
-        offsetY: -25,
-        offsetX: -5
-      }
-      };
-
-      var chart = new ApexCharts(document.querySelector("#chart3"), options);
-      chart.render();
+    
 
 
 
@@ -339,26 +277,7 @@
 </script>
 
 
-<script>
 
-function data_variacion(){
-  meses = []
-  var_interanual = []
-  var_intermensual = []
-
-  {% for data in variacion  %}
-    meses.push({{data.mes__mes}})
-    var_interanual.push({{ data.variacion_interanual }})
-    var_intermensual.push({{ data.variacion_intermensual }})
-  
-  {% endfor %}
-
-  return [meses, var_interanual, var_intermensual]
-}
-
-variantes_temporales()
-
-</script>
 {% endblock container %}
 
 
