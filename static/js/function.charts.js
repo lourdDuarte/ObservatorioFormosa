@@ -1,15 +1,15 @@
-function draw_line_chart(lista1,lista2,lista3, id)
+function draw_line_chart(data_intermensual,data_interanual,titulo,meses, id)
 {
 
   var options = {
     series: [
     {
-      name: "Interanual",
-      data: lista1
+      name: "Intermensual",
+      data: data_intermensual
     },
     {
-      name: "Intermensual",
-      data: lista2
+      name: "Interanual",
+      data: data_interanual
     }
   ],
     chart: {
@@ -23,6 +23,9 @@ function draw_line_chart(lista1,lista2,lista3, id)
       blur: 10,
       opacity: 0.2
     },
+    zoom: {
+      enabled: false
+    },
     toolbar: {
       show: false
     }
@@ -35,7 +38,7 @@ function draw_line_chart(lista1,lista2,lista3, id)
     curve: 'smooth'
   },
   title: {
-    text: 'Datos',
+    text: titulo,
     align: 'left'
   },
   grid: {
@@ -49,17 +52,14 @@ function draw_line_chart(lista1,lista2,lista3, id)
     size: 1
   },
   xaxis: {
-    categories: lista3,
+    categories: meses,
     title: {
       text: 'Meses'
     }
   },
   yaxis: {
-    title: {
-      text: ' '
-    },
-    min: -30,
-    max: 350
+    min: -10,
+    max: 80
   },
   legend: {
     position: 'top',
@@ -70,7 +70,7 @@ function draw_line_chart(lista1,lista2,lista3, id)
   }
   };
 
-  var chart = new ApexCharts(document.querySelector("#"+id), options);
+  var chart = new ApexCharts(document.querySelector('#'+id), options);
   chart.render();
 }
 

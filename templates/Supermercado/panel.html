@@ -5,33 +5,109 @@
 
 {% block container %}
 <div class="main-panel">
-  <div class="button-card">
-    <button type="button" class="btn btn-secondary">Indicadores</button>
-    <button type="button" class="btn btn-secondary">Variacion</button>
-    <button type="button" class="btn btn-secondary">Participacion</button>
-  </div>
+  <h2 style="margin-left: 2em; color:#fff">Supermercado (precios corrientes)</h2>
+  
   <div class="content-chart">
 
     <div class="card-chart">
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, quis. Cum dolore quo tempore quasi distinctio odit reprehenderit, nam doloribus non ea iure quis voluptatibus veritatis! Esse, porro expedita optio molestiae laboriosam maxime! Quia cum atque, sit sint velit quisquam.</p>
 
-      <div id="chart" style="width: 850px; margin: 0px auto;" ></div>
-    </div>
-    {% comment %} <div class="card-chart">
-      <div id="chart2" style="width: 530px;" ></div>
-    </div>
-    <div class="card-chart">
-      <div id="chart3" style="width: 530px;" ></div>
-    </div> {% endcomment %}
+      <div id="chart" style="width: 530px; margin-left: 1em;  " ></div>
+    
+    
+      <div id="chart2" style="width: 530px; margin-left: 1em;  " ></div>
+    
+    
+      <div id="chart3" style="width: 530px; margin-left: 1em; " ></div>
+    </div> 
   </div>
+  
+
+    <div class="card-chart-pie">
+      <h4> Venta total por articulo </h4>
+      <div id="chart-articulos" style="width: 540px; margin: 0px auto; " ></div>
+      
+    
+    
+      
+    </div> 
+    <div class="card-chart-line">
+     
+      <div id="chart-articulos2" style="width: 600px; margin: 0px auto; " ></div>
+    
+    
+      
+    </div> 
+  
+
     
     
 
 </div>
 
 
-
 <script>
+
+     var options = {
+          series: [44, 55, 13, 43, 22],
+          chart: {
+          width: 380,
+          type: 'pie',
+        },
+        labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
+        responsive: [{
+          breakpoint: 480,
+          
+          options: {
+            chart: {
+              width: 200,
+      
+            },
+            legend: {
+              position: 'bottom'
+            }
+          }
+        }]
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart-articulos"), options);
+        chart.render();
+      
+      var options = {
+          series: [{
+            name: "Desktops",
+            data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
+        }],
+          chart: {
+          height: 350,
+          type: 'line',
+          zoom: {
+            enabled: false
+          }
+        },
+        dataLabels: {
+          enabled: false
+        },
+        stroke: {
+          curve: 'straight'
+        },
+        title: {
+          text: 'Ventas totales de supermercado',
+          align: 'left'
+        },
+        grid: {
+          row: {
+            colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+            opacity: 0.5
+          },
+        },
+        xaxis: {
+          categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+        }
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart-articulos2"), options);
+        chart.render();
+     
 
     var options = {
         series: [
@@ -70,7 +146,7 @@
         curve: 'smooth'
       },
       title: {
-        text: 'Average High & Low Temperature',
+        text: 'Cantidad de operaciones intermensual / interanual',
         align: 'left'
       },
       grid: {
@@ -145,7 +221,7 @@
         curve: 'smooth'
       },
       title: {
-        text: 'Average High & Low Temperature',
+        text: 'Variacion porcentual en ventas intermensual / interanual',
         align: 'left'
       },
       grid: {
@@ -221,7 +297,7 @@
         curve: 'smooth'
       },
       title: {
-        text: 'Average High & Low Temperature',
+        text: 'Acumulado y participacion de ventas',
         align: 'left'
       },
       grid: {
@@ -241,11 +317,8 @@
         }
       },
       yaxis: {
-        title: {
-          text: 'Temperature'
-        },
-        min: 5,
-        max: 40
+        min: -10,
+        max: 80
       },
       legend: {
         position: 'top',
@@ -258,6 +331,32 @@
 
       var chart = new ApexCharts(document.querySelector("#chart3"), options);
       chart.render();
+
+
+
+
+    
+</script>
+
+
+<script>
+
+function data_variacion(){
+  meses = []
+  var_interanual = []
+  var_intermensual = []
+
+  {% for data in variacion  %}
+    meses.push({{data.mes__mes}})
+    var_interanual.push({{ data.variacion_interanual }})
+    var_intermensual.push({{ data.variacion_intermensual }})
+  
+  {% endfor %}
+
+  return [meses, var_interanual, var_intermensual]
+}
+
+variantes_temporales()
 
 </script>
 {% endblock container %}

@@ -23,7 +23,7 @@ class Total(models.Model):
      anio = models.ForeignKey(Anio, on_delete=models.CASCADE, related_name='+')
      mes = models.ForeignKey(Mes, on_delete=models.CASCADE, related_name='+')
      valor = models.ForeignKey(Valor, on_delete=models.CASCADE, related_name='+')
-     tipoPrecio = models.ForeignKey(TipoPrecio, on_delete=models.CASCADE, related_name='+')
+     tipo_precio = models.ForeignKey(TipoPrecio, on_delete=models.CASCADE, related_name='+')
      venta_total = models.CharField(max_length=200,null=False,blank=False)
 
      def __str__(self):
@@ -33,20 +33,18 @@ class Variacion(models.Model):
     anio = models.ForeignKey(Anio, on_delete=models.CASCADE, related_name='+')
     mes = models.ForeignKey(Mes, on_delete=models.CASCADE, related_name='+')
     valor = models.ForeignKey(Valor, on_delete=models.CASCADE, related_name='+')
-    comparacion_temporal =  models.ForeignKey(ComparacionTemporal, on_delete=models.CASCADE, related_name='+')
-    tipoPrecio = models.ForeignKey(TipoPrecio, on_delete=models.CASCADE, related_name='+')
-    variacion_porcentual = models.CharField(max_length=200, null=False, blank=False)
+    tipo_precio = models.ForeignKey(TipoPrecio, on_delete=models.CASCADE, related_name='+')
+    variacion_interanual = models.CharField(max_length=200, null=False, blank=False)
+    variacion_intermensual = models.CharField(max_length=200, null=False, blank=False)
 
-    def __str__(self):
-        return self.variacion_porcentual
-
+  
 
 class VentaArticulo(models.Model):
     anio = models.ForeignKey(Anio, on_delete=models.CASCADE, related_name='+')
     mes = models.ForeignKey(Mes, on_delete=models.CASCADE, related_name='+')
     valor = models.ForeignKey(Valor, on_delete=models.CASCADE, related_name='+')
     articulo_supermercado =  models.ForeignKey(TipoArticulo, on_delete=models.CASCADE, related_name='+')
-    tipoPrecio = models.ForeignKey(TipoPrecio, on_delete=models.CASCADE, related_name='+')
+    tipo_precio = models.ForeignKey(TipoPrecio, on_delete=models.CASCADE, related_name='+')
     total = models.CharField(max_length=200, null=False, blank=False)
 
     def __str__(self):
@@ -57,7 +55,7 @@ class VentaParticipacion(models.Model):
     anio = models.ForeignKey(Anio, on_delete=models.CASCADE, related_name='+')
     mes = models.ForeignKey(Mes, on_delete=models.CASCADE, related_name='+')
     valor = models.ForeignKey(Valor, on_delete=models.CASCADE, related_name='+')
-    tipoPrecio = models.ForeignKey(TipoPrecio, on_delete=models.CASCADE, related_name='+')
+    tipo_precio = models.ForeignKey(TipoPrecio, on_delete=models.CASCADE, related_name='+')
     acumulado_total = models.CharField(max_length=200, null=False, blank=False)
     participacion_total = models.CharField(max_length=200, null=False, blank=False)
 
