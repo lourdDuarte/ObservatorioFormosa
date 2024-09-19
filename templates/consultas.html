@@ -57,31 +57,31 @@
            
         </div>
     
-        <div class="row">
+        {% comment %} <div class="row">
           
             <div class="col-md-6">
                 <div class="card" >
                   
-                  <table id="example" class="stripe row-border order-column" style="width:100%">
-                    <thead>
-                        <tr style="color: aliceblue;" >
-                            {% for encabezado in encabezados %}
-                                    <th>{{ encabezado }}</th>
-                            {% endfor %}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for fila in datos %}
-                                <tr style="color: aliceblue;">
-                                    {% for valor in fila %}
-                                        <td>{{ valor }}</td>
-                                    {% endfor %}
-                                </tr>
-                            {% endfor %}
-                   
-                        
-                    </tbody>
-                </table>
+                    <table id="example" class="stripe row-border order-column" style="width:100%">
+                        <thead>
+                            <tr style="color: aliceblue;" >
+                                {% for encabezado in encabezados %}
+                                        <th>{{ encabezado }}</th>
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for fila in datos %}
+                                    <tr style="color: aliceblue;">
+                                        {% for valor in fila %}
+                                            <td>{{ valor }}</td>
+                                        {% endfor %}
+                                    </tr>
+                                {% endfor %}
+                    
+                            
+                        </tbody>
+                    </table>
                 </div>
             </div> 
             <div class="col-md-6">
@@ -112,7 +112,7 @@
              
         </div>
     </div>
-</div>
+</div> {% endcomment %}
 
 <script>
 

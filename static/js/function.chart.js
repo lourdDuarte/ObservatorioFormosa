@@ -58,8 +58,8 @@ function draw_line_chart(data_intermensual,data_interanual,titulo,meses, id)
     }
   },
   yaxis: {
-    min: -10,
-    max: 80
+    min: -30,
+    max: 150
   },
   legend: {
     position: 'top',

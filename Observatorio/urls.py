@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from Supermercado import views as supermercado
+from Sector_construccion import views as construccion
+from Ipc import views as ipc
 from Observatorio import views as observatorio
 from django.conf import settings
 
@@ -26,5 +28,7 @@ urlpatterns = [
     path('panel/', observatorio.panel, name='panel'),
     path('prueba/', observatorio.prueba, name='prueba'),
     path('consulta/', observatorio.gestor_consultas, name='consulta'),
-    path('supermercado-panel/', supermercado.panel_supermercado, name='consulta')
+    path('supermercado-panel/', supermercado.panel_supermercado, name='supermercado-panel'),
+    path('ipc-panel/', ipc.panel_ipc, name='ipc-panel'),
+    path('construccion-panel/', construccion.panel_construccion, name='construccion-panel')
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

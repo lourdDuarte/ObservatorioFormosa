@@ -1,9 +1,11 @@
-.content-chart{
+.content-chart, .content-table{
     margin-top: 3em;
     display: flex; /* Organiza los elementos en fila */
     gap: 20px; /* Espacio entre cada tarjeta */
 }
-
+.content-table{
+    display: block;
+}
 
 .card-chart{
     width: 1100px;
@@ -15,28 +17,33 @@
     border-radius: 10px;
 }
 
-.card-chart-pie, .card-chart-ventas{
+/* .card-chart-pie, */
+.card-chart-ventas{ 
     background: #fff;
-    width: 600px;
-    display: inline-flex;
-    height: 320px;
-    margin: 1em;
+    width: 700px;
+    height: 380px;
+    margin-top: 0;
+    display:inline-flex;
+    margin: 2em;
     border-radius: 10px;
    
 }
-.card-chart-pie{
+/* .card-chart-pie{
     position: absolute;
     left: 54%;
     top: 38em;
 }
 .card-chart-pie h4{
     padding: 1em;
+} */
+.content form{
+    margin-left: 8em;
 }
 
-.card-chart-ventas{
-    width: 700px;
-    margin-left: 8%;
-    height: 380px;
-    margin-top: 0;
-
+.card-chart-division{
+    width: 1200px;
+    background: #fff;
+    margin: 0px auto;
+    height: 400px;
+    border-radius: 10px;
 }
