@@ -45,45 +45,31 @@
               <tr style="color: aliceblue;" >
                           <th>Año</th>
                           <th>Mes</th>
-                          <th>Tipo de valor</th>
-                          <th>Bebidas</th>
-                          <th>Almacen</th>
-                          <th>Panaderia</th>
-                          <th>Lacteos</th>
-                          <th>Carnes</th>
-                          <th>Verduleria y fruteria</th>
-                          <th>Alimentos y rotiseria</th>
-                          <th>Limpieza y perfumeria</th>
-                          <th>Indumentaria</th>
-                          <th>Electronica y hogar</th>
-                          <th>Otros</th>
+                          
+                          <th>Articulo de supermercado</th>
+                          <th>Total</th>
+                          
                   
               </tr>
           </thead>
           <tbody>
-            
+                    {% for articulo in venta_articulo %}
                       <tr style="color: aliceblue;">
+                         
                           
-                              <td>#</td>
-                              <td>#</td>
-                              <td>#</td>
-                              <td>#</td>
-                              <td>#</td>
-                              <td>#</td>
-                              <td>#</td>
-                              <td>#</td>
-                              <td>#</td>
-                              <td>#</td>
-                              <td>#</td>
-                              <td>#</td>
-                              <td>#</td>
-                              <td>#</td>
-
+                          
+                              <td>{{articulo.anio__anio}}</td>
+                              <td>{{articulo.mes__mes}}</td>
+                              
+                              <td>{{articulo.articulo__articulo}}</td>
+                              <td>{{articulo.total}}</td>
+                          
                               
                           
                       </tr>
                  
-      
+          
+                    {% endfor %}
               
           </tbody>
         </table>

@@ -30,8 +30,16 @@ def panel_supermercado(request):
         'acumulado_total',
         'participacion_total').filter(anio_id=2, valor_id=1)
     
+    venta_articulo = VentaArticulo.objects.select_related('mes','anio', 'articulo').values(
+        'mes__mes',
+        'anio__anio',
+        'valor__valor',
+        'articulo__articulo',
+        'total').filter(tipoPrecio_id=2, valor_id= 1 )
+    
     context = {
-        'variacion':variacion
+        'variacion':variacion,
+        'venta_articulo':venta_articulo
         # 'indicador': indicador,
         # 'acumulado': acumulado
     }

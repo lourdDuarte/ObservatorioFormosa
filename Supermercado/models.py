@@ -14,10 +14,10 @@ class TipoPrecio(models.Model):
         return self.tipo
 
 class TipoArticulo(models.Model):
-    tipo_articulo = models.CharField(max_length=200, null=False, blank=False)
+    articulo = models.CharField(max_length=200, null=False, blank=False)
 
     def __str__(self):
-        return self.tipo_articulo
+        return str(self.articulo)
 
 class Total(models.Model):
      anio = models.ForeignKey(Anio, on_delete=models.CASCADE, related_name='+')
@@ -43,12 +43,12 @@ class VentaArticulo(models.Model):
     anio = models.ForeignKey(Anio, on_delete=models.CASCADE, related_name='+')
     mes = models.ForeignKey(Mes, on_delete=models.CASCADE, related_name='+')
     valor = models.ForeignKey(Valor, on_delete=models.CASCADE, related_name='+')
-    articulo_supermercado =  models.ForeignKey(TipoArticulo, on_delete=models.CASCADE, related_name='+')
-    tipo_precio = models.ForeignKey(TipoPrecio, on_delete=models.CASCADE, related_name='+')
+    articulo =  models.ForeignKey(TipoArticulo, on_delete=models.CASCADE, related_name='+')
+    tipoPrecio = models.ForeignKey(TipoPrecio, on_delete=models.CASCADE, related_name='+')
     total = models.CharField(max_length=200, null=False, blank=False)
 
     def __str__(self):
-        return self.articulo_supermercado + "-" + self.total
+        return str(self.articulo) + "-" + str(self.total)
 
 
 class VentaParticipacion(models.Model):

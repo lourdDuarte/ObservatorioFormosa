@@ -13,7 +13,7 @@
                 <tr style="color: aliceblue;" >
                             <th>Año</th>
                             <th>Mes</th>
-                            <th>Tipo de valor</th>
+                           
                             <th>Total de empresas</th>
                             <th>Total puestos de trabajo</th>
                             <th>Salario promedio</th>
@@ -22,22 +22,24 @@
                 </tr>
             </thead>
             <tbody>
-              
+                        {% for data in data_construccion %}
                         <tr style="color: aliceblue;">
                             
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
+                              <td>{{data.anio__anio}}</td>
+                              <td>{{data.mes__mes}}</td>
+                              <td>{{data.total_empresas}}</td>
+                              <td>{{data.total_puesto_trabajo}}</td>
+                              <td>{{data.salario_promedio}}</td>
+                              
+                            
+                               
                                
   
                                 
                             
                         </tr>
                    
-        
+                        {% endfor %}
                 
             </tbody>
           </table>
