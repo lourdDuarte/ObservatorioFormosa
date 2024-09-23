@@ -12,7 +12,7 @@
     
         <div class="card-content">
         
-            <div id="chart-patentamiento" style="width: 600px; margin: 0px auto; " ></div>
+            <div id="chart-patentamiento" style="width: 750px; margin: 0px auto; " ></div>
         
         
         
@@ -24,10 +24,10 @@
         
         
         </div> 
-        <form>
+        <form method="POST" action=" {% url 'auto-panel' %}">
             <h2 style="color:#fff">Comparativa historica</h2>
             {% csrf_token %}
-            <select class="form-select" name="division"  aria-label="Default select example">
+            <select class="form-select" name="año"  aria-label="Default select example">
                 <option selected>Seleccionar año</option>
                
                 <option value="1">2019</option>
@@ -62,54 +62,90 @@
 
 
   
-  <div class="content-table">
-    <h2 style="margin-left:1em; color:#fff">Datos totales y acumulados</h2>
-
-    <table id="example" class="stripe row-border order-column" style="width:100% margin: 0px auto;">
-        <thead>
-            <tr style="color: aliceblue;" >
-                        <th>Año</th>
-                        <th>Mes</th>
-                        
-                        <th>Patentamiento</th>
-                        <th>Patentamiento acumulado</th>
-                        <th>Transferencia</th>
-                        <th>Transferencia acumulado</th>
-                        
-                
-            </tr>
-        </thead>
-        <tbody>
-                  {% for data in data_patentamiento  %}
+  <div style="display: inline-flex; margin-left: 2em">
+    
+    <div class="col-md-6"  >
+      <div class="card" >
+        
+        <table id="example" class="stripe row-border order-column" style="width: 100%;">
+          <thead>
+              <tr style="color: aliceblue;" >
+                          <th>Año</th>
+                          <th>Mes</th>
+                          
+                          <th>Patentamiento</th>
+                          <th>Patentamiento acumulado</th>
+                         
                   
-                  
-                    <tr style="color: aliceblue;">
+              </tr>
+          </thead>
+          <tbody>
+                       {% for data in data_patentamiento  %}
+                          {% if  data.movimiento_vehicular == 1 %}
+                          
+                            <tr style="color: aliceblue;">
+                                
+                              <td>{{data.anio__anio}}</td>
+                              <td>{{data.mes__mes}}</td>
+                              <td>{{data.total}}</td>
+                              <td>{{data.total_acumulado}}</td>
+                              
+                            
+                          
+                            </tr>
                        
                         
-                        
-                            <td>{{data.anio__anio}}</td>
-                            <td>{{data.mes__mes}}</td>
-                            {% if data.movimiento_vehicular_id == 1 %}
-                                <td>{{data.total}}</td>
-                                <td>{{data.total_acumulado}}</td>
-                            
-                            {% endif %}
-                            
-                            {% if data.movimiento_vehicular_id == 2 %}
-                                <td>{{data.total}}</td>
-                                <td>{{data.total_acumulado}}</td>
-                        
-                            {% endif %}
-                        
-                            
-                        
-                    </tr>
-               
-                {% endfor %}
+                          {% endif %} 
+                         
+                      
+                        {% endfor %}
+                    
+              
+          </tbody>
+        </table>
+      </div>
+    </div> 
+    <div class="col-md-6"  >
+      <div class="card" >
+        
+        <table id="exampledos" class="stripe row-border order-column" style="width: 100%;">
+          <thead>
+              <tr style="color: aliceblue;" >
+                          <th>Año</th>
+                          <th>Mes</th>
+                          
+                          <th>Patentamiento</th>
+                          <th>Patentamiento acumulado</th>
+                         
                   
-            
-        </tbody>
-      </table>
+              </tr>
+          </thead>
+          <tbody>
+                       {% for data in data_patentamiento  %}
+                          {% if  data.movimiento_vehicular == 2 %}
+                          
+                            <tr style="color: aliceblue;">
+                                
+                              <td>{{data.anio__anio}}</td>
+                              <td>{{data.mes__mes}}</td>
+                              <td>{{data.total}}</td>
+                              <td>{{data.total_acumulado}}</td>
+                              
+                            
+                          
+                            </tr>
+                       
+                        
+                          {% endif %} 
+                         
+                      
+                        {% endfor %}
+                    
+              
+          </tbody>
+        </table>
+      </div>
+    </div> 
   </div>
   
     
@@ -265,6 +301,41 @@
       };
       var chart = new ApexCharts(document.querySelector("#chart-transferencia"), options);
       chart.render();
+
+      function obtenerDatosPatentamiento(){
+        let interanual= [];
+        let intermensual = [];
+        let meses= []
+      // Obtener datos interanuales / mensuales
+      {% for data in patentamiento_filtro %}
+          interanual.push({{ data.variacion_interanual }});
+          intermensual.push({{data.variacion_intermensual}})
+          meses.push('{{data.mes__mes}}')
+          
+      {% endfor %}
+  
+      
+      return [interanual, intermensual, meses];
+      }
+
+      function obtenerDatosTransferencia(){
+        let interanual= [];
+        let intermensual = [];
+        let meses= []
+      // Obtener datos interanuales / mensuales
+      {% for data in transferencia_filtro %}
+          interanual.push({{ data.variacion_interanual }});
+          intermensual.push({{data.variacion_intermensual}})
+          meses.push('{{data.mes__mes}}')
+          
+      {% endfor %}
+  
+      
+      return [interanual, intermensual, meses];
+      }
+
+      patentamiento_auto()
+      transferencia_auto()
 </script>
   
 
