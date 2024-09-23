@@ -18,6 +18,7 @@ from django.urls import path
 from Supermercado import views as supermercado
 from Sector_construccion import views as construccion
 from Ipc import views as ipc
+from Patentamiento import views as patentamiento
 from Observatorio import views as observatorio
 from django.conf import settings
 
@@ -30,5 +31,6 @@ urlpatterns = [
     path('consulta/', observatorio.gestor_consultas, name='consulta'),
     path('supermercado-panel/', supermercado.panel_supermercado, name='supermercado-panel'),
     path('ipc-panel/', ipc.panel_ipc, name='ipc-panel'),
-    path('construccion-panel/', construccion.panel_construccion, name='construccion-panel')
+    path('construccion-panel/', construccion.panel_construccion, name='construccion-panel'),
+    path('auto-panel/', patentamiento.panel_auto, name='auto-panel'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
