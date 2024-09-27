@@ -58,8 +58,8 @@ function draw_line_chart(data_intermensual,data_interanual,titulo,meses, id)
     }
   },
   yaxis: {
-    min: -80,
-    max: 150
+    min: -100,
+    max: 400
   },
   legend: {
     position: 'top',
@@ -75,78 +75,113 @@ function draw_line_chart(data_intermensual,data_interanual,titulo,meses, id)
 }
 
 
-function draw_pie_chart(lista1, lista2, id){
-  var options = {
-    series: lista2,
-    chart: {
-    width: 100,
-    type: 'pie',
-  },
-  labels: lista1,
-  responsive: [{
-    breakpoint: 10000,
-    options: {
-      chart: {
-        width: 650
-      },
-      legend: {
-        position: 'bottom'
-      }
-    }
-  }]
-  };
-  
-  
-  var chart = new ApexCharts(document.querySelector("#"+id), options);
-  chart.render();
-}
-
-
-function draw_column_chart(lista1, lista2, id){
- 
+function draw_line_column(data, categoria,tipo_precio, mes,titulo, id){
   var options = {
     series: [{
-    name: 'Net Profit',
-    data: lista2
-  }], 
+    data: data
+  }],
     chart: {
     type: 'bar',
-    height: 300
+    height: 350
   },
   plotOptions: {
     bar: {
-      horizontal: false,
-      columnWidth: '40%',
-      endingShape: 'rounded'
-    },
+      borderRadius: 4,
+      borderRadiusApplication: 'end',
+      horizontal: true,
+    }
   },
   dataLabels: {
     enabled: false
   },
-  stroke: {
-    show: true,
-    width: 2,
-    colors: ['transparent']
+  title: {
+    text: titulo+ ' ' + tipo_precio+':'+ ' '+ mes,
+    align: 'left'
   },
   xaxis: {
-    categories: lista1,
-  },
-  yaxis: {
-    title: {
-      text: '$ (thousands)'
-    }
-  },
-  fill: {
-    opacity: 1
-  },
-
+    categories: categoria
+  }
   };
-  
 
   var chart = new ApexCharts(document.querySelector("#"+id), options);
   chart.render();
+
 }
 
-//CHART MODULO 
+
+
+// function draw_pie_chart(lista1, lista2, id){
+//   var options = {
+//     series: lista2,
+//     chart: {
+//     width: 100,
+//     type: 'pie',
+//   },
+//   labels: lista1,
+//   responsive: [{
+//     breakpoint: 10000,
+//     options: {
+//       chart: {
+//         width: 650
+//       },
+//       legend: {
+//         position: 'bottom'
+//       }
+//     }
+//   }]
+//   };
+  
+  
+//   var chart = new ApexCharts(document.querySelector("#"+id), options);
+//   chart.render();
+// }
+
+
+// function draw_column_chart(lista1, lista2, id){
+ 
+//   var options = {
+//     series: [{
+//     name: 'Net Profit',
+//     data: lista2
+//   }], 
+//     chart: {
+//     type: 'bar',
+//     height: 300
+//   },
+//   plotOptions: {
+//     bar: {
+//       horizontal: false,
+//       columnWidth: '40%',
+//       endingShape: 'rounded'
+//     },
+//   },
+//   dataLabels: {
+//     enabled: false
+//   },
+//   stroke: {
+//     show: true,
+//     width: 2,
+//     colors: ['transparent']
+//   },
+//   xaxis: {
+//     categories: lista1,
+//   },
+//   yaxis: {
+//     title: {
+//       text: '$ (thousands)'
+//     }
+//   },
+//   fill: {
+//     opacity: 1
+//   },
+
+//   };
+  
+
+//   var chart = new ApexCharts(document.querySelector("#"+id), options);
+//   chart.render();
+// }
+
+// //CHART MODULO 
 
 

@@ -1,340 +1,200 @@
+
 {% extends 'base.html' %}
+{% load static %}
 {% block head_content %}
-<title>Dashboard</title>
+
+    <title>Asalariados sector privado</title>
+
 {% endblock head_content %}
 
 {% block container %}
-<div class="main-panel">
-  <h2 style="margin-left: 2em; color:#fff">Supermercado (precios corrientes)</h2>
-  
-  <div class="content-chart">
 
-    <div class="card-chart">
+ <div class="content">
+    <div class="div-content">
+        <div class="content-graficos">
+            <h2 class="mb-0"  >Supermercado: precios constantes y corrientes </h2>
+            <div class="content-description">
+                Lorem ipsum dolor sit amet_total, consectetur adipisicing elit. Perferendis, nihil. Ut impedit cum alias tempora voluptas dolorum laudantium officia cupiditate nesciunt magni porro quia exercitationem, ab quae neque modi, distinctio odit eveniet! Pariatur dicta commodi ex odio nemo quidem similique impedit, deserunt ea! Numquam ut a quae atque tempora modi consequatur in ad aspernatur quos! Voluptatem quasi omnis expedita adipisci optio reiciendis voluptate possimus ipsum, saepe libero, ea eos natus.
+                Velit, sit! Iste labore asperiores, reprehenderit magni pariatur alias officia!
+            </div>
+            <div class="content-chart-actual">
+                <div style= "width: 600px;" id="chart-precio-corriente"></div>
+                <div style= "width: 600px; " id="chart-precio-constante"></div>
+            </div> 
 
-      <div id="chart" style="width: 830px; margin: 0px auto  " ></div>
-    
-    
-     
-    
-    
-    
-    </div> 
-  </div>
-  
-  <div class="content">
-    <h2 style="margin-left: 3.5em; color:#fff">Ventas</h2>
-    <div class="card-chart-ventas">
-     
-      <div id="chart-articulos2" style="width: 600px; margin: 0px auto; " ></div>
-    
-    
-      
-    </div> 
-    <div class="card-chart-ventas">
-     
-      <div id="chart2" style="width: 750px; margin-left: 1em;  " ></div>
-    
-    
-      
-    </div> 
-    <div class="content-table">
 
-      <h2 style="margin-left:1em; color:#fff">Ventas por articulo</h2>
-        <table id="example" class="stripe row-border order-column" style="width:100% margin: 0px auto;">
-          <thead>
-              <tr style="color: aliceblue;" >
-                          <th>Año</th>
-                          <th>Mes</th>
-                          
-                          <th>Articulo de supermercado</th>
-                          <th>Total</th>
-                          
-                  
-              </tr>
-          </thead>
-          <tbody>
-                    {% for articulo in venta_articulo %}
-                      <tr style="color: aliceblue;">
-                         
-                          
-                          
-                              <td>{{articulo.anio__anio}}</td>
-                              <td>{{articulo.mes__mes}}</td>
-                              
-                              <td>{{articulo.articulo__articulo}}</td>
-                              <td>{{articulo.total}}</td>
-                          
-                              
-                          
-                      </tr>
+            <div class="content-chart-actual" style="margin-top: 8em;">
+              <div style= "width: 600px;" id="chart-precio-corriente-historico"></div>
+              <div style= "width: 600px; " id="chart-precio-constante-historico"></div>
+          </div>
+   
+
+
+
+        </div>
+
+
+
+    </div>
+    <div class="div-card">
+      <div class="content-filter">
+        {% comment %} <h6 class="mb-0" style="margin-top:2em;">Asalariados sector privado variable y diferencia intermensual / interanual - Historico </h6> {% endcomment %}
+        <form method= "POST" action="{% url 'supermercado-panel' %} ">
+            {% csrf_token %}
+            <select class="select1" style="width: 130px;" name="año">
+                <option selected>Año</option>
+                    <option value="2">2020</option>
+                    <option value="3">2021</option>
+                    <option value="4">2022</option>
+                    <option value="5">2023</option>
+                    <option value="6">2024</option>
+
+
+            </select>
+            <select class="select1" style="width: 130px;" name="mes">
+              <option selected>Mes</option>
+              {% for mes in meses  %}
+                <option value='{{mes.id}}'>{{mes.mes}}</option>
+              {% endfor %}
                  
+
+
+            </select>
+            <select class="select1" style="width: 130px;" name="precio">
+              <option selected>Tipo de precio</option>
+
+                  <option value="1">Constante</option>
+                  <option value="2">Corriente</option>
+
+
+          </select>
+            <button type="submit" style="display:block; margin: 0px auto" id="btn" class="btn-filtrar">Filtrar</button>
+            <div class="container ">
+                <div style= "width: 630px;" id="chart-articulos2"></div>
+
+            </div>
+
+        </form>
+
+     </div>
+
+
+        <div class="card-data">
           
-                    {% endfor %}
-              
-          </tbody>
-        </table>
-      
-       
-      
-      
-    
-      
-    </div> 
-    
+          <div style= "width: 430px; margin-top: -4em" id="chart-total-producto"></div>
+        </div>
+        <div class="card-data">
+
+          <div style= "width: 430px; margin-top: -4em" id="chart-total"></div>
+        </div>
+
+    </div>
 
 
-  </div>
 
-    
-    
-    
 
 </div>
-
 
 <script>
 
   
-      
-  var options = {
-    series: [{
-    name: 'Ventas',
-    data: [6252.74,6209.77,7041.60,6416.34,6879.23,7785.56]
-  }],
-    chart: {
-    height: 350,
-    type: 'bar',
-  },
-  plotOptions: {
-    bar: {
-      borderRadius: 10,
-      dataLabels: {
-        position: 'top', // top, center, bottom
-      },
-    }
-  },
-  dataLabels: {
-    enabled: true,
-    
-    offsetY: -20,
-    style: {
-      fontSize: '12px',
-      colors: ["#304758"]
-    }
-  },
+
+
+  function obtenerTotalArticulo(){
+    let categoria = [];
+    let total = [];
+    let precio
+    let mes
+  // Obtener datos interanuales / mensuales
+  {% for data in venta_articulo %}
+      categoria.push('{{ data.articulo__articulo }}');
+      total.push({{data.total}});
+      precio = '{{data.tipoPrecio__tipo}}'
+      mes = '{{data.mes__mes}}' +' ' + '{{data.anio__anio}}'
+  {% endfor %}
+
   
-  xaxis: {
-    categories: ["Enero","Febrero","Marzo","Abril","Mayo","Junio"],
-    position: 'top',
-    axisBorder: {
-      show: false
-    },
-    axisTicks: {
-      show: false
-    },
-    crosshairs: {
-      fill: {
-        type: 'gradient',
-        gradient: {
-          colorFrom: '#D8E3F0',
-          colorTo: '#BED1E6',
-          stops: [0, 100],
-          opacityFrom: 0.4,
-          opacityTo: 0.5,
-        }
-      }
-    },
-    tooltip: {
-      enabled: true,
-    }
-  },
-  yaxis: {
-    axisBorder: {
-      show: false
-    },
-    axisTicks: {
-      show: false,
-    },
-    labels: {
-      show: false,
-      formatter: function (val) {
-        return val + "%";
-      }
-    }
-  
-  },
-  title: {
-    text: 'Ventas totales',
-    floating: true,
-    offsetY: 330,
-    align: 'center',
-    style: {
-      color: '#444'
-    }
+  return [categoria, total, precio,mes];
   }
-  };
 
-  var chart = new ApexCharts(document.querySelector("#chart-articulos2"), options);
-  chart.render();
-     
+  function obtenerTotal(){
+    let categoria_total = [];
+    let total_total = [];
+    let precio_total
+    let mes_total
+  // Obtener datos interanuales / mensuales
+  {% for data in venta_total_corriente %}
+      categoria_total.push('{{ data.mes__mes }}');
+      total_total.push({{data.venta_total}});
+      precio_total = '{{data.tipoPrecio__tipo}}'
+      mes_total = '{{data.anio__anio}}'
+  {% endfor %}
 
-    var options = {
-        series: [
-        {
-          name: "Intermensual",
-          data: [-11.4, -10.8, 10.1]
-        },
-        {
-          name: "Interanual",
-          data: [13.8,14.6,14.8]
-        }
-      ],
-        chart: {
-        height: 350,
-        type: 'line',
-        dropShadow: {
-          enabled: true,
-          color: '#000',
-          top: 18,
-          left: 7,
-          blur: 10,
-          opacity: 0.2
-        },
-        zoom: {
-          enabled: false
-        },
-        toolbar: {
-          show: false
-        }
-      },
-      colors: ['#77B6EA', '#545454'],
-      dataLabels: {
-        enabled: true,
-      },
-      stroke: {
-        curve: 'smooth'
-      },
-      title: {
-        text: 'Cantidad de operaciones intermensual / interanual',
-        align: 'left'
-      },
-      grid: {
-        borderColor: '#e7e7e7',
-        row: {
-          colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
-          opacity: 0.5
-        },
-      },
-      markers: {
-        size: 1
-      },
-      xaxis: {
-        categories: ['Enero', 'Febrero', 'Marzo'],
-        title: {
-          text: 'Meses'
-        }
-      },
-      yaxis: {
-       
-        min:-20,
-        max: 40
-      },
-      legend: {
-        position: 'top',
-        horizontalAlign: 'right',
-        floating: true,
-        offsetY: -25,
-        offsetX: -5
-      }
-      };
+  
+  return [categoria_total, total_total, precio_total,mes_total];
+  }
 
-      var chart = new ApexCharts(document.querySelector("#chart"), options);
-      chart.render();
-
-      var options = {
-        series: [
-        {
-          name: "Intermensual",
-          data: [-5.8,-0.7,-13.4,-8.9,7.2,13.2]
-        },
-        {
-          name: "Interanual",
-          data: [153.4,172.9,189.3,151.9,156.4,154.6]
-        }
-      ],
-        chart: {
-        height: 350,
-        type: 'line',
-        dropShadow: {
-          enabled: true,
-          color: '#000',
-          top: 18,
-          left: 7,
-          blur: 10,
-          opacity: 0.2
-        },
-        zoom: {
-          enabled: false
-        },
-        toolbar: {
-          show: false
-        }
-      },
-      colors: ['#77B6EA', '#545454'],
-      dataLabels: {
-        enabled: true,
-      },
-      stroke: {
-        curve: 'smooth'
-      },
-      title: {
-        text: 'Variacion porcentual en ventas intermensual / interanual',
-        align: 'left'
-      },
-      grid: {
-        borderColor: '#e7e7e7',
-        row: {
-          colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
-          opacity: 0.5
-        },
-      },
-      markers: {
-        size: 1
-      },
-      xaxis: {
-        categories: ['Enero', 'Febrero','Marzo','Abril','Mayo','Junio'],
-        title: {
-          text: 'Meses'
-        }
-      },
-      yaxis: {
-        
-        min: -25,
-        max: 200
-      },
-      legend: {
-        position: 'top',
-        horizontalAlign: 'right',
-        floating: true,
-        offsetY: -25,
-        offsetX: -5
-      }
-      };
-
-      var chart = new ApexCharts(document.querySelector("#chart2"), options);
-      chart.render();
-
-
+  function obtenerVariaciones(){
+    let intermensual_corriente = [];
+    let interanual_corriente = [];
+    let meses_corriente = []
     
 
+    let intermensual_constante = [];
+    let interanual_constante = [];
+    let meses_constante = []
 
 
+  // Obtener datos interanuales / mensuales
+  {% for data in variacion_corriente %}
+      intermensual_corriente.push({{ data.variacion_intermensual }});
+      interanual_corriente.push({{ data.variacion_interanual }});
+      meses_corriente.push('{{data.mes__mes}}')
+  {% endfor %}
 
+  // Obtener datos interanuales / mensuales
+  {% for data in variacion_constante %}
+      intermensual_constante.push({{ data.variacion_intermensual }});
+      interanual_constante.push({{ data.variacion_interanual }});
+      meses_constante.push('{{data.mes__mes}}')
+  {% endfor %}
+  
+  return [intermensual_corriente, interanual_corriente,meses_corriente, intermensual_constante, interanual_constante,meses_constante];
+  }
+
+  function ObtenerVariacionesHistoricas(){
+    let intermensual_corriente_historico = [];
+    let interanual_corriente_historico = [];
+    let meses_corriente_historico  = [];
     
+
+    let intermensual_constante_historico = [];
+    let interanual_constante_historico = [];
+    let meses_constante_historico = [];
+
+
+  // Obtener datos interanuales / mensuales
+  {% for data in variacion_corriente_historico %}
+      intermensual_corriente_historico.push({{ data.variacion_intermensual }});
+      interanual_corriente_historico.push({{ data.variacion_interanual }});
+      meses_corriente_historico.push('{{data.mes__mes}}')
+  {% endfor %}
+
+  // Obtener datos interanuales / mensuales
+  {% for data in variacion_constante_historico %}
+      intermensual_constante_historico.push({{ data.variacion_intermensual }});
+      interanual_constante_historico.push({{ data.variacion_interanual }});
+      meses_constante_historico.push('{{data.mes__mes}}')
+  {% endfor %}
+  
+  return [intermensual_corriente_historico, interanual_corriente_historico,meses_corriente_historico, intermensual_constante_historico, interanual_constante_historico,meses_constante_historico];
+  
+  }
+
+  
+  
+  variantes_totales()
+  variantes_temporales()
 </script>
-
-
-
 {% endblock container %}
-
 
