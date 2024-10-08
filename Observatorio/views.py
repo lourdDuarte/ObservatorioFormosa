@@ -15,7 +15,7 @@ def panel(request):
         'indicadores_supermercado': indicadores_supermercado,
         'indicadores_ipc': list(indicadores_ipc)
     }
-    print(context)
+    
     return render (request, 'panel.html', context)
 
 

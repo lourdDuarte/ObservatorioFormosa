@@ -122,15 +122,16 @@ body {
 }
 
 .card{
-    width: 500px;
+    width: 350px;
     height: 350px;
     background: #cfcccc;
+    padding-top: 2em;
     margin-top: 1em;
     margin-left: 1em;
     border-radius: 10px;
-    box-shadow: 10px 5px 17px -5px rgba(86, 86, 86, 0.75);
-    -webkit-box-shadow: 10px 5px 17px -5px rgba(0,0,0,0.75);
-    -moz-box-shadow: 10px 5px 17px -5px rgba(0,0,0,0.75);
+    box-shadow: 10px 5px 17px -5px rgba(86, 86, 86, 0.485);
+    -webkit-box-shadow: 10px 5px 17px -5px rgba(94, 94, 94, 0.75);
+    -moz-box-shadow: 10px 5px 17px -5px rgba(181, 179, 179, 0.75);
     align-items: center;
     
 }
@@ -139,6 +140,7 @@ body {
 
     width: 100px;
     height: 80px;
+    
     background: #003763; 
     border-radius: 250px;
     margin: 0px auto;

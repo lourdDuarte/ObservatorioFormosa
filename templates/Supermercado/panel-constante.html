@@ -14,8 +14,8 @@
         <div class="content-graficos">
             <h2 class="mb-0"  >Supermercado: precios constantes </h2>
             <div class="content-description">
-              Las ventas totales en supermercados de Formosa, superaron los $8208.42 millones en el mes de julio (en junio fueron $7785.56 millones). 
-              Estas se incrementaron 5,4%, con respecto al mes de junio, además se incrementaron un 153,3% con respecto al mes de julio del año 2024.
+              Si se analizan los guarismos a precios constantes (sin el efecto de la inflación), se observa que las ventas totales en supermercados de Formosa en julio fueron de $115.3 millones (en abril fueron $112.6 millones). Estas se incrementaron un 2,4%, 
+              con respecto al mes de junio, y disminuyeron un 32,5% con respecto al mes de julio del 2023.
             </div>
             <div class="content-chart-actual">
                
@@ -125,7 +125,7 @@
     let precio_total
     let mes_total
   // Obtener datos interanuales / mensuales
-  {% for data in venta_total_corriente %}
+  {% for data in venta_total_constante %}
       categoria_total.push('{{ data.mes__mes }}');
       total_total.push({{data.venta_total}});
       precio_total = '{{data.tipoPrecio__tipo}}'

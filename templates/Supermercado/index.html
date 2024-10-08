@@ -14,8 +14,7 @@
         <div class="content-graficos">
             <h2 class="mb-0"  >Supermercado </h2>
             <div class="content-description">
-              Las ventas totales en supermercados de Formosa, superaron los $8208.42 millones en el mes de julio (en junio fueron $7785.56 millones). 
-              Estas se incrementaron 5,4%, con respecto al mes de junio, además se incrementaron un 153,3% con respecto al mes de julio del año 2024.
+              Si se analizan los guarismos a precios constantes (sin el efecto de la inflación), se observa que las ventas totales en supermercados de Formosa en julio fueron de $115.3 millones (en abril fueron $112.6 millones). Estas se incrementaron un 2,4%, con respecto al mes de junio, y disminuyeron un 32,5% con respecto al mes de julio del 2023.
             </div>
             <div class="content-chart-actual">
                
@@ -143,22 +142,38 @@
       
         let total_operaciones = [];
         let meses_operaciones = []
-        let valor
+        let valor_operaciones
         
 
         // Obtener total de operaciones supermercado
         {% for data in operaciones%}
             total_operaciones.push({{ data.cantidad_operaciones }});
             meses_operaciones.push('{{data.mes__mes}}')
-            valor = ('{{data.valor__valor}}')
+            valor_operaciones = ('{{data.valor__valor}}')
         {% endfor %}
         
-        return [total_operaciones, meses_operaciones, valor];
+        return [total_operaciones, meses_operaciones, valor_operaciones];
       
     }
     
       
+    
+    function obtenerAcumulado()
+    {
       
+        let acumulado_total = [];
+        let meses_acumulado = []
+        let valor_acumulado
+        // Obtener total de operaciones supermercado
+        {% for data in acumulados %}
+            acumulado_total.push({{ data.acumulado_total }});
+            meses_acumulado.push('{{data.mes__mes}}')
+            valor_acumulado = ('{{data.valor__valor}}')
+        {% endfor %}
+        
+        return [acumulado_total, meses_acumulado, valor_acumulado];
+      
+    }
       
       
     indicadores()

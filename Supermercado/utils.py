@@ -45,6 +45,7 @@ def get_venta_participacion():
     return VentaParticipacion.objects.select_related('mes', 'anio', 'tipoPrecio').values(
         'mes__mes',
         'anio__anio',
+        'valor__valor',
         'tipoPrecio__tipo',
         'acumulado_total')
 

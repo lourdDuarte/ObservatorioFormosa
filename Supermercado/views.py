@@ -59,7 +59,7 @@ def index(request):
 
 
     operaciones = indicadores.filter(anio_id = anio_default, valor_id = valor_default)
-    acumulados = acumulados.filter(anio_id = anio_default,tipoPrecio_id = 2, valor_id = valor_default)
+    acumulados_total = acumulados.filter(anio_id = anio_default,tipoPrecio_id = 2, valor_id = valor_default)
 
     if request.method == "POST":
         anio = request.POST.get('año') if request.POST.get('año') != '0' else anio_default
@@ -70,15 +70,16 @@ def index(request):
 
 
         if anio != anio_default and valor != valor_default:
+           
             indicador_historico = indicadores.filter(anio_id = anio, valor_id = valor)
            
             operaciones = indicadores.filter(anio_id = anio, valor_id = valor)
-            acumulados = acumulados.filter(anio_id = anio,tipoPrecio_id = 2, valor_id = valor_default)
-
+            acumulados_total = acumulados.filter(anio_id = anio, tipoPrecio_id = 2, valor_id = valor_default)
+           
     context = {
         'indicador_actual':indicador_actual,
         'indicador_historico': indicador_historico,
-        'acumulados':acumulados,
+        'acumulados':acumulados_total,
         'operaciones': operaciones,
         'valores':valores,
         'error_message':error_message

@@ -30,10 +30,13 @@ function variantes_totales(){
 function indicadores(){
   let [intermensual, interanual,meses] = obtenerIndicadores();
   let [intermensual_historico , interanual_historico ,meses_historico] = ObtenerIndicadoresHistoricos();
-  let [total_operaciones, meses_operaciones, valor] = obtenerTotalOperaciones();
+  let [total_operaciones, meses_operaciones, valor_operaciones] = obtenerTotalOperaciones();
+  let [acumulado_total, meses_acumulado, valor_acumulado] = obtenerAcumulado()
+
 
   chartIndicador = draw_line_chart(intermensual, interanual,'Variacion intermensual / interanual de operaciones',meses,'chart-operaciones-variante')
   chartIndicadorHistorico = draw_line_chart(intermensual_historico , interanual_historico,'Variacion intermensual / interanual de operaciones historico',meses_historico,'chart-operaciones-variante-historico')
 
-  chartTotalProducto = draw_line_column(total_operaciones,meses_operaciones,'',valor,'Total cantidad de operaciones','chart-cantidad-operaciones')
+  chartTotalOperaciones = draw_line_column(total_operaciones,meses_operaciones,'',valor_operaciones,'Total cantidad de operaciones','chart-cantidad-operaciones')
+  chartTotalAcumulado = draw_line_column(acumulado_total, meses_acumulado,'', valor_acumulado,'Acumulado en ventas (solo Formosa)','chart-acumulado')
 }
