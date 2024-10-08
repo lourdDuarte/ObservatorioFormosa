@@ -1,0 +1,182 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block head_content %}
+
+    <title>Asalariados sector privado</title>
+
+{% endblock head_content %}
+
+{% block container %}
+
+ <div class="content">
+    <div class="div-content">
+        <div class="content-graficos">
+            <h2 class="mb-0"  >Supermercado: precios constantes </h2>
+            <div class="content-description">
+              Las ventas totales en supermercados de Formosa, superaron los $8208.42 millones en el mes de julio (en junio fueron $7785.56 millones). 
+              Estas se incrementaron 5,4%, con respecto al mes de junio, además se incrementaron un 153,3% con respecto al mes de julio del año 2024.
+            </div>
+            <div class="content-chart-actual">
+               
+                 <div style= "width: 1200px; margin: 0px auto;" id="chart-precio-constante"></div> 
+            </div> 
+
+
+            <div class="content-chart-actual" style= "margin-top: 5em;">
+              
+              <div  style= "width: 1200px; margin: 0px auto;" id="chart-precio-constante-historico"></div> 
+          </div>
+   
+
+
+
+        </div>
+
+
+
+    </div>
+    <div class="div-card">
+      <div class="content-filter">
+        
+        <form method= "POST" action="{% url 'supermercado-constante' %} ">
+            {% csrf_token %}
+            <div class ="content-error">
+
+              {% if error_message %}
+
+                {{error_message}}
+              
+              {%endif%}
+            </div>
+           
+            <select class="select1" style="width: 130px;" name="año">
+                <option  value='0' selected>Año</option>
+                    <option value="2">2020</option>
+                    <option value="3">2021</option>
+                    <option value="4">2022</option>
+                    <option value="5">2023</option>
+                    <option value="6">2024</option>
+
+
+            </select>
+            <select class="select1" style="width: 130px;" name="mes">
+              <option value='0' selected>Mes</option>
+              {% for mes in meses  %}
+                <option value='{{mes.id}}'>{{mes.mes}}</option>
+              {% endfor %}
+                 
+
+
+            </select>
+           
+            <button type="submit" style="display:block; margin: 0px auto" id="btn" class="btn-filtrar">Filtrar</button>
+            <div class="container ">
+                <div style= "width: 630px;" id="chart-articulos2"></div>
+
+            </div>
+
+        </form>
+
+     </div>
+
+
+        <div class="card-data">
+          
+          <div style= "width: 530px; margin-top: -4em;" id="chart-total-producto"></div>
+        </div>
+        <div class="card-data">
+
+          <div style= "width: 530px; margin-top: -4em" id="chart-total"></div>
+        </div>
+
+    </div>
+
+
+
+
+</div>
+
+<script>
+
+  
+
+
+  function obtenerTotalArticulo(){
+    let categoria = [];
+    let total = [];
+    let precio
+    let mes
+  // Obtener datos interanuales / mensuales
+  {% for data in venta_articulo %}
+      categoria.push('{{ data.articulo__articulo }}');
+      total.push({{data.total}});
+      precio = '{{data.tipoPrecio__tipo}}'
+      mes = '{{data.mes__mes}}' +' ' + '{{data.anio__anio}}'
+  {% endfor %}
+
+  
+  return [categoria, total, precio,mes];
+  }
+
+  function obtenerTotal(){
+    let categoria_total = [];
+    let total_total = [];
+    let precio_total
+    let mes_total
+  // Obtener datos interanuales / mensuales
+  {% for data in venta_total_corriente %}
+      categoria_total.push('{{ data.mes__mes }}');
+      total_total.push({{data.venta_total}});
+      precio_total = '{{data.tipoPrecio__tipo}}'
+      mes_total = '{{data.anio__anio}}'
+  {% endfor %}
+
+  
+  return [categoria_total, total_total, precio_total,mes_total];
+  }
+
+  function obtenerVariaciones(){
+
+
+    let intermensual_constante = [];
+    let interanual_constante = [];
+    let meses_constante = []
+
+
+
+  // Obtener datos interanuales / mensuales
+  {% for data in variacion_constante %}
+      intermensual_constante.push({{ data.variacion_intermensual }});
+      interanual_constante.push({{ data.variacion_interanual }});
+      meses_constante.push('{{data.mes__mes}}')
+  {% endfor %}
+  
+  return [intermensual_constante, interanual_constante,meses_constante];
+  }
+
+  function ObtenerVariacionesHistoricas(){
+  
+
+    let intermensual_constante_historico = [];
+    let interanual_constante_historico = [];
+    let meses_constante_historico = [];
+
+  // Obtener datos interanuales / mensuales
+  {% for data in variacion_constante_historico %}
+      intermensual_constante_historico.push({{ data.variacion_intermensual }});
+      interanual_constante_historico.push({{ data.variacion_interanual }});
+      meses_constante_historico.push('{{data.mes__mes}}')
+  {% endfor %}
+  
+  return [intermensual_constante_historico, interanual_constante_historico,meses_constante_historico];
+  
+  }
+
+  
+  
+  variantes_totales()
+  variantes_temporales()
+</script>
+{% endblock container %}
+

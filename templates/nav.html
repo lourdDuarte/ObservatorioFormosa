@@ -2,34 +2,23 @@
 <div class="sidebar">
   <div class="sidebar-menu">
       <div class="logo">Observatorio<br> Economico<br>de Formosa</div>
-      <nav>
-          <ul>
-             
-              <a  href="{% url 'panel' %}">
-                  <li><i class="fas fa-bars"></i> Inicio</li>
-              </a>
-              <a  href="#">
-                  <li><i class="fas fa-briefcase"></i> Empleos</li>
-              </a>
-              <a  href="#">
-                  <li><i class="fas fa-shopping-cart"></i> Supermercado</li>
-              </a>
 
-              <a  href="#">
-                  <li><i class="fas fa-car"></i> Autos</li>
-              </a>
-
-              <a  href="#">
-                  <li><i class="fas fa-motorcycle"></i> Motos</li>
-              </a>
-
-             
-
-              <a  href="#">
-                  <li><i class="fas fa-dollar-sign"></i> Dgr</li>
-              </a>
-            
-          </ul>
+          <nav>
+            <ul>
+                <li><a href="{% url 'panel' %}"><i class="fas fa-server"></i> Inicio</a>
+                </li>
+                <li><a href="{% url 'supermercado-inicio' %}"><i class="fas fa-shopping-cart"></i>  Supermercado</a>
+          
+                    <ul>
+                        <li><a href="{% url 'supermercado-corriente' %}"><i class="fas fa-caret-right"></i> Precios corrientes</a>
+                        </li>
+                        <li style="margin-top: -1em"><a href="{% url 'supermercado-constante' %}"><i class="fas fa-caret-right"></i> Precios constantes</a>
+                       
+                    </ul>
+                </li>
+                
+            </ul>
+          </nav>
       </nav>
   </div>
 </div>
@@ -41,59 +30,3 @@
 
 
 
-
-
-
-
-
-
-{% comment %} <div class="sidebar" data-color="purple" data-background-color="black" data-image="../assets/img/sidebar-2.jpg">
-
-  <div class="logo" style="background:#181818"><a href="#" class="simple-text logo-normal">
-      Observatorio Economico
-    </a></div>
-  <div class="sidebar-wrapper" style="background:#181818">
-    <ul class="nav">
-      <li class="nav-item ">
-        <a class="nav-link" href="{% url 'panel' %}">
-          <i class="material-icons" style="color:#1294ff">dashboard</i>
-          <p style="color:#ffffff">Panel</p>
-        </a>
-      </li>
-      <li class="nav-item ">
-        <a class="nav-link" href="{% url 'consulta' %}">
-          <i class="material-icons" style="color:#1294ff">dashboard</i>
-          <p style="color:#ffffff">Gestor de consultas</p>
-        </a>
-      </li>
-      <li class="nav-item ">
-        <a class="nav-link" href="{% url 'supermercado-panel' %}">
-          <i class="material-icons" style="color:#1294ff">shopping_cart</i>
-
-          <p style="color:#ffffff">Supermercado</p>
-        </a>
-      </li>
-      <li class="nav-item ">
-        <a class="nav-link" href="{% url 'ipc-panel' %}">
-          <i class="material-icons" style="color:#1294ff">equalizer</i>
-          <p style="color:#ffffff">IPC</p>
-        </a>
-      </li>
-      <li class="nav-item ">
-        <a class="nav-link" href="{% url 'construccion-panel' %}">
-          <i class="material-icons" style="color:#1294ff">construction</i>
-          <p style="color:#ffffff">Construccion</p>
-        </a>
-      </li>
-      <li class="nav-item ">
-        <a class="nav-link" href="{% url 'auto-panel' %}">
-          <i class="material-icons" style="color:#1294ff">drive_eta</i>
-
-          <p style="color:#ffffff">Auto</p>
-        </a>
-      </li>
-      
-      
-    </ul>
-  </div>
-</div> {% endcomment %}

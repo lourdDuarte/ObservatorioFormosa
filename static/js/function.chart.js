@@ -75,7 +75,7 @@ function draw_line_chart(data_intermensual,data_interanual,titulo,meses, id)
 }
 
 
-function draw_line_column(data, categoria,tipo_precio, mes,titulo, id){
+function draw_line_column(data, categoria,tipo_precio, mes ,titulo, id){
   var options = {
     series: [{
     data: data

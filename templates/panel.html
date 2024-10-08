@@ -1,154 +1,100 @@
+
 {% extends 'base.html' %}
+{% load static %}
 {% block head_content %}
-<title>Dashboard</title>
+
+  
 {% endblock head_content %}
 
 {% block container %}
-<div class="main-panel">
-  <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top " id="navigation-example">
-    <div class="container-fluid">
-      
-      <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation" data-target="#navigation-example">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="navbar-toggler-icon icon-bar"></span>
-        <span class="navbar-toggler-icon icon-bar"></span>
-        <span class="navbar-toggler-icon icon-bar"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-end">
-        <ul class="navbar-nav">
-          
-          
-          
-        </ul>
-      </div>
-    </div>
-  </nav>
+
+   
     <div class="content">
-      <div class="container-fluid">
- 
-      
-        <div class="card card-plain">
-          <div class="card-header card-header-primary"  style ="background:#0a6ebd;">
-            <h4 class="card-title">Ultimos datos actualizados</h4>
-            
-          </div>
-  
-        </div>
+      <div class="content-descripcion">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+        Culpa fugiat omnis excepturi nihil, laboriosam illo porro, 
+        ipsum totam libero alias et deleniti, facilis tenetur praesentium dolore ex reiciendis doloremque reprehenderit. Repudiandae dolore pariatur, neque quas est voluptate eligendi nostrum in minima voluptas aliquid magnam velit ea vero molestias aut ipsum aspernatur quisquam? Nobis distinctio delectus quae fugiat quisquam, aliquid inventore officiis sapiente voluptatem itaque tenetur similique ex et consectetur perspiciatis laudantium quibusdam dolor rerum amet nostrum hic maxime praesentium dolorem? Voluptate aperiam dolor facere, vitae aut, sunt tempora excepturi, recusandae dolorem neque consectetur quaerat molestias nobis ipsa architecto sed nulla.
       </div>
-      <div class="row">
-        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
-          <div class="card card-stats">
-            <div class="card-header card-header-warning card-header-icon">
-              <div class="card-icon">
-                <i class="material-icons">shopping_cart</i>
-              </div>
-              <p class="card-category">OPERACIONES EN SUPERMERCADO</p>
-              <h4 class="card-title" style="color:#fff; font-size: 16px">valor interanual: {{indicadores_supermercado.variacion_interanual}}</h4>
-              <h4 class="card-title" style="color:#fff; font-size: 16px">valor intermensual: {{indicadores_supermercado.variacion_intermensual}}</h4>
+      <div class="content-card">
+        <a style="text-decoration: none;" href="{% url 'supermercado-inicio' %}">
+          <div class="card">
+            <div class="circle-icon">
+              <i class="fas fa-shopping-cart"></i>
             </div>
-            <div class="card-footer">
-              <div class="stats">
-                <i class="material-icons" style="color:#fff">date_range</i><p  style="color:#fff"> Ultima actualizacion: {{indicadores_supermercado.mes__mes}}</p>
-              </div>
+            <div class="div-acceso">
+            Interanual: 14.8
+            </div>
+            <div class="div-acceso">
+            Intermensual: 10.1
             </div>
           </div>
-        </div>
-        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
-          <div class="card card-stats">
-            <div class="card-header card-header-success card-header-icon">
-              <div class="card-icon">
-                <i class="material-icons">equalizer</i>
-              </div>
-              <p class="card-category">IPC (NEA)</p>
-              <h3 class="card-title" style="color:#fff">
-                {% comment %} {% for indicador in indicadores_ipc %}
-                  {% if indicador.comparacion_temporal_id == 2  %}
-                     {{indicador.porcentaje}} {% endcomment %}
-                     <h4 class="card-title" style="color:#fff; font-size: 16px">valor interanual: 222.8</h4>
-                     <h4 class="card-title" style="color:#fff; font-size: 16px">valor intermensual: 4.4</h4>
+        </a>
+        <a href="#" style="text-decoration: none;">
+          <div class="card">
+            <div class="circle-icon">
+              <i style="left:0.9em;" class="fas fa-car"></i>
+            </div>
+            <div class="div-acceso">
+              Interanual: -30.40
+             </div>
+             <div class="div-acceso">
+              Intermensual: -13.9
+             </div>
+          </div>
+
+        </a>
        
-                  
-                  
-               
-              </div>
-            <div class="card-footer">
-              <div class="stats">
-                <i class="material-icons" style="color:#fff">date_range</i><p  style="color:#fff"> Ultima actualizacion: Julio
-                  {% comment %} {{indicador.mes__mes}}{% endcomment %} </p> 
-                
-              </div>
+        <a href="#" style="text-decoration: none;">
+          <div class="card">
+            <div class="circle-icon">
+              <i class="fas fa-motorcycle"></i>
             </div>
+            <div class="div-acceso">
+              Interanual: 8.1
+             </div>
+             <div class="div-acceso">
+              Intermensual: 0.1
+             </div>
           </div>
-        </div>
-        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
-          <div class="card card-stats">
-            <div class="card-header card-header-danger card-header-icon">
-              <div class="card-icon">
-                <i class="material-icons" >construction</i>
-              </div>
-              <p class="card-category">PUESTOS EN SECTOR CONSTRUCCION</p>
-              <h4 class="card-title" style="color:#fff; font-size: 16px">valor interanual: -64.4</h4>
-              <h4 class="card-title" style="color:#fff; font-size: 16px">valor intermensual: 0.6</h4>
 
-              
+        </a>
+         <a href="#" style="text-decoration: none;">
+          <div class="card">
+            <div class="circle-icon">
+              <i style="left:0.9em;" class="fas fa-briefcase"></i>
             </div>
-            <div class="card-footer">
-              <div class="stats">
-                <i class="material-icons" style="color:#fff">date_range</i><p  style="color:#fff"> Ultima actualizacion: Junio </p>
-              </div>
-            </div>
+            <div class="div-acceso">
+              Interanual: -64.4
+             </div>
+             <div class="div-acceso">
+             Intermensual: 0.6
+             </div>
           </div>
-        </div>
-        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
-          <div class="card card-stats">
-            <div class="card-header card-header-warning card-header-icon">
-              <div class="card-icon">
-                <i class="material-icons" >time_to_leave</i>
-              </div>
-              <p class="card-category">PATENTAMIENTO AUTOS</p>
-              <h4 class="card-title" style="color:#fff; font-size: 16px">valor interanual: -30.40</h4>
-              <h4 class="card-title" style="color:#fff; font-size: 16px">valor intermensual: -13.9</h4>
-              
-            </div>
-            <div class="card-footer">
-              <div class="stats">
-                <i class="material-icons" style="color:#fff">date_range</i><p  style="color:#fff"> Ultima actualizacion: Agosto</p>
-              </div>
-            </div>
+
+        </a>
+       <a href="#" style="text-decoration: none;">
+        <div class="card">
+          <div class="circle-icon">
+            <i class="fas fa-signal"></i>
           </div>
+          <div class="div-acceso">
+            Interanual: 222.8
+           </div>
+           <div class="div-acceso">
+            Intermensual: 4.4
+           </div>
         </div>
-        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
-          <div class="card card-stats">
-            <div class="card-header card-header-success card-header-icon">
-              <div class="card-icon">
-                <i class="material-icons" >time_to_leave</i>
-              </div>
-              <p class="card-category">PATENTAMIENTO MOTOS</p>
-              <h4 class="card-title" style="color:#fff; font-size: 16px">valor interanual: 8.1</h4>
-              <h4 class="card-title" style="color:#fff; font-size: 16px">valor intermensual: 0.1</h4>
-            </div>
-            <div class="card-footer">
-              <div class="stats">
-                <i class="material-icons" style="color:#fff">date_range</i><p  style="color:#fff"> Ultima actualizacion: Agosto</p>
-              </div>
-            </div>
-          </div>
-        </div>
+       
+
+       </a>
         
+
       </div>
-      
-      
-      
-      
+      {% comment %} <div class="footer">
+        <img src="/static/img/logo.png" alt="" srcset="">
+        <button class="btn-informe"><i class="fa fa-download" aria-hidden="true"></i> Descargar informes</button>
+
+      </div> {% endcomment %}
     </div>
-  </div>
- 
-  <script>
-    const x = new Date().getFullYear();
-    let date = document.getElementById('date');
-    date.innerHTML = '&copy; ' + x + date.innerHTML;
-  </script>
-</div>
+
 {% endblock container %}
-
-

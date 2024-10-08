@@ -29,7 +29,11 @@ urlpatterns = [
     path('panel/', observatorio.panel, name='panel'),
     path('prueba/', observatorio.prueba, name='prueba'),
     path('consulta/', observatorio.gestor_consultas, name='consulta'),
-    path('supermercado-panel/', supermercado.panel_supermercado, name='supermercado-panel'),
+    path('supermercado-inicio/', supermercado.index, name='supermercado-inicio'),
+    path('supermercado-corriente/', supermercado.panel_supermercado_corriente, name='supermercado-corriente'),
+    path('supermercado-constante/', supermercado.panel_supermercado_constante, name='supermercado-constante'),
+   
+
     path('ipc-panel/', ipc.panel_ipc, name='ipc-panel'),
     path('construccion-panel/', construccion.panel_construccion, name='construccion-panel'),
     path('auto-panel/', patentamiento.panel_auto, name='auto-panel'),

@@ -38,7 +38,7 @@ class Variacion(models.Model):
     variacion_intermensual = models.CharField(max_length=200, null=False, blank=False)
 
     def __str__(self):
-        return str(self.variacion_interanual) + str(self.variacion_intermensual)
+        return str(self.anio) + str(self.mes)  + str(self.tipoPrecio) + str(self.variacion_interanual) + str(self.variacion_intermensual)
 
   
 
@@ -51,14 +51,14 @@ class VentaArticulo(models.Model):
     total = models.CharField(max_length=200, null=False, blank=False)
 
     def __str__(self):
-        return str(self.articulo) + "-" + str(self.total)
+        return str(self.anio) + " " + str(self.mes) + str(self.articulo) + "-" + str(self.total)
 
 
 class VentaParticipacion(models.Model):
     anio = models.ForeignKey(Anio, on_delete=models.CASCADE, related_name='+')
     mes = models.ForeignKey(Mes, on_delete=models.CASCADE, related_name='+')
     valor = models.ForeignKey(Valor, on_delete=models.CASCADE, related_name='+')
-    tipo_precio = models.ForeignKey(TipoPrecio, on_delete=models.CASCADE, related_name='+')
+    tipoPrecio = models.ForeignKey(TipoPrecio, on_delete=models.CASCADE, related_name='+')
     acumulado_total = models.CharField(max_length=200, null=False, blank=False)
     participacion_total = models.CharField(max_length=200, null=False, blank=False)
 

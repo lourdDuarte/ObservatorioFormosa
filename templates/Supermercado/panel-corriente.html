@@ -12,20 +12,20 @@
  <div class="content">
     <div class="div-content">
         <div class="content-graficos">
-            <h2 class="mb-0"  >Supermercado: precios constantes y corrientes </h2>
+            <h2 class="mb-0"  >Supermercado: precios corrientes </h2>
             <div class="content-description">
-                Lorem ipsum dolor sit amet_total, consectetur adipisicing elit. Perferendis, nihil. Ut impedit cum alias tempora voluptas dolorum laudantium officia cupiditate nesciunt magni porro quia exercitationem, ab quae neque modi, distinctio odit eveniet! Pariatur dicta commodi ex odio nemo quidem similique impedit, deserunt ea! Numquam ut a quae atque tempora modi consequatur in ad aspernatur quos! Voluptatem quasi omnis expedita adipisci optio reiciendis voluptate possimus ipsum, saepe libero, ea eos natus.
-                Velit, sit! Iste labore asperiores, reprehenderit magni pariatur alias officia!
+              Las ventas totales en supermercados de Formosa, superaron los $8208.42 millones en el mes de julio (en junio fueron $7785.56 millones). 
+              Estas se incrementaron 5,4%, con respecto al mes de junio, además se incrementaron un 153,3% con respecto al mes de julio del año 2024.
             </div>
             <div class="content-chart-actual">
-                <div style= "width: 600px;" id="chart-precio-corriente"></div>
-                <div style= "width: 600px; " id="chart-precio-constante"></div>
+                <div style= "width: 1200px; margin: 0px auto;" id="chart-precio-corriente"></div>
+                {% comment %} <div style= "width: 600px; " id="chart-precio-constante"></div> {% endcomment %}
             </div> 
 
 
-            <div class="content-chart-actual" style="margin-top: 8em;">
-              <div style= "width: 600px;" id="chart-precio-corriente-historico"></div>
-              <div style= "width: 600px; " id="chart-precio-constante-historico"></div>
+            <div class="content-chart-actual" style= "margin-top: 5em;">
+              <div style= "width: 1200px; margin: 0px auto;" id="chart-precio-corriente-historico"></div>
+              {% comment %} <div style= "width: 660px; " id="chart-precio-constante-historico"></div> {% endcomment %}
           </div>
    
 
@@ -38,11 +38,21 @@
     </div>
     <div class="div-card">
       <div class="content-filter">
+        
         {% comment %} <h6 class="mb-0" style="margin-top:2em;">Asalariados sector privado variable y diferencia intermensual / interanual - Historico </h6> {% endcomment %}
-        <form method= "POST" action="{% url 'supermercado-panel' %} ">
+        <form method= "POST" action="{% url 'supermercado-corriente' %} ">
             {% csrf_token %}
+            <div class ="content-error">
+
+              {% if error_message %}
+
+                {{error_message}}
+              
+              {%endif%}
+            </div>
+           
             <select class="select1" style="width: 130px;" name="año">
-                <option selected>Año</option>
+                <option  value='0' selected>Año</option>
                     <option value="2">2020</option>
                     <option value="3">2021</option>
                     <option value="4">2022</option>
@@ -52,7 +62,7 @@
 
             </select>
             <select class="select1" style="width: 130px;" name="mes">
-              <option selected>Mes</option>
+              <option value='0' selected>Mes</option>
               {% for mes in meses  %}
                 <option value='{{mes.id}}'>{{mes.mes}}</option>
               {% endfor %}
@@ -60,14 +70,14 @@
 
 
             </select>
-            <select class="select1" style="width: 130px;" name="precio">
-              <option selected>Tipo de precio</option>
+            {% comment %} <select class="select1" style="width: 130px;" name="precio">
+              <option value='0' selected>Tipo de precio</option>
 
                   <option value="1">Constante</option>
                   <option value="2">Corriente</option>
 
 
-          </select>
+          </select> {% endcomment %}
             <button type="submit" style="display:block; margin: 0px auto" id="btn" class="btn-filtrar">Filtrar</button>
             <div class="container ">
                 <div style= "width: 630px;" id="chart-articulos2"></div>
@@ -81,11 +91,11 @@
 
         <div class="card-data">
           
-          <div style= "width: 430px; margin-top: -4em" id="chart-total-producto"></div>
+          <div style= "width: 530px; margin-top: -4em;" id="chart-total-producto"></div>
         </div>
         <div class="card-data">
 
-          <div style= "width: 430px; margin-top: -4em" id="chart-total"></div>
+          <div style= "width: 530px; margin-top: -4em" id="chart-total"></div>
         </div>
 
     </div>

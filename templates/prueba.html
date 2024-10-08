@@ -1,338 +1,182 @@
-{% extends 'base.html' %}
-{% block head_content %}
-<title>Dashboard</title>
-{% endblock head_content %}
+from django.shortcuts import render
+from Observatorio.utils import *
+from Supermercado.models import *
+from Mes.models import *
+from django.shortcuts import render
+from .utils import *
 
-{% block container %}
-<div class="main-panel">
-  <h2 style="margin-left: 2em; color:#fff">Supermercado (precios corrientes)</h2>
-  
-  <div class="content-chart">
 
-    <div class="card-chart">
+# Create your views here.
+def datos_supermercado_panel():
+    anio = obtener_anio_actual()
+    indicador = Indicadores.objects.select_related('mes').values(
+        'mes__mes',  
+        'variacion_interanual',
+        'variacion_intermensual').filter(anio_id=anio, valor_id=1).order_by('-id').first()
+    
+    return indicador
 
-      <div id="chart" style="width: 830px; margin: 0px auto  " ></div>
-    
-    
-     
-    
-    
-    
-    </div> 
-  </div>
-  
-  <div class="content">
-    <h2 style="margin-left: 3.5em; color:#fff">Ventas</h2>
-    <div class="card-chart-ventas">
-     
-      <div id="chart-articulos2" style="width: 600px; margin: 0px auto; " ></div>
-    
-    
-      
-    </div> 
-    <div class="card-chart-ventas">
-     
-      <div id="chart2" style="width: 750px; margin-left: 1em;  " ></div>
-    
-    
-      
-    </div> 
-    <div class="content-table">
 
-      <h2 style="margin-left:1em; color:#fff">Ventas por articulo</h2>
-        <table id="example" class="stripe row-border order-column" style="width:100% margin: 0px auto;">
-          <thead>
-              <tr style="color: aliceblue;" >
-                          <th>Año</th>
-                          <th>Mes</th>
-                          
-                          <th>Articulo de supermercado</th>
-                          <th>Total</th>
-                          
-                  
-              </tr>
-          </thead>
-          <tbody>
-                    {% for articulo in venta_articulo %}
-                      <tr style="color: aliceblue;">
-                         
-                          
-                          
-                              <td>{{articulo.anio__anio}}</td>
-                              <td>{{articulo.mes__mes}}</td>
-                              
-                              <td>{{articulo.articulo__articulo}}</td>
-                              <td>{{articulo.total}}</td>
-                          
-                              
-                          
-                      </tr>
-                 
-          
-                    {% endfor %}
-              
-          </tbody>
-        </table>
-      
+
+def panel_supermercado(request):
+    meses = Mes.objects.all()
+
+    # Consulta inicial para variaciones del año 6
+    variacion_corriente = get_variacion(anio_id=6, tipo_precio_id=2)
+    variacion_constante = get_variacion(anio_id=6, tipo_precio_id=1)
+
+    # Variables iniciales para los valores históricos
+    venta_articulo_corriente = []
+    venta_total_corriente = []
+    variacion_corriente_historico = {}
+    variacion_constante_historico = {}
+
+    if request.method == "POST":
        
-      
-      
-    
-      
-    </div> 
-    
+        anio_id = request.POST.get('año')
+        mes_id = request.POST.get('mes')
+        tipo_precio_id = request.POST.get('precio')
 
+        # Si hay datos en el formulario, realizamos las consultas específicas
+        if (anio_id != '0' and tipo_precio_id != '0'):
+            variacion_corriente_historico = get_variacion(anio_id=anio_id, tipo_precio_id=2)
+            variacion_constante_historico = get_variacion(anio_id=anio_id, tipo_precio_id=1)
+            
+        if (mes_id != '0'):
+            venta_articulo_corriente = get_venta_articulo(anio_id=anio_id, mes_id=mes_id, tipo_precio_id=tipo_precio_id)
+            venta_total_corriente = get_venta_total(anio_id=anio_id, tipo_precio_id=tipo_precio_id)
+        else:
+            # Si no es POST, carga datos por defecto (e.g., mes 1, año 5, tipo de precio 2)
+            venta_articulo_corriente = get_venta_articulo(anio_id=6, mes_id=1, tipo_precio_id=2)
+            venta_total_corriente = get_venta_total(anio_id=6, tipo_precio_id=2)
 
-  </div>
+    else:
+        # Si no es POST, carga datos por defecto (e.g., mes 1, año 5, tipo de precio 2)
+        venta_articulo_corriente = get_venta_articulo(anio_id=6, mes_id=1, tipo_precio_id=2)
+        venta_total_corriente = get_venta_total(anio_id=6, tipo_precio_id=2)
 
-    
-    
-    
-
-</div>
-
-
-<script>
-
-  
-      
-  var options = {
-    series: [{
-    name: 'Ventas',
-    data: [6252.74,6209.77,7041.60,6416.34,6879.23,7785.56]
-  }],
-    chart: {
-    height: 350,
-    type: 'bar',
-  },
-  plotOptions: {
-    bar: {
-      borderRadius: 10,
-      dataLabels: {
-        position: 'top', // top, center, bottom
-      },
+    context = {
+        'venta_articulo': venta_articulo_corriente,
+        'venta_total_corriente': venta_total_corriente,
+        'variacion_corriente': variacion_corriente,
+        'variacion_constante': variacion_constante,
+        'variacion_corriente_historico': variacion_corriente_historico,
+        'variacion_constante_historico': variacion_constante_historico,
+        'meses': meses,
     }
-  },
-  dataLabels: {
-    enabled: true,
+    return render(request, 'Supermercado/panel.html', context)
+
+
+
+
+
+    # def panel_supermercado_corriente(request):
+
+    #     #se ejecutan las consultas iniciales para luego filtrar datos
+    #     meses = Mes.objects.all()
+    #     variacion = get_variacion()
+    #     total = get_venta_total()
+    #     articulos = get_venta_articulo()
     
-    offsetY: -20,
-    style: {
-      fontSize: '12px',
-      colors: ["#304758"]
-    }
-  },
-  
-  xaxis: {
-    categories: ["Enero","Febrero","Marzo","Abril","Mayo","Junio"],
-    position: 'top',
-    axisBorder: {
-      show: false
-    },
-    axisTicks: {
-      show: false
-    },
-    crosshairs: {
-      fill: {
-        type: 'gradient',
-        gradient: {
-          colorFrom: '#D8E3F0',
-          colorTo: '#BED1E6',
-          stops: [0, 100],
-          opacityFrom: 0.4,
-          opacityTo: 0.5,
-        }
-      }
-    },
-    tooltip: {
-      enabled: true,
-    }
-  },
-  yaxis: {
-    axisBorder: {
-      show: false
-    },
-    axisTicks: {
-      show: false,
-    },
-    labels: {
-      show: false,
-      formatter: function (val) {
-        return val + "%";
-      }
-    }
-  
-  },
-  title: {
-    text: 'Ventas totales',
-    floating: true,
-    offsetY: 330,
-    align: 'center',
-    style: {
-      color: '#444'
-    }
-  }
-  };
-
-  var chart = new ApexCharts(document.querySelector("#chart-articulos2"), options);
-  chart.render();
-     
-
-    var options = {
-        series: [
-        {
-          name: "Intermensual",
-          data: [-11.4, -10.8, 10.1]
-        },
-        {
-          name: "Interanual",
-          data: [13.8,14.6,14.8]
-        }
-      ],
-        chart: {
-        height: 350,
-        type: 'line',
-        dropShadow: {
-          enabled: true,
-          color: '#000',
-          top: 18,
-          left: 7,
-          blur: 10,
-          opacity: 0.2
-        },
-        zoom: {
-          enabled: false
-        },
-        toolbar: {
-          show: false
-        }
-      },
-      colors: ['#77B6EA', '#545454'],
-      dataLabels: {
-        enabled: true,
-      },
-      stroke: {
-        curve: 'smooth'
-      },
-      title: {
-        text: 'Cantidad de operaciones intermensual / interanual',
-        align: 'left'
-      },
-      grid: {
-        borderColor: '#e7e7e7',
-        row: {
-          colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
-          opacity: 0.5
-        },
-      },
-      markers: {
-        size: 1
-      },
-      xaxis: {
-        categories: ['Enero', 'Febrero', 'Marzo'],
-        title: {
-          text: 'Meses'
-        }
-      },
-      yaxis: {
-       
-        min:-20,
-        max: 40
-      },
-      legend: {
-        position: 'top',
-        horizontalAlign: 'right',
-        floating: true,
-        offsetY: -25,
-        offsetX: -5
-      }
-      };
-
-      var chart = new ApexCharts(document.querySelector("#chart"), options);
-      chart.render();
-
-      var options = {
-        series: [
-        {
-          name: "Intermensual",
-          data: [-5.8,-0.7,-13.4,-8.9,7.2,13.2]
-        },
-        {
-          name: "Interanual",
-          data: [153.4,172.9,189.3,151.9,156.4,154.6]
-        }
-      ],
-        chart: {
-        height: 350,
-        type: 'line',
-        dropShadow: {
-          enabled: true,
-          color: '#000',
-          top: 18,
-          left: 7,
-          blur: 10,
-          opacity: 0.2
-        },
-        zoom: {
-          enabled: false
-        },
-        toolbar: {
-          show: false
-        }
-      },
-      colors: ['#77B6EA', '#545454'],
-      dataLabels: {
-        enabled: true,
-      },
-      stroke: {
-        curve: 'smooth'
-      },
-      title: {
-        text: 'Variacion porcentual en ventas intermensual / interanual',
-        align: 'left'
-      },
-      grid: {
-        borderColor: '#e7e7e7',
-        row: {
-          colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
-          opacity: 0.5
-        },
-      },
-      markers: {
-        size: 1
-      },
-      xaxis: {
-        categories: ['Enero', 'Febrero','Marzo','Abril','Mayo','Junio'],
-        title: {
-          text: 'Meses'
-        }
-      },
-      yaxis: {
+    #     #inicializacion de contextos individuales
+    #     variacion_historico = []
+    #     error_message = None
+    
+    #     #año y mes por default, año actual y mes iniciando en Enero
+    #     anio_default = 6
+    #     mes_default = 1
+    
+    #     #consultas con valores actuales
+    #     variacion_actual = variacion.filter(anio_id=anio_default, tipoPrecio_id=2)
+    #     totales = total.filter(anio_id=anio_default,  tipoPrecio_id=2)
+    #     totales_articulo = articulos.filter(anio_id = anio_default, mes = mes_default, tipoPrecio_id=2)
         
-        min: -25,
-        max: 200
-      },
-      legend: {
-        position: 'top',
-        horizontalAlign: 'right',
-        floating: true,
-        offsetY: -25,
-        offsetX: -5
-      }
-      };
-
-      var chart = new ApexCharts(document.querySelector("#chart2"), options);
-      chart.render();
-
-
+        
+    #     if request.method == 'POST':
+    #         #se validan que los filtros sean distintos a 0, en el caso contrario mantienen el valor por default
+    #         if (request.POST.get('año') != '0'):
+    #             anio = anio = request.POST.get('año')   
+    #         else:
+    #             anio = anio_default
+    #             error_message = "Seleccionar año es obligatorio para aplicar filtros"
     
-
-
-
-
+    #         if (request.POST.get('mes') != '0'):
+    #             mes = request.POST.get('mes')
+    #         else:
+    #             mes = mes_default
+            
+    #         if (anio != anio_default):
+    #             variacion_historico = variacion.filter(anio_id = anio, tipoPrecio_id=2)
+    #             totales = total.filter(anio_id=anio,  tipoPrecio_id=2)
+            
+    #         if (anio != anio_default and mes != mes_default):
+    #             totales_articulo = articulos.filter(anio_id=anio, mes_id = mes, tipoPrecio_id=2)
+           
+    #     context = {
+    #           'error_message': error_message,
+    #           'venta_articulo': totales_articulo,
+    #           'venta_total_corriente': totales,
+    #           'variacion_corriente': variacion_actual,
+    #           'variacion_corriente_historico': variacion_historico,
+    #           'meses': meses,
+    #     }
     
-</script>
-
-
-
-{% endblock container %}
+    #     return render(request, 'Supermercado/panel-corriente.html',context)
+    
+    
+    
+    
+    # def panel_supermercado_corriente(request):
+    
+    #     #se ejecutan las consultas iniciales para luego filtrar datos
+    #     meses = Mes.objects.all()
+    #     variacion = get_variacion()
+    #     total = get_venta_total()
+    #     articulos = get_venta_articulo()
+    
+    #     #inicializacion de contextos individuales
+    #     variacion_historico = []
+    #     error_message = None
+    
+    #     #año y mes por default, año actual y mes iniciando en Enero
+    #     anio_default = 6
+    #     mes_default = 1
+    
+    #     #consultas con valores actuales
+    #     variacion_actual = variacion.filter(anio_id=anio_default, tipoPrecio_id=1)
+    #     totales = total.filter(anio_id=anio_default,  tipoPrecio_id=1)
+    #     totales_articulo = articulos.filter(anio_id = anio_default, mes = mes_default, tipoPrecio_id=1)
+        
+        
+    #     if request.method == 'POST':
+    #         #se validan que los filtros sean distintos a 0, en el caso contrario mantienen el valor por default
+    #         if (request.POST.get('año') != '0'):
+    #             anio = anio = request.POST.get('año')   
+    #         else:
+    #             anio = anio_default
+    #             error_message = "Seleccionar año es obligatorio para aplicar filtros"
+    
+    #         if (request.POST.get('mes') != '0'):
+    #             mes = request.POST.get('mes')
+    #         else:
+    #             mes = mes_default
+            
+    #         if (anio != anio_default):
+    #             variacion_historico = variacion.filter(anio_id = anio, tipoPrecio_id=1)
+    #             totales = total.filter(anio_id=anio,  tipoPrecio_id=1)
+            
+    #         if (anio != anio_default and mes != mes_default):
+    #             totales_articulo = articulos.filter(anio_id=anio, mes_id = mes, tipoPrecio_id=1)
+           
+    #     context = {
+    #           'error_message': error_message,
+    #           'venta_articulo': totales_articulo,
+    #           'venta_total_constante': totales,
+    #           'variacion_constante': variacion_actual,
+    #           'variacion_constante_historico': variacion_historico,
+    #           'meses': meses,
+    #     }
+    
+    #     return render(request, 'Supermercado/panel-constante.html',context)
+    
+        
