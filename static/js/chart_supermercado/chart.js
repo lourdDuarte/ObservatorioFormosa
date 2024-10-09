@@ -11,7 +11,7 @@ function variantes_temporales(){
   chartVariacionCorriente = draw_line_chart(intermensual_corriente,interanual_corriente,'Variacion intermensual / interanual precios corriente',meses_corriente,'chart-precio-corriente')
   chartVariacionConstante = draw_line_chart(intermensual_constante,interanual_constante,'Variacion intermensual / interanual precios constante',meses_constante,'chart-precio-constante')
   chartCorrientelHistorico = draw_line_chart(intermensual_corriente_historico, interanual_corriente_historico,'Variacion intermensual / interanual precios corriente historico',meses_corriente_historico,'chart-precio-corriente-historico')
-  chartConstanteHistorico = draw_line_chart(intermensual_constante_historico, interanual_constante_historico,'Variacion intermensual / interanual precios constante',meses_constante_historico,'chart-precio-constante-historico')
+  chartConstanteHistorico = draw_line_chart(intermensual_constante_historico, interanual_constante_historico,'Variacion intermensual / interanual precios constante historico',meses_constante_historico,'chart-precio-constante-historico')
 
 
 }
