@@ -6,16 +6,39 @@
           <nav>
             <ul>
                 <li><a href="{% url 'panel' %}"><i class="fas fa-server"></i> Inicio</a>
+                    
                 </li>
-                <li><a href="{% url 'supermercado-inicio' %}"><i class="fas fa-shopping-cart"></i>  Supermercado</a>
+                <li><a href="{% url 'consulta' %}"><i class="fas fa-server"></i> Gestor de graficos</a>
+                    
+                </li>
+                <li style="margin-bottom: 7em;"><i class="fas fa-shopping-cart"></i>  Supermercado
           
                     <ul>
-                        <li><a href="{% url 'supermercado-corriente' %}"><i class="fas fa-caret-right"></i> Precios corrientes</a>
+                        <li class="li-item"><a href="{% url 'supermercado-corriente' %}"><i class="fas fa-caret-right"></i> Precios corrientes</a>
                         </li>
-                        <li style="margin-top: -1em"><a href="{% url 'supermercado-constante' %}"><i class="fas fa-caret-right"></i> Precios constantes</a>
+                        <li class="li-item" style="margin-top: -1em"><a href="{% url 'supermercado-constante' %}"><i class="fas fa-caret-right"></i> Precios constantes</a>
                        
                     </ul>
                 </li>
+                <li style="margin-bottom: 5em;"><i class="fas fa-car"></i> Auto</a>
+                    <ul>
+                        <li class="li-item"><a href="{% url 'auto-patentamiento' %}"><i class="fas fa-caret-right"></i> Patentamiento</a>
+                        </li>
+                        <li class="li-item" style="margin-top: -1em"><a href="{% url 'auto-transferencia' %}"><i class="fas fa-caret-right"></i> Transferencia</a>
+                       
+                    </ul>
+                
+                </li>
+                <li><i class="fas fa-motorcycle"></i>Moto</a>
+                    <ul>
+                        <li class="li-item"><a href="{% url 'moto-patentamiento' %}"><i class="fas fa-caret-right"></i> Patentamiento</a>
+                        </li>
+                        <li class="li-item" style="margin-top: -1em"><a href="{% url 'moto-transferencia' %}"><i class="fas fa-caret-right"></i> Transferencia</a>
+                       
+                    </ul>
+                
+                </li>
+               
                 
             </ul>
           </nav>

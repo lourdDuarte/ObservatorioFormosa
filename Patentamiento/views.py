@@ -1,42 +1,42 @@
 from django.shortcuts import render
 from .models import *
+from .utils import *
 
 # Create your views here.
-def panel_auto(request):
-    data_patentamiento = Indicadores.objects.select_related('mes','anio').values(
-        'mes__mes',
-        'anio__anio',
-        'movimiento_vehicular',
-        'total',
-        'total_acumulado'
-    ).filter(tipo_vehiculo_id = 2)
-    print(data_patentamiento)
-    context = {
-        'data_patentamiento': data_patentamiento
+def panel_auto_patentamiento(request):
+    context_keys = {
+        'indicador_actual': 'indicador_actual',
+        'indicador_historico': 'indicador_historico',
+        'acumulados': 'acumulados',
     }
-    if request.method == "POST":
-        año = request.POST.get('año')
-       
-        
-        if año and año.isdigit():
-            patentamiento_filtro = Indicadores.objects.select_related('mes').values(
-                'mes__mes',
-                'movimiento_vehicular_id',
-                'variacion_interanual',
-                'variacion_intermensual'
-            ).filter(tipo_vehiculo_id = 2, movimiento_vehicular_id = 1, anio_id = año)
-
-            transferencia_filtro = Indicadores.objects.select_related('mes').values(
-                'mes__mes',
-                'movimiento_vehicular_id',
-                'variacion_interanual',
-                'variacion_intermensual'
-            ).filter(tipo_vehiculo_id = 2, movimiento_vehicular_id = 2, anio_id = año)
-            
     
-            context.update({
-                'patentamiento_filtro': patentamiento_filtro,
-                'transferencia_filtro': transferencia_filtro
-            })
-   
-    return render (request, 'patentamiento/auto.html', context)
+    return panel_vehiculo(request, tipo_vehiculo = 2, tipo_movimiento= 1, context_keys=context_keys, template='patentamiento/auto.html')
+
+def panel_auto_transferencia(request):
+    context_keys = {
+        'indicador_actual': 'indicador_actual',
+        'indicador_historico': 'indicador_historico',
+        'acumulados': 'acumulados',
+    }
+    
+    
+    return panel_vehiculo(request, tipo_vehiculo = 2, tipo_movimiento= 2, context_keys=context_keys, template='transferencia/auto.html')
+
+def panel_moto_patentamiento(request):
+    context_keys = {
+        'indicador_actual': 'indicador_moto_actual',
+        'indicador_historico': 'indicador_moto_historico',
+        'acumulados': 'acumulados',
+    }
+    
+    return panel_vehiculo(request, tipo_vehiculo = 1, tipo_movimiento= 1, context_keys=context_keys, template='patentamiento/moto.html')
+
+def panel_moto_transferencia(request):
+    context_keys = {
+        'indicador_actual': 'indicador_actual',
+        'indicador_historico': 'indicador_historico',
+        'acumulados': 'acumulados',
+    }
+    
+    
+    return panel_vehiculo(request, tipo_vehiculo = 1, tipo_movimiento= 2, context_keys=context_keys, template='transferencia/moto.html')

@@ -1,96 +1,198 @@
-
 {% extends 'base.html' %}
 {% load static %}
 {% block head_content %}
 
-    <title>Asalariados sector privado</title>
+    <title>Supermercado - Constantes</title>
 
 {% endblock head_content %}
 
 {% block container %}
 
- <div class="content">
-    <div class="div-content">
-        <div class="content-graficos">
-            <h2 class="mb-0"  >Supermercado: precios constantes </h2>
-            <div class="content-description">
+<div class="content">
+          <div class="div-content-l">
+            <div class="content-button">
+              <button type="button" style="background: #003763; " class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal1">
+                Tabla venta por articulos
+              </button>
+            
+              <!-- Botón para abrir Modal 2 -->
+              <button type="button" style="background: #003763;" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal2">
+                Tabla venta totales
+              </button>
+            
+             
+             
+            </div> 
+            <div class="content-description-l">
+              <h2 class="mb-0"  >Supermercado: precios constantes </h2>
               Si se analizan los guarismos a precios constantes (sin el efecto de la inflación), se observa que las ventas totales en supermercados de Formosa en julio fueron de $115.3 millones (en abril fueron $112.6 millones). Estas se incrementaron un 2,4%, 
-              con respecto al mes de junio, y disminuyeron un 32,5% con respecto al mes de julio del 2023.
+              con respecto al mes de junio, y disminuyeron un 32,5% con respecto al mes de julio del 2023.<br>
             </div>
-            <div class="content-chart-actual">
+            <div class="content-chart-div-l">
                
-                 <div style= "width: 1200px; margin: 0px auto;" id="chart-precio-constante"></div> 
+              <div style= "width: 1600px; margin: 0px auto;" id="chart-precio-constante"></div> 
+                
             </div> 
 
 
-            <div class="content-chart-actual" style= "margin-top: 5em;">
-              
-              <div  style= "width: 1200px; margin: 0px auto;" id="chart-precio-constante-historico"></div> 
-          </div>
+            <div class="content-chart-div-l">
+               
+              <div  style= "width: 1600px; margin: 0px auto;" id="chart-precio-constante-historico"></div> 
+            </div> 
    
 
 
 
-        </div>
-
-
-
-    </div>
-    <div class="div-card">
-      <div class="content-filter">
-        
-        <form method= "POST" action="{% url 'supermercado-constante' %} ">
-            {% csrf_token %}
-            <div class ="content-error">
-
-              {% if error_message %}
-
-                {{error_message}}
-              
-              {%endif%}
-            </div>
-           
-            <select class="select1" style="width: 130px;" name="año">
-                <option  value='0' selected>Año</option>
-                    <option value="2">2020</option>
-                    <option value="3">2021</option>
-                    <option value="4">2022</option>
-                    <option value="5">2023</option>
-                    <option value="6">2024</option>
-
-
-            </select>
-            <select class="select1" style="width: 130px;" name="mes">
-              <option value='0' selected>Mes</option>
-              {% for mes in meses  %}
-                <option value='{{mes.id}}'>{{mes.mes}}</option>
-              {% endfor %}
-                 
-
-
-            </select>
-           
-            <button type="submit" style="display:block; margin: 0px auto" id="btn" class="btn-filtrar">Filtrar</button>
-            <div class="container ">
-                <div style= "width: 630px;" id="chart-articulos2"></div>
-
-            </div>
-
-        </form>
-
-     </div>
-
-
-        <div class="card-data">
           
-          <div style= "width: 530px; margin-top: -4em;" id="chart-total-producto"></div>
-        </div>
-        <div class="card-data">
+          </div>
+     
+          <div class="content-filter-l">
+            
+            <form method= "POST" action="{% url 'supermercado-constante' %} ">
+                {% csrf_token %}
+                <div class ="content-error">
 
-          <div style= "width: 530px; margin-top: -4em" id="chart-total"></div>
-        </div>
+                  {% if error_message %}
 
+                    {{error_message}}
+                  
+                  {%endif%}
+                </div>
+              
+                <select class="select1" style="width: 130px;" name="año">
+                    <option  value='0' selected>Año</option>
+                        <option value="2">2020</option>
+                        <option value="3">2021</option>
+                        <option value="4">2022</option>
+                        <option value="5">2023</option>
+                        <option value="6">2024</option>
+
+
+                </select>
+                <select class="select1" style="width: 130px;" name="valor">
+                  <option value='0' selected>Valor</option>
+                  <option value="1">Formosa</option>
+                  <option value="2">Nacional</option>
+
+                </select>
+              
+                <button type="submit" style="display:block; margin: 0px auto" id="btn" class="btn-filtrar">Filtrar</button>
+                
+
+            </form>
+
+          </div>
+
+
+ <!-- Modal 1 -->
+ <div class="modal fade"  id="modal1" tabindex="-1" aria-labelledby="modal1Label" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content  modal-lg">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modal1Label">Venta por articulo</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <table id="example" class="stripe row-border order-column" style="width:100%">
+          <thead>
+              <tr style="color: black; " >
+                  
+                          <th >Año</th>
+                          <th>Mes</th>
+                          <th>Valor</th>
+                          <th>Articulo</th>
+                          <th>Total</th>
+                  
+              </tr>
+          </thead>
+          <tbody>
+                      {% for  data in venta_articulo %}
+                      <tr style="color: black;">
+                      
+                          
+                              <td>{{data.anio__anio}}</td>
+                              
+                              <td>{{data.mes__mes}}</td>
+                              
+                              <td>{{data.valor__valor}}</td>
+    
+                              <td>{{data.articulo__articulo}}</td>
+    
+                              <td>{{data.total}}</td>
+    
+    
+                          
+                      </tr>
+                      {% endfor %}
+                      
+              
+          </tbody>
+        </table>
+        
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
     </div>
+  </div>
+</div>
+
+<!-- Modal 2 -->
+<div class="modal fade" id="modal2" tabindex="-1" aria-labelledby="modal2Label" aria-hidden="true">
+  <div class="modal-dialog  modal-lg">
+    <div class="modal-content  modal-lg">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modal2Label">Ventas totales</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <table id="example2" class="stripe row-border order-column" style="width:100%">
+          <thead>
+              <tr style="color: black; " >
+                  
+                          <th >Año</th>
+                          <th>Mes</th>
+                          <th>Valor</th>
+                          <th>Total</th>
+                  
+              </tr>
+          </thead>
+          <tbody>
+                      {% for  data in venta_total %}
+                      <tr style="color: black;">
+                      
+                          
+                              <td>{{data.anio__anio}}</td>
+                              
+                              <td>{{data.mes__mes}}</td>
+                              
+                              <td>{{data.valor__valor}}</td>
+    
+                              <td>{{data.venta_total}}</td>
+    
+    
+                          
+                      </tr>
+                      {% endfor %}
+                      
+              
+          </tbody>
+        </table>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+    
+
 
 
 
@@ -119,40 +221,29 @@
   return [categoria, total, precio,mes];
   }
 
-  function obtenerTotal(){
-    let categoria_total = [];
-    let total_total = [];
-    let precio_total
-    let mes_total
-  // Obtener datos interanuales / mensuales
-  {% for data in venta_total_constante %}
-      categoria_total.push('{{ data.mes__mes }}');
-      total_total.push({{data.venta_total}});
-      precio_total = '{{data.tipoPrecio__tipo}}'
-      mes_total = '{{data.anio__anio}}'
-  {% endfor %}
 
-  
-  return [categoria_total, total_total, precio_total,mes_total];
-  }
 
   function obtenerVariaciones(){
 
 
     let intermensual_constante = [];
     let interanual_constante = [];
-    let meses_constante = []
-
+    let meses_constante = [];
+    let anio = ' ';
+    let valor = ' ';
+  
 
 
   // Obtener datos interanuales / mensuales
   {% for data in variacion_constante %}
       intermensual_constante.push({{ data.variacion_intermensual }});
       interanual_constante.push({{ data.variacion_interanual }});
-      meses_constante.push('{{data.mes__mes}}')
+      meses_constante.push('{{data.mes__mes}}');
+       anio = {{data.anio__anio}};
+      valor = '{{data.valor__valor}}'
   {% endfor %}
   
-  return [intermensual_constante, interanual_constante,meses_constante];
+  return [intermensual_constante, interanual_constante,meses_constante, anio, valor];
   }
 
   function ObtenerVariacionesHistoricas(){
@@ -161,22 +252,29 @@
     let intermensual_constante_historico = [];
     let interanual_constante_historico = [];
     let meses_constante_historico = [];
-
+    let anio = ' '
+    let valor = ' '
+  
   // Obtener datos interanuales / mensuales
   {% for data in variacion_constante_historico %}
       intermensual_constante_historico.push({{ data.variacion_intermensual }});
       interanual_constante_historico.push({{ data.variacion_interanual }});
-      meses_constante_historico.push('{{data.mes__mes}}')
+      meses_constante_historico.push('{{data.mes__mes}}');
+      anio = {{data.anio__anio}};
+      valor = '{{data.valor__valor}}'
+      
   {% endfor %}
   
-  return [intermensual_constante_historico, interanual_constante_historico,meses_constante_historico];
+  return [intermensual_constante_historico, interanual_constante_historico,meses_constante_historico, anio, valor];
   
   }
 
   
   
-  variantes_totales()
-  variantes_temporales()
+  
+  precio_constante()
 </script>
 {% endblock container %}
+
+
 

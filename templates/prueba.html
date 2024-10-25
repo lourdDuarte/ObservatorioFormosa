@@ -1,182 +1,182 @@
-from django.shortcuts import render
-from Observatorio.utils import *
-from Supermercado.models import *
-from Mes.models import *
-from django.shortcuts import render
-from .utils import *
+function draw_line_chart(data_intermensual,data_interanual,titulo,meses,max,min,id)
+{
 
-
-# Create your views here.
-def datos_supermercado_panel():
-    anio = obtener_anio_actual()
-    indicador = Indicadores.objects.select_related('mes').values(
-        'mes__mes',  
-        'variacion_interanual',
-        'variacion_intermensual').filter(anio_id=anio, valor_id=1).order_by('-id').first()
-    
-    return indicador
-
-
-
-def panel_supermercado(request):
-    meses = Mes.objects.all()
-
-    # Consulta inicial para variaciones del año 6
-    variacion_corriente = get_variacion(anio_id=6, tipo_precio_id=2)
-    variacion_constante = get_variacion(anio_id=6, tipo_precio_id=1)
-
-    # Variables iniciales para los valores históricos
-    venta_articulo_corriente = []
-    venta_total_corriente = []
-    variacion_corriente_historico = {}
-    variacion_constante_historico = {}
-
-    if request.method == "POST":
-       
-        anio_id = request.POST.get('año')
-        mes_id = request.POST.get('mes')
-        tipo_precio_id = request.POST.get('precio')
-
-        # Si hay datos en el formulario, realizamos las consultas específicas
-        if (anio_id != '0' and tipo_precio_id != '0'):
-            variacion_corriente_historico = get_variacion(anio_id=anio_id, tipo_precio_id=2)
-            variacion_constante_historico = get_variacion(anio_id=anio_id, tipo_precio_id=1)
-            
-        if (mes_id != '0'):
-            venta_articulo_corriente = get_venta_articulo(anio_id=anio_id, mes_id=mes_id, tipo_precio_id=tipo_precio_id)
-            venta_total_corriente = get_venta_total(anio_id=anio_id, tipo_precio_id=tipo_precio_id)
-        else:
-            # Si no es POST, carga datos por defecto (e.g., mes 1, año 5, tipo de precio 2)
-            venta_articulo_corriente = get_venta_articulo(anio_id=6, mes_id=1, tipo_precio_id=2)
-            venta_total_corriente = get_venta_total(anio_id=6, tipo_precio_id=2)
-
-    else:
-        # Si no es POST, carga datos por defecto (e.g., mes 1, año 5, tipo de precio 2)
-        venta_articulo_corriente = get_venta_articulo(anio_id=6, mes_id=1, tipo_precio_id=2)
-        venta_total_corriente = get_venta_total(anio_id=6, tipo_precio_id=2)
-
-    context = {
-        'venta_articulo': venta_articulo_corriente,
-        'venta_total_corriente': venta_total_corriente,
-        'variacion_corriente': variacion_corriente,
-        'variacion_constante': variacion_constante,
-        'variacion_corriente_historico': variacion_corriente_historico,
-        'variacion_constante_historico': variacion_constante_historico,
-        'meses': meses,
+  var options = {
+    series: [
+    {
+      name: "Intermensual",
+      data: data_intermensual
+    },
+    {
+      name: "Interanual",
+      data: data_interanual
     }
-    return render(request, 'Supermercado/panel.html', context)
+  ],
+    chart: {
+    height: 350,
+    type: 'line',
+    dropShadow: {
+      enabled: true,
+      color: '#000',
+      top: 10,
+      left: 7,
+      blur: 7,
+      opacity: 0.2
+    },
+    zoom: {
+      enabled: false
+    },
+    toolbar: {
+      show: false
+    }
+  },
+  colors: ['#007D9D', '#859222'],
+  dataLabels: {
+    enabled: true,
+  },
+  stroke: {
+    curve: 'smooth'
+  },
+  title: {
+    text: titulo,
+    align: 'left'
+  },
+  grid: {
+    borderColor: '#e7e7e7',
+    row: {
+      colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+      opacity: 0.5
+    },
+  },
+  markers: {
+    size: 0
+  },
+  xaxis: {
+    categories: meses,
+    title: {
+      text: 'Meses'
+    }
+  },
+  yaxis: {
+    min: min,
+    max: max,
+    tickAmount: 6, // Define la cantidad de marcas en el eje Y, ajusta este valor según lo necesites
+    forceNiceScale: true, // Mantener esta opción por si ayuda en la escala
+    labels: {
+      formatter: function(value) {
+        return value.toFixed(0); // Mostrar solo enteros
+      }
+    },
+  },
+  
+  grid: {
+    show: true,
+    position: 'back',
+    yaxis: {
+      lines: {
+        show: true
+      }
+    },
+  },
+  legend: {
+    position: 'top',
+    horizontalAlign: 'right',
+    floating: true,
+    offsetY: -20,
+    offsetX: -0
+  },
+  annotations: {
+    yaxis: [{
+      y: 0,
+      borderColor: '#000000',  // Color de la línea
+      strokeDashArray: 0,       // Línea punteada
+      
+    }]
+  }
+  };
+
+  var chart = new ApexCharts(document.querySelector('#'+id), options);
+  chart.render();
+}
 
 
 
 
 
-    # def panel_supermercado_corriente(request):
-
-    #     #se ejecutan las consultas iniciales para luego filtrar datos
-    #     meses = Mes.objects.all()
-    #     variacion = get_variacion()
-    #     total = get_venta_total()
-    #     articulos = get_venta_articulo()
-    
-    #     #inicializacion de contextos individuales
-    #     variacion_historico = []
-    #     error_message = None
-    
-    #     #año y mes por default, año actual y mes iniciando en Enero
-    #     anio_default = 6
-    #     mes_default = 1
-    
-    #     #consultas con valores actuales
-    #     variacion_actual = variacion.filter(anio_id=anio_default, tipoPrecio_id=2)
-    #     totales = total.filter(anio_id=anio_default,  tipoPrecio_id=2)
-    #     totales_articulo = articulos.filter(anio_id = anio_default, mes = mes_default, tipoPrecio_id=2)
-        
-        
-    #     if request.method == 'POST':
-    #         #se validan que los filtros sean distintos a 0, en el caso contrario mantienen el valor por default
-    #         if (request.POST.get('año') != '0'):
-    #             anio = anio = request.POST.get('año')   
-    #         else:
-    #             anio = anio_default
-    #             error_message = "Seleccionar año es obligatorio para aplicar filtros"
-    
-    #         if (request.POST.get('mes') != '0'):
-    #             mes = request.POST.get('mes')
-    #         else:
-    #             mes = mes_default
+def gestor_consultas(request):
+    if request.method == "POST":
+        seleccionados = request.POST.getlist('consulta') 
+       
+        if 'Moto' in seleccionados:
+            resultados = Indicadores.objects.select_related('mes','anio','valor').values(
+            'mes__mes',
+            'anio__anio',
+            ).filter(anio_id=2)
+            print(resultados)
+        if 'Auto' in seleccionados:
+            print('Auto')
+        if 'Puesto sector construccion' in seleccionados:
+            print('Puesto sector construccion')
+        if 'Salario sector construccion' in seleccionados:
+            print('Salario sector construccion')
+        if 'Sector construccion' in seleccionados:
+            print('Sector construccion')
             
-    #         if (anio != anio_default):
-    #             variacion_historico = variacion.filter(anio_id = anio, tipoPrecio_id=2)
-    #             totales = total.filter(anio_id=anio,  tipoPrecio_id=2)
-            
-    #         if (anio != anio_default and mes != mes_default):
-    #             totales_articulo = articulos.filter(anio_id=anio, mes_id = mes, tipoPrecio_id=2)
+        if resultados.exists():
+            encabezados = list(resultados[0].keys())
+            datos = list(resultados)
            
-    #     context = {
-    #           'error_message': error_message,
-    #           'venta_articulo': totales_articulo,
-    #           'venta_total_corriente': totales,
-    #           'variacion_corriente': variacion_actual,
-    #           'variacion_corriente_historico': variacion_historico,
-    #           'meses': meses,
-    #     }
-    
-    #     return render(request, 'Supermercado/panel-corriente.html',context)
-    
-    
-    
-    
-    # def panel_supermercado_corriente(request):
-    
-    #     #se ejecutan las consultas iniciales para luego filtrar datos
-    #     meses = Mes.objects.all()
-    #     variacion = get_variacion()
-    #     total = get_venta_total()
-    #     articulos = get_venta_articulo()
-    
-    #     #inicializacion de contextos individuales
-    #     variacion_historico = []
-    #     error_message = None
-    
-    #     #año y mes por default, año actual y mes iniciando en Enero
-    #     anio_default = 6
-    #     mes_default = 1
-    
-    #     #consultas con valores actuales
-    #     variacion_actual = variacion.filter(anio_id=anio_default, tipoPrecio_id=1)
-    #     totales = total.filter(anio_id=anio_default,  tipoPrecio_id=1)
-    #     totales_articulo = articulos.filter(anio_id = anio_default, mes = mes_default, tipoPrecio_id=1)
-        
-        
-    #     if request.method == 'POST':
-    #         #se validan que los filtros sean distintos a 0, en el caso contrario mantienen el valor por default
-    #         if (request.POST.get('año') != '0'):
-    #             anio = anio = request.POST.get('año')   
-    #         else:
-    #             anio = anio_default
-    #             error_message = "Seleccionar año es obligatorio para aplicar filtros"
-    
-    #         if (request.POST.get('mes') != '0'):
-    #             mes = request.POST.get('mes')
-    #         else:
-    #             mes = mes_default
+            solo_valores = []
+            for fila in datos:
+              
+                valores = [valor for clave, valor in fila.items()]
+                solo_valores.append(valores)
+
             
-    #         if (anio != anio_default):
-    #             variacion_historico = variacion.filter(anio_id = anio, tipoPrecio_id=1)
-    #             totales = total.filter(anio_id=anio,  tipoPrecio_id=1)
-            
-    #         if (anio != anio_default and mes != mes_default):
-    #             totales_articulo = articulos.filter(anio_id=anio, mes_id = mes, tipoPrecio_id=1)
-           
-    #     context = {
-    #           'error_message': error_message,
-    #           'venta_articulo': totales_articulo,
-    #           'venta_total_constante': totales,
-    #           'variacion_constante': variacion_actual,
-    #           'variacion_constante_historico': variacion_historico,
-    #           'meses': meses,
-    #     }
-    
-    #     return render(request, 'Supermercado/panel-constante.html',context)
-    
+            return render(request, 'consultas.html', {
+                'encabezados': encabezados,
+                'datos': solo_valores
+            })
         
+    return render(request, 'consultas.html')
+    
+
+
+
+
+
+    <table id="exampledos" class="stripe row-border order-column" style="width:100%">
+      <thead>
+          <tr style="color: aliceblue;" >
+              
+                      <th>Año</th>
+                      <th>Mes</th>
+                      <th>Valor</th>
+                      <th>Articulo</th>
+                      <th>Total</th>
+              
+          </tr>
+      </thead>
+      <tbody>
+                  {% for  data in venta_articulo %}
+                  <tr style="color: aliceblue;">
+                  
+                      
+                          <td>{{data.anio__anio}}</td>
+                          
+                          <td>{{data.mes__mes}}</td>
+                          
+                          <td>{{data.valor__valor}}</td>
+
+                          <td>{{data.articulo__articulo}}</td>
+
+                          <td>{{data.total}}</td>
+
+
+                      
+                  </tr>
+                  {% endfor %}
+                  
+          
+      </tbody>
+    </table>

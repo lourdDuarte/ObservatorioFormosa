@@ -29,12 +29,17 @@ urlpatterns = [
     path('panel/', observatorio.panel, name='panel'),
     path('prueba/', observatorio.prueba, name='prueba'),
     path('consulta/', observatorio.gestor_consultas, name='consulta'),
-    path('supermercado-inicio/', supermercado.index, name='supermercado-inicio'),
+
     path('supermercado-corriente/', supermercado.panel_supermercado_corriente, name='supermercado-corriente'),
     path('supermercado-constante/', supermercado.panel_supermercado_constante, name='supermercado-constante'),
    
 
     path('ipc-panel/', ipc.panel_ipc, name='ipc-panel'),
     path('construccion-panel/', construccion.panel_construccion, name='construccion-panel'),
-    path('auto-panel/', patentamiento.panel_auto, name='auto-panel'),
+
+    path('auto-patentamiento/', patentamiento.panel_auto_patentamiento, name='auto-patentamiento'),
+    path('auto-transferencia/', patentamiento.panel_auto_transferencia, name='auto-transferencia'),
+    
+    path('moto-patentamiento/', patentamiento.panel_moto_patentamiento, name='moto-patentamiento'),
+    path('moto-transferencia/', patentamiento.panel_moto_transferencia, name='moto-transferencia'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

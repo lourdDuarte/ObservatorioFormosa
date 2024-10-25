@@ -2,7 +2,7 @@
 {% load static %}
 {% block head_content %}
 
-    <title>Autos - patentamiento</title>
+    <title>Autos - transferencia</title>
 
 {% endblock head_content %}
 
@@ -12,25 +12,24 @@
           <div class="div-content-l">
             <div class="content-button">
               <button type="button" style="background: #003763; " class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal1">
-                Tabla patentamientos acumulados
+                Tabla transferencias acumuladas
               </button>
- 
-            </div> 
+            </div>
             <div class="content-description-l">
-              <h2 class="mb-0" >Patentamiento de autos</h2>
-              En el mes de septiembre, se patentaron 253 automóviles, 1,6% más que en el mes de agosto. Si se comparan los datos anualmente, en el mes de septiembre, el patentamiento de autos fue un 4,2% menos con respecto al mes de septiembre del año 2023. 
-              En lo que va del año, se patentaron en Formosa, un total de 2.065 autos.<br>
+              <h2 class="mb-0" >Transferencia de autos</h2>
+              En el mes de septiembre, se transfirieron 731 automóviles, 6,9% menos que en el mes de agosto. Si se comparan los datos anualmente, en el mes de septiembre, las transferencias de autos fueron un 6,2% menos con respecto al mes de septiembre del año 2023. 
+              En lo que va del año, se transfirieron en Formosa, un total de 5.419 autos.<br>
             </div>
             <div class="content-chart-div-l">
                
-                 <div style= "width: 1600px; margin: 0px auto;" id="patentamiento-auto"></div> 
+                 <div style= "width: 1600px; margin: 0px auto;" id="transferencia-auto"></div> 
                 
             </div> 
 
 
             <div class="content-chart-div-l">
                
-              <div style= "width: 1600px; margin: 0px auto;" id="patentamiento-auto-historico"></div> 
+              <div style= "width: 1600px; margin: 0px auto;" id="transferencia-auto-historico"></div> 
             </div> 
    
 
@@ -41,7 +40,7 @@
      
       <div class="content-filter-l">
         
-        <form method= "POST" action="{% url 'auto-patentamiento' %} ">
+        <form method= "POST" action="{% url 'auto-transferencia' %} ">
             {% csrf_token %}
             <div class ="content-error">
 
@@ -80,63 +79,59 @@
        
 
     </div> 
-
-
  <!-- Modal 1 -->
- <div class="modal fade"  id="modal1" tabindex="-1" aria-labelledby="modal1Label" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content  modal-lg">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modal1Label">Acumulado de patentamientos</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <table id="example" class="stripe row-border order-column" style="width:100%">
-          <thead>
-              <tr style="color: black; " >
-                  
-                          <th>Año</th>
-                          <th>Mes</th>
-                          <th>Valor</th>
-                          <th>Total</th>
-                          <th>Total acumulado</th>
-                  
-              </tr>
-          </thead>
-          <tbody>
-                      {% for  data in acumulados %}
-                      <tr style="color: black;">
+    <div class="modal fade"  id="modal1" tabindex="-1" aria-labelledby="modal1Label" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content  modal-lg">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modal1Label">Acumulado de transferencias</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <table id="example" class="stripe row-border order-column" style="width:100%">
+              <thead>
+                  <tr style="color: black; " >
                       
-                          
-                              <td>{{data.anio__anio}}</td>
-                              
-                              <td>{{data.mes__mes}}</td>
-                              
-                              <td>{{data.valor__valor}}</td>
-    
-                              <td>{{data.total}}</td>
-    
-                              <td>{{data.total_acumulado}}</td>
-    
-    
-                          
-                      </tr>
-                      {% endfor %}
+                              <th>Año</th>
+                              <th>Mes</th>
+                              <th>Valor</th>
+                              <th>Total</th>
+                              <th>Total acumulado</th>
                       
-              
-          </tbody>
-        </table>
+                  </tr>
+              </thead>
+              <tbody>
+                          {% for  data in acumulados %}
+                          <tr style="color: black;">
+                          
+                              
+                                  <td>{{data.anio__anio}}</td>
+                                  
+                                  <td>{{data.mes__mes}}</td>
+                                  
+                                  <td>{{data.valor__valor}}</td>
         
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                  <td>{{data.total}}</td>
+        
+                                  <td>{{data.total_acumulado}}</td>
+        
+        
+                              
+                          </tr>
+                          {% endfor %}
+                          
+                  
+              </tbody>
+            </table>
+            
+    
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-
-
 
 
 
@@ -159,11 +154,11 @@
       intermensual.push({{data.variacion_intermensual}});
       interanual.push({{data.variacion_interanual}});
       meses.push('{{data.mes__mes}}');
-      anio = {{data.anio__anio}};
+      anio = {{data.anio__anio}}
       valor = '{{data.valor__valor}}'
     {% endfor %}
   
-  return [intermensual, interanual,meses, anio, valor];
+  return [intermensual, interanual,meses, anio,valor];
   }
 
   function datosVehiculoHistorico(){
@@ -174,6 +169,7 @@
     let meses_historico = []
     let anio = ' '
     let valor = ' '
+
 
     
   // Obtener datos interanuales / mensuales

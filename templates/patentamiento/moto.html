@@ -2,7 +2,7 @@
 {% load static %}
 {% block head_content %}
 
-    <title>Autos - patentamiento</title>
+    <title>Motos - patentamiento</title>
 
 {% endblock head_content %}
 
@@ -14,23 +14,22 @@
               <button type="button" style="background: #003763; " class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal1">
                 Tabla patentamientos acumulados
               </button>
- 
-            </div> 
+            </div>
             <div class="content-description-l">
-              <h2 class="mb-0" >Patentamiento de autos</h2>
-              En el mes de septiembre, se patentaron 253 automóviles, 1,6% más que en el mes de agosto. Si se comparan los datos anualmente, en el mes de septiembre, el patentamiento de autos fue un 4,2% menos con respecto al mes de septiembre del año 2023. 
-              En lo que va del año, se patentaron en Formosa, un total de 2.065 autos.<br>
+              <h2 class="mb-0" >Patentamiento de motos</h2>
+              En el mes de septiembre, se patentaron 820 motocicletas, 8,4% menos que en el mes de agosto. Si se comparan los datos anualmente, en el mes de septiembre, el patentamiento de motos fue un 16,5% menos al mes de septiembre del año 2023. 
+              En lo que va del año, se patentaron en Formosa, un total de 6.382 motos.<br>
             </div>
             <div class="content-chart-div-l">
                
-                 <div style= "width: 1600px; margin: 0px auto;" id="patentamiento-auto"></div> 
+                 <div style= "width: 1600px; margin: 0px auto;" id="patentamiento-moto"></div> 
                 
             </div> 
 
 
             <div class="content-chart-div-l">
                
-              <div style= "width: 1600px; margin: 0px auto;" id="patentamiento-auto-historico"></div> 
+              <div style= "width: 1600px; margin: 0px auto;" id="patentamiento-moto-historico"></div> 
             </div> 
    
 
@@ -39,55 +38,51 @@
           
           </div>
      
-      <div class="content-filter-l">
-        
-        <form method= "POST" action="{% url 'auto-patentamiento' %} ">
-            {% csrf_token %}
-            <div class ="content-error">
-
-              {% if error_message %}
-
-                {{error_message}}
-              
-              {%endif%}
-            </div>
-           
-            <select class="select1" style="width: 130px;" name="año">
-                <option  value='0' selected>Año</option>
-                    <option value="2">2020</option>
-                    <option value="3">2021</option>
-                    <option value="4">2022</option>
-                    <option value="5">2023</option>
-                    <option value="6">2024</option>
-
-
-            </select>
-            <select class="select1" style="width: 130px;" name="valor">
-              <option value='0' selected>Valor</option>
-              <option value="1">Formosa</option>
-              <option value="2">Nacional</option>
-
-            </select>
-           
-            <button type="submit" style="display:block; margin: 0px auto" id="btn" class="btn-filtrar">Filtrar</button>
+          <div class="content-filter-l">
             
+            <form method= "POST" action="{% url 'moto-patentamiento' %} ">
+                {% csrf_token %}
+                <div class ="content-error">
 
-        </form>
+                  {% if error_message %}
 
-     </div>
+                    {{error_message}}
+                  
+                  {%endif%}
+                </div>
+              
+                <select class="select1" style="width: 130px;" name="año">
+                    <option  value='0' selected>Año</option>
+                        <option value="2">2020</option>
+                        <option value="3">2021</option>
+                        <option value="4">2022</option>
+                        <option value="5">2023</option>
+                        <option value="6">2024</option>
+
+
+                </select>
+                <select class="select1" style="width: 130px;" name="valor">
+                  <option value='0' selected>Valor</option>
+                  <option value="1">Formosa</option>
+                  <option value="2">Nacional</option>
+
+                </select>
+              
+                <button type="submit" style="display:block; margin: 0px auto" id="btn" class="btn-filtrar">Filtrar</button>
+                
+
+            </form>
+
+          </div>
 
 
        
-
-    </div> 
-
-
  <!-- Modal 1 -->
  <div class="modal fade"  id="modal1" tabindex="-1" aria-labelledby="modal1Label" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content  modal-lg">
       <div class="modal-header">
-        <h5 class="modal-title" id="modal1Label">Acumulado de patentamientos</h5>
+        <h5 class="modal-title" id="modal1Label">Acumulado de pantentamientos</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -136,6 +131,8 @@
   </div>
 </div>
 
+   
+
 
 
 
@@ -153,14 +150,16 @@
     let anio = ' '
     let valor = ' '
 
+
     
   // Obtener datos interanuales / mensuales
-    {% for data in indicador_actual  %}
+    {% for data in indicador_moto_actual  %}
       intermensual.push({{data.variacion_intermensual}});
       interanual.push({{data.variacion_interanual}});
       meses.push('{{data.mes__mes}}');
       anio = {{data.anio__anio}};
       valor = '{{data.valor__valor}}'
+
     {% endfor %}
   
   return [intermensual, interanual,meses, anio, valor];
@@ -177,7 +176,7 @@
 
     
   // Obtener datos interanuales / mensuales
-    {% for data in indicador_historico  %}
+    {% for data in indicador_moto_historico  %}
       intermensual_historico.push({{data.variacion_intermensual}});
       interanual_historico.push({{data.variacion_interanual}});
       meses_historico.push('{{data.mes__mes}}');
@@ -189,6 +188,6 @@
   return [intermensual_historico, interanual_historico,meses_historico, anio, valor];
   }
 
-  auto()
+  moto()
 </script>
 {% endblock container %}

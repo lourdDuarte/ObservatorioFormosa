@@ -1,123 +1,177 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block head_content %}
-<title>Dashboard</title>
-<style>
-    .table-th{
-        color: azure;
-    }
-</style>
+
+    <title>Autos</title>
+
 {% endblock head_content %}
 
 {% block container %}
-<div class="main-panel">
-    <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top " id="navigation-example">
-      <div class="container-fluid">
-        
-        <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation" data-target="#navigation-example">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="navbar-toggler-icon icon-bar"></span>
-          <span class="navbar-toggler-icon icon-bar"></span>
-          <span class="navbar-toggler-icon icon-bar"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-end">
-          <ul class="navbar-nav">
-            
-            
-            
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <div class="content">
-        <div class="container-fluid">
-           
-          <div class="card card-plain">
-            <div class="card-header card-header-primary"  style ="background:#0a6ebd;">
-              <h4 class="card-title">Gestor de consultas del Observatorio economico de Formosa</h4>
-              
-            </div>
-            </div>
-            <div>
-                <form  method= "POST" action="{% url 'consulta' %}">
-                    {% csrf_token %}
-                    <select class="form-select" name="consulta" multiple aria-label="multiple select example">
-                       
-                        <option value="Moto">patentamiento moto</option>
-                        <option value="Auto">patentamiento auto</option>
-                        <option value="Puesto sector construccion">puestos en sector construcción </option>
-                        <option value="Salario sector construccion">salario en sector construcción </option>
-                        <option value="Sector construccion">sector construcción general</option>
-                      </select>
-                      <br>
-                      <button type="submit" class="btn btn-light">Consultar</button>
 
-                </form>
-                  
+ <div class="content">
+          <div class="div-content-l">
+            <div class="content-description-l">
+              <h2 class="mb-0"  >Gestor comparativo de graficos</h2>
+              Elegir mediante los desplegables los valores a visualizar y comparar<br>
             </div>
-           
-        </div>
-    
-        {% comment %} <div class="row">
+            <div class="content-chart-div-l">
+               
+                 <div style= "width: 1600px; margin: 0px auto;" id="chart-comparativo-uno"></div> 
+                
+            </div> 
+
+
+            <div class="content-chart-div-l">
+              
+              <div style= "width: 1600px; margin: 0px auto;" id="chart-comparativo-dos"></div> 
+            </div> 
+   
+
+
+
           
-            <div class="col-md-6">
-                <div class="card" >
-                  
-                    <table id="example" class="stripe row-border order-column" style="width:100%">
-                        <thead>
-                            <tr style="color: aliceblue;" >
-                                {% for encabezado in encabezados %}
-                                        <th>{{ encabezado }}</th>
-                                {% endfor %}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for fila in datos %}
-                                    <tr style="color: aliceblue;">
-                                        {% for valor in fila %}
-                                            <td>{{ valor }}</td>
-                                        {% endfor %}
-                                    </tr>
-                                {% endfor %}
-                    
-                            
-                        </tbody>
-                    </table>
-                </div>
-            </div> 
-            <div class="col-md-6">
-                <div class="card" >
-                  
-                  <table id="exampledos" class="stripe row-border order-column" style="width:100%">
-                    <thead>
-                        <tr style="color: aliceblue;" >
-                            {% for encabezado in encabezados %}
-                                    <th>{{ encabezado }}</th>
-                            {% endfor %}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for fila in datos %}
-                                <tr style="color: aliceblue;">
-                                    {% for valor in fila %}
-                                        <td>{{ valor }}</td>
-                                    {% endfor %}
-                                </tr>
-                            {% endfor %}
-                   
-                        
-                    </tbody>
-                </table>
-                </div>
-            </div> 
-             
-        </div>
-    </div>
-</div> {% endcomment %}
+          </div>
+     
+      <div class="content-filter-l">
+        
+        <form method= "POST" style="margin-top:-8em" action="{% url 'consulta' %} ">
+            {% csrf_token %}
+            <div class ="content-error">
+
+              {% if error_message %}
+
+                {{error_message}}
+              
+              {%endif%}
+            </div>
+           <h4>Grafico 1</h4>
+            <select class="select1" style="width: 130px;" name="año_uno">
+                <option  value='0' selected>Año</option>
+                    <option value="2">2020</option>
+                    <option value="3">2021</option>
+                    <option value="4">2022</option>
+                    <option value="5">2023</option>
+                    <option value="6">2024</option>
+
+
+            </select>
+            <select class="select1" style="width: 130px;" name="valor_uno">
+                <option value='0' selected>Valor</option>
+                <option value="1">Formosa</option>
+                <option value="2">Nacional</option>
+                <option value="3">NEA</option>
+  
+              </select>
+            <select class="select1" style="width: 130px;" name="dato_uno">
+              <option value='0' selected>Dato</option>
+              <option value="Patentamiento - auto">Patentamiento - auto</option>
+              <option value="Transferencia - auto">Transferencia - auto</option>
+              <option value="Patentamiento - moto">Patentamiento - moto</option>
+              <option value="Transferencia - moto">Transferencia - moto</option>
+              <option value="Supermercado - corriente">Supermercado - corriente</option>
+              <option value="Supermercado - constante">Supermercado - constante</option>
+
+            </select>
+            
+            <h4>Grafico 2</h4>
+            <select class="select1" style="width: 130px;" name="año_dos">
+                <option  value='0' selected>Año</option>
+                    <option value="2">2020</option>
+                    <option value="3">2021</option>
+                    <option value="4">2022</option>
+                    <option value="5">2023</option>
+                    <option value="6">2024</option>
+
+
+            </select>
+            <select class="select1" style="width: 130px;" name="valor_dos">
+                <option value='0' selected>Valor</option>
+                <option value="1">Formosa</option>
+                <option value="2">Nacional</option>
+                <option value="3">NEA</option>
+              </select>
+            <select class="select1" style="width: 130px;" name="dato_dos">
+              <option value='0' selected>Dato</option>
+              <option value="Patentamiento - auto">Patentamiento - auto</option>
+              <option value="Transferencia - auto">Transferencia - auto</option>
+              <option value="Patentamiento - moto">Patentamiento - moto</option>
+              <option value="Transferencia - moto">Transferencia - moto</option>
+              <option value="Supermercado - corriente">Supermercado - corriente</option>
+              <option value="Supermercado - constante">Supermercado - constante</option>
+
+            </select>
+           
+            <button type="submit" style="display:block; margin: 0px auto" id="btn" class="btn-filtrar">Filtrar</button>
+            
+
+        </form>
+
+     </div>
+
+
+       
+
+    </div> 
+
+
+
+
+
+</div>
 
 <script>
+    function obtenerGraficoUno()
+    {
+        let intermensual = [];
+        let interanual= [];
+        let meses = []
+        let modelo = ' '
+        let anio = ' '
+        let valor = ' '
+    
+        // Obtener datos interanuales / mensuales
+        {% for data in grafico_uno %}
+            intermensual.push({{ data.variacion_intermensual }});
+            interanual.push({{ data.variacion_interanual }});
+            meses.push('{{data.mes__mes}}');
+            anio = {{data.anio__anio}};
+            valor = '{{data.valor__valor}}'
+            modelo = '{{modelo_uno}}'
+        {% endfor %}
+    
+      
+      return [intermensual, interanual,meses, modelo, anio,valor];
+    }
 
-   
+
+    function obtenerGraficoDos()
+    {
+        let intermensual = [];
+        let interanual= [];
+        let meses = []
+        let modelo = ' '
+        let anio = ' '
+        let valor = ' '
+
+       
+        
+        // Obtener datos interanuales / mensuales
+        {% for data in grafico_dos %}
+            intermensual.push({{ data.variacion_intermensual }});
+            interanual.push({{ data.variacion_interanual }});
+            meses.push('{{data.mes__mes}}');
+            anio = {{data.anio__anio}};
+            valor = '{{data.valor__valor}}'
+            modelo = '{{modelo_dos}}'
+        {% endfor %}
+    
+      
+      return [intermensual, interanual,meses, modelo, anio,valor];
+    }
+    
+    
+    GraficoDos()
+    GraficoUno()
+    
 </script>
 {% endblock container %}
-
-

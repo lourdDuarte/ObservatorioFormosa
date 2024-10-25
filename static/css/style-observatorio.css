@@ -76,6 +76,12 @@ body {
     margin-left: 0.5em;
 }
 
+.modal-backdrop {
+    width: 100%;
+    height: 100%;
+  }
+
+
 .sidebar-menu nav ul li {
     padding: 10px 0;
    
@@ -90,13 +96,22 @@ body {
 
 }
 
+.content .div-content-l .content-description-l h2{
+    padding-bottom: 1em;
+}
 
+
+.content-button{
+ 
+    text-align: left;
+    margin-left: 3em;
+}
 
 .content {
     background-color: #e4e2e2;
     padding: 20px;
     padding-bottom: 38em;
-    width: 87%;
+    width: 88%;
     overflow-y: auto;
     position: relative;
     left: 15em;
@@ -208,7 +223,7 @@ body {
 }
 
 
-.div-content{
+.div-content, .div-content-l{
     width: 70%;
     height: 500px;
     display: inline-block;
@@ -218,6 +233,11 @@ body {
     padding: 20px;
     box-sizing: border-box; /* Incluye el padding en el ancho total */
 }
+
+.div-content-l, .content-description-l{
+    width: 80%;
+}
+
 
 .div-card{
     width: 25%;
@@ -238,7 +258,7 @@ body {
     
 }
 
-.content .content-description{
+.content .content-description, .content .content-description-l{
    color: #000;
    margin-top: 3em;
    margin-left: 1.5em;
@@ -248,11 +268,21 @@ body {
    
 }
 
-.content .content-chart-actual{
+.content .content-chart-actual, .content .content-chart-div, .content .content-chart-div-l{
     display: block;
     margin-top: 8em;
 }
 
+.content .content-chart-div, .content .content-chart-div-l{
+    display: flex;
+
+}
+
+.content .content-chart-div-l{
+    width: 110em;
+    
+    background: #e4e2e2;
+}
 
 .div-card .card-data{
     padding-top: 6em;
@@ -284,9 +314,17 @@ body {
     color: #000;
     padding-bottom: 3em;
 }
-.content-filter{
+.content-filter, .content-filter-l{
     display: flex;
     margin-left: -15em;
+}
+
+.content-filter-l{
+    float: right;
+    position: relative;
+    left: -8em;
+    top: 7em
+    
 }
 
 .content form select{
@@ -343,6 +381,10 @@ body {
 nav ul {
     float: left;
     
+}
+
+nav ul li .li-item{
+    margin-left: -2em;
 }
 
 nav ul li {

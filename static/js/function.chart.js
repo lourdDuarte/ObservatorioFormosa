@@ -1,14 +1,14 @@
-function draw_line_chart(data_intermensual,data_interanual,titulo,meses, id)
+function draw_line_chart(data_intermensual,data_interanual,titulo,meses,max,min,id)
 {
 
   var options = {
     series: [
     {
-      name: "Intermensual",
+      name: "Interanual",
       data: data_intermensual
     },
     {
-      name: "Interanual",
+      name: "Intermensual",
       data: data_interanual
     }
   ],
@@ -18,19 +18,19 @@ function draw_line_chart(data_intermensual,data_interanual,titulo,meses, id)
     dropShadow: {
       enabled: true,
       color: '#000',
-      top: 18,
+      top: 10,
       left: 7,
-      blur: 10,
+      blur: 7,
       opacity: 0.2
     },
     zoom: {
-      enabled: false
+      enabled: true
     },
     toolbar: {
-      show: false
+      show: true
     }
   },
-  colors: ['#77B6EA', '#545454'],
+  colors: ['#007D9D', '#859222'],
   dataLabels: {
     enabled: true,
   },
@@ -49,7 +49,7 @@ function draw_line_chart(data_intermensual,data_interanual,titulo,meses, id)
     },
   },
   markers: {
-    size: 1
+    size: 0
   },
   xaxis: {
     categories: meses,
@@ -58,15 +58,40 @@ function draw_line_chart(data_intermensual,data_interanual,titulo,meses, id)
     }
   },
   yaxis: {
-    min: -100,
-    max: 400
+    min: min,
+    max: max,
+    tickAmount: 4, // Define la cantidad de marcas en el eje Y, ajusta este valor según lo necesites
+    forceNiceScale: true, // Mantener esta opción por si ayuda en la escala
+    labels: {
+      formatter: function(value) {
+        return value.toFixed(0); // Mostrar solo enteros
+      }
+    },
+  },
+  
+  grid: {
+    show: true,
+    position: 'back',
+    yaxis: {
+      lines: {
+        show: true
+      }
+    },
   },
   legend: {
     position: 'top',
     horizontalAlign: 'right',
     floating: true,
-    offsetY: -25,
-    offsetX: -5
+    offsetY: -20,
+    offsetX: -0
+  },
+  annotations: {
+    yaxis: [{
+      y: 0,
+      borderColor: '#000000',  // Color de la línea
+      strokeDashArray: 0,       // Línea punteada
+      
+    }]
   }
   };
 
