@@ -34,8 +34,7 @@ urlpatterns = [
     path('supermercado-constante/', supermercado.panel_supermercado_constante, name='supermercado-constante'),
    
 
-    path('ipc-panel/', ipc.panel_ipc, name='ipc-panel'),
-    path('construccion-panel/', construccion.panel_construccion, name='construccion-panel'),
+    path('ipc-inicio/', ipc.ipc, name='ipc-inicio'),
 
     path('auto-patentamiento/', patentamiento.panel_auto_patentamiento, name='auto-patentamiento'),
     path('auto-transferencia/', patentamiento.panel_auto_transferencia, name='auto-transferencia'),

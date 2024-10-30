@@ -4,11 +4,11 @@ function draw_line_chart(data_intermensual,data_interanual,titulo,meses,max,min,
   var options = {
     series: [
     {
-      name: "Interanual",
+      name: "Intermensual",
       data: data_intermensual
     },
     {
-      name: "Intermensual",
+      name: "Interanual",
       data: data_interanual
     }
   ],

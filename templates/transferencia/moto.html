@@ -7,136 +7,141 @@
 {% endblock head_content %}
 
 {% block container %}
+<div class="content">
+  <div class="div-content-l">
+    <div class="content-button">
+      <button type="button" style="background: #003763; " class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal1">
+        Tabla transferencias acumuladas
+      </button>
 
- <div class="content">
-          <div class="div-content-l">
-            <div class="content-button">
-              <button type="button" style="background: #003763; " class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal1">
-                Tabla transferencias acumuladas
-              </button>
-            <div class="content-description-l">
-              <h2 class="mb-0"  >Transferencia de motos</h2>
-              En el mes de septiembre, se transfirieron 193 motos, la variación fue 4,3% más con respecto al mes de agosto. Si se comparan los datos anualmente, en el mes de septiembre, las transferencias de motos fueron un 1% menos que el de septiembre del año 2023. 
-              En lo que va del año, se transfirieron en Formosa, un total de 1.439 motos.<br>
-            </div>
-            <div class="content-chart-div-l">
-               
-                 <div style= "width: 1600px; margin: 0px auto;" id="transferencia-moto"></div> 
-                
-            </div> 
-
-
-            <div class="content-chart-div-l">
-               
-              <div style= "width: 1600px; margin: 0px auto;" id="transferencia-moto-historico"></div> 
-            </div> 
-   
-
-
-
-          
-          </div>
-     
-      <div class="content-filter-l">
-        
-        <form method= "POST" action="{% url 'moto-transferencia' %} ">
-            {% csrf_token %}
-            <div class ="content-error">
-
-              {% if error_message %}
-
-                {{error_message}}
-              
-              {%endif%}
-            </div>
-           
-            <select class="select1" style="width: 130px;" name="año">
-                <option  value='0' selected>Año</option>
-                    <option value="2">2020</option>
-                    <option value="3">2021</option>
-                    <option value="4">2022</option>
-                    <option value="5">2023</option>
-                    <option value="6">2024</option>
-
-
-            </select>
-            <select class="select1" style="width: 130px;" name="valor">
-              <option value='0' selected>Valor</option>
-              <option value="1">Formosa</option>
-              <option value="2">Nacional</option>
-
-            </select>
-           
-            <button type="submit" style="display:block; margin: 0px auto" id="btn" class="btn-filtrar">Filtrar</button>
-            
-
-        </form>
-
-     </div>
-
-
+    </div> 
+    <div class="content-description-l">
+      <h2 class="mb-0" >Transferencia de motos</h2>
+      En el mes de septiembre, se transfirieron 193 motos, la variación fue 4,3% más con respecto al mes de agosto. Si se comparan los datos anualmente, en el mes de septiembre, las transferencias de motos fueron un 1% menos que el de septiembre del año 2023. 
+      En lo que va del año, se transfirieron en Formosa, un total de 1.439 motos.<br>
+</div>
+    <div class="content-chart-div-l">
        
-
+      <div style= "width: 1600px; margin: 0px auto;" id="transferencia-moto"></div> 
+        
     </div> 
 
 
- <!-- Modal 1 -->
- <div class="modal fade"  id="modal1" tabindex="-1" aria-labelledby="modal1Label" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content  modal-lg">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modal1Label">Acumulado de transferencias</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <table id="example" class="stripe row-border order-column" style="width:100%">
-          <thead>
-              <tr style="color: black; " >
-                  
-                          <th>Año</th>
-                          <th>Mes</th>
-                          <th>Valor</th>
-                          <th>Total</th>
-                          <th>Total acumulado</th>
-                  
-              </tr>
-          </thead>
-          <tbody>
-                      {% for  data in acumulados %}
-                      <tr style="color: black;">
-                      
-                          
-                              <td>{{data.anio__anio}}</td>
-                              
-                              <td>{{data.mes__mes}}</td>
-                              
-                              <td>{{data.valor__valor}}</td>
-    
-                              <td>{{data.total}}</td>
-    
-                              <td>{{data.total_acumulado}}</td>
-    
-    
-                          
-                      </tr>
-                      {% endfor %}
-                      
-              
-          </tbody>
-        </table>
-        
+    <div class="content-chart-div-l">
+       
+      <div style= "width: 1600px; margin: 0px auto;" id="transferencia-moto-historico"></div> 
+    </div> 
 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-      </div>
-    </div>
+
+
+
+  
   </div>
+
+<div class="content-filter-l">
+
+<form method= "POST" action="{% url 'moto-transferencia' %} ">
+    {% csrf_token %}
+    <div class ="content-error">
+
+      {% if error_message %}
+
+        {{error_message}}
+      
+      {%endif%}
+    </div>
+   
+    <select class="select1" style="width: 130px;" name="año">
+        <option  value='0' selected>Año</option>
+            <option value="2">2020</option>
+            <option value="3">2021</option>
+            <option value="4">2022</option>
+            <option value="5">2023</option>
+            <option value="6">2024</option>
+
+
+    </select>
+    <select class="select1" style="width: 130px;" name="valor">
+      <option value='0' selected>Valor</option>
+      <option value="1">Formosa</option>
+      <option value="2">Nacional</option>
+
+    </select>
+   
+    <button type="submit" style="display:block; margin: 0px auto" id="btn" class="btn-filtrar">Filtrar</button>
+    
+
+</form>
+
 </div>
 
 
 
+
+</div> 
+
+
+<!-- Modal 1 -->
+<div class="modal fade"  id="modal1" tabindex="-1" aria-labelledby="modal1Label" aria-hidden="true">
+<div class="modal-dialog modal-lg">
+<div class="modal-content  modal-lg">
+<div class="modal-header">
+<h5 class="modal-title" id="modal1Label">Acumulado de transferencias</h5>
+<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 </div>
+<div class="modal-body">
+<table id="example" class="stripe row-border order-column" style="width:100%">
+  <thead>
+      <tr style="color: black; " >
+          
+        <th>Año</th>
+        <th>Mes</th>
+        <th>Valor</th>
+        <th>Total</th>
+        <th>Total acumulado</th>
+
+</tr>
+</thead>
+<tbody>
+    {% for  data in acumulados %}
+    <tr style="color: black;">
+    
+        
+            <td>{{data.anio__anio}}</td>
+            
+            <td>{{data.mes__mes}}</td>
+            
+            <td>{{data.valor__valor}}</td>
+
+            <td>{{data.total}}</td>
+
+            <td>{{data.total_acumulado}}</td>
+
+
+        
+    </tr>
+    {% endfor %}
+    
+
+</tbody>
+</table>
+
+
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+
 
 <script>
 
@@ -183,7 +188,7 @@
       
     {% endfor %}
   
-  return [intermensual_historico, interanual_historico,meses_historico, anio, valor];
+  return [intermensual_historico,interanual_historico, meses_historico, anio, valor];
   }
 
   moto()

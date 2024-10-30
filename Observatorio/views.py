@@ -5,20 +5,15 @@ from Observatorio.utils import *
 from Patentamiento.utils import *
 from Supermercado.utils import *
 from Supermercado.views import *
-from Ipc.views import *
+from Ipc.utils import *
 from Ipc.models import *
 
 
 
 def panel(request):
-    indicadores_supermercado = datos_supermercado_panel()
-    indicadores_ipc = datos_ipc_panel()
-    context = {
-        'indicadores_supermercado': indicadores_supermercado,
-        'indicadores_ipc': list(indicadores_ipc)
-    }
+   
     
-    return render (request, 'panel.html', context)
+    return render (request, 'panel.html')
 
 
 
@@ -47,6 +42,10 @@ def consultas(dato, año, valor):
      elif dato == 'Supermercado - constante':
             indicadores = get_variacion_supermercado()
             grafico = indicadores.filter(anio_id=año, valor_id=valor, tipoPrecio_id=1)
+     elif dato == 'Indice precio al consumidor':
+            indicadores = get_variacion_ipc()
+            grafico = indicadores.filter(anio_id=año, valor_id=valor)
+            
      return grafico
 
 

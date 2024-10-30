@@ -35,8 +35,7 @@ def panel_vehiculo(request, tipo_vehiculo, tipo_movimiento, context_keys, templa
     acumulados = get_acumulados_vehiculo().filter(movimiento_vehicular_id = tipo_movimiento,
                                                  tipo_vehiculo_id = tipo_vehiculo)
     
-    print(acumulados.query)
-
+   
     # Inicialización de contextos individuales
     indicador_historico = []
     error_message = None

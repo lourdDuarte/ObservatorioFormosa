@@ -1,5 +1,9 @@
-function ipc_division(){
-    let [interanual, intermensual, meses] = obtenerDatosDivision();
-    chart = draw_line_chart( intermensual ,interanual,' ',meses,'chartDivision')
+function ipc(){
+
+    //Indice precio al consumidor actual
+    chartIpcActual = graficos(datosVariacion, 'Datos IPC año actual','ipc-actual')
     
-  }
+    //Indice precio al consumidor historico
+    chartIpcHistorico = graficos(datosVariacionHistorico, 'Datos IPC historico', 'ipc-historico')
+
+}
