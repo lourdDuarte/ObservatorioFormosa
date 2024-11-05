@@ -33,3 +33,12 @@ function graficos(funcion, titulo, id_grafico){
     return draw_line_chart(intermensual ,interanual, titulo + ' ' + anio +' ' + valor, meses,maximo,minimo, id_grafico)
 }
 
+function graficos_columna(funcion, titulo, id_grafico){
+
+    let [numeros, meses,anio, valor] = funcion();
+
+   
+
+    return draw_line_column(numeros,meses, titulo + ' ' + anio + ' ' + valor,id_grafico)
+}
+

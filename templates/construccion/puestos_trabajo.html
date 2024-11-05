@@ -12,25 +12,30 @@
           <div class="div-content-l">
             <div class="content-button">
               <button type="button" style="background: #003763; " class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal1">
-                Tabla Indice precio al consumidor por division
+                Tabla variaciones intermensual / interanual
               </button>
  
             </div> 
             <div class="content-description-l">
-              <h2 class="mb-0" >Indice precio al consumidor</h2>
-              La inflación mensual para la Región NEA, tuvo un incremento del 3,3% en el mes de septiembre, respecto al mes de agosto. A su vez, la inflación anual arroja un valor de 195,1% de incremento en septiembre, frente al mismo mes del año 2023. 
-              La inflación acumulada en lo que va del año fue de 89,7%.<br>
+              <h2 class="mb-0" >Puestos de trabajo en el sector construccion </h2>
+              En el mes de julio, los puestos de trabajo generados por el sector en la provincia fueron 2.248 lo que 
+              representa un incremento del 2,2% en relación al mes anterior, así también una disminución interanual de 66,2%, esto representa 4.212 puestos menos frente al mes julio del año 2023. <br>
+
+              En el mes de julio, los puestos de trabajo generados por el sector en la provincia fueron 2.248, 
+              lo que representa un incremento del 2,2% (49 puestos) en relación al mes anterior y una disminución de 65,2% (4.212 puestos) frente al mes de julio del año 2023.
+
             </div>
             <div class="content-chart-div-l">
                
-                 <div style= "width: 1600px; margin: 0px auto;" id="ipc-actual"></div> 
+                 <div style= "width:800px; margin: 0px auto;" id="puestos-trabajo-var"></div> 
+                 <div style= "width: 800px; margin: 0px auto;" id="puestos-trabajo"></div> 
                 
             </div> 
 
 
             <div class="content-chart-div-l">
                
-              <div style= "width: 1600px; margin: 0px auto;" id="ipc-historico"></div> 
+              <div style= "width: 1600px; margin: 0px auto;" id="salario-historico"></div> 
             </div> 
    
 
@@ -41,7 +46,7 @@
      
       <div class="content-filter-l">
         
-        <form method= "POST" action="{% url 'ipc-inicio' %} ">
+        <form method= "POST" action="{% url 'puestos-trabajo' %} ">
             {% csrf_token %}
             <div class ="content-error">
 
@@ -99,13 +104,12 @@
                           <th>Año</th>
                           <th>Mes</th>
                           <th>Valor</th>
-                          <th>Division</th>
-                          <th>Var. Intermensual</th>
-                          <th>Var. Interanual</th>
+                          
+                          <th>Salario promedio</th>
               </tr>
           </thead>
           <tbody>
-                      {% for  data in ipc_division %}
+                      {% for  data in sector_construccion %}
                       <tr style="color: black;">
                       
                           
@@ -115,10 +119,9 @@
                               
                               <td>{{data.valor__valor}}</td>
     
-                              <td>{{data.divisionIpc__tipo_division}}</td>
+                              <td>{{data.salario_promedio}}</td>
     
-                              <td>{{data.variacion_intermensual}}</td>
-                              <td>{{data.variacion_interanual}}</td>
+                            
     
     
                           
@@ -145,52 +148,53 @@
 </div>
 
 <script>
-  function datosVariacion(){
+  function datosVariacionPuestos(){
    
 
     let intermensual = [];
     let interanual = [];
     let meses = []
     let anio = ' '
-    let valor = ' '
-
+    let valor
     
   // Obtener datos interanuales / mensuales
     {% for data in variacion %}
-      intermensual.push({{data.variacion_intermensual}});
-      interanual.push({{data.variacion_interanual}});
-      meses.push('{{data.mes__mes}}');
-      anio = {{data.anio__anio}};
-      valor = '{{data.valor__valor}}'
+     
+        intermensual.push({{data.variacion_intermensual}})
+        interanual.push({{data.variacion_interanual}})
+     
+        meses.push('{{data.mes__mes}}')
+        anio = {{data.anio__anio}}
+        valor = '{{data.valor__valor}}'
+    
     {% endfor %}
-  
-  return [intermensual ,interanual, meses, anio, valor];
+   
+    return [intermensual, interanual,meses, anio, valor];
   }
 
-  function datosVariacionHistorico(){
+  
+  function puestosTrabajoData(){
    
 
-    let intermensual_historico = [];
-    let interanual_historico = [];
-    let meses_historico = []
+    let numeros = [];
+ 
+    let meses = []
     let anio = ' '
     let valor = ' '
-
     
   // Obtener datos interanuales / mensuales
-    {% for data in variacion_historico  %}
-      intermensual_historico.push({{data.variacion_intermensual}});
-      interanual_historico.push({{data.variacion_interanual}});
-      meses_historico.push('{{data.mes__mes}}');
-      anio = {{data.anio__anio}}
-      valor = '{{data.valor__valor}}'
-      
+    {% for data in sector_construccion %}
+        numeros.push({{data.total_puesto_trabajo}})
+        meses.push('{{data.mes__mes}}')
+        anio = {{data.anio__anio}}
+        valor = '{{data.valor__valor}}'
+     
+    
     {% endfor %}
-  
-  return [intermensual_historico ,interanual_historico,meses_historico, anio, valor];
+    
+    return [numeros,meses, anio,valor];
   }
 
-  ipc()
-
+  puestosTrabajo()
 </script>
 {% endblock container %}

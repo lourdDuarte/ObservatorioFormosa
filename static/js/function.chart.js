@@ -100,34 +100,88 @@ function draw_line_chart(data_intermensual,data_interanual,titulo,meses,max,min,
 }
 
 
-function draw_line_column(data, categoria,tipo_precio, mes ,titulo, id){
+function draw_line_column(data, meses, title, id){
+ 
   var options = {
     series: [{
+    name: 'Total',
     data: data
   }],
     chart: {
+    height: 350,
     type: 'bar',
-    height: 350
   },
+  colors: ['#007D9D'],
   plotOptions: {
     bar: {
-      borderRadius: 4,
-      borderRadiusApplication: 'end',
-      horizontal: true,
+      borderRadius: 10,
+      dataLabels: {
+        position: 'top', // top, center, bottom
+      },
     }
   },
   dataLabels: {
-    enabled: false
+    enabled: true,
+    
+    offsetY: -20,
+    style: {
+      fontSize: '12px',
+      colors: ["#859222"]
+    }
+  },
+  
+  xaxis: {
+    categories: meses,
+    position: 'buttom',
+    offsetY: -8,
+    axisBorder: {
+      show: false
+    },
+    axisTicks: {
+      show: false
+    },
+    crosshairs: {
+      fill: {
+        type: 'gradient',
+        gradient: {
+          colorFrom: '#D8E3F0',
+          colorTo: '#BED1E6',
+          stops: [0, 100],
+          opacityFrom: 0.4,
+          opacityTo: 0.5,
+        }
+      }
+    },
+    tooltip: {
+      enabled: true,
+    }
+  },
+  yaxis: {
+    axisBorder: {
+      show: false
+    },
+    axisTicks: {
+      show: false,
+    },
+    labels: {
+      show: false,
+      formatter: function (val) {
+        return val + "%";
+      }
+    }
+  
   },
   title: {
-    text: titulo+ ' ' + tipo_precio+':'+ ' '+ mes,
-    align: 'left'
-  },
-  xaxis: {
-    categories: categoria
+    text: title,
+    position: 'top',
+    floating: false,
+  
+    align: 'left',
+    style: {
+      color: '#444'
+    }
   }
   };
-
   var chart = new ApexCharts(document.querySelector("#"+id), options);
   chart.render();
 

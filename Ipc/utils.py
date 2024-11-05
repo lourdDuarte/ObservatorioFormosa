@@ -12,20 +12,21 @@ def get_variacion_ipc():
 
 
 def get_variacion_ipc_division():
-    return Indicadores_division.objects.select_related('mes', 'valor', 'anio').values(
+    return Indicadores_division.objects.select_related('mes', 'valor', 'anio','divisionIpc').values(
         'mes__mes',
         'valor__valor',
         'anio__anio',
+        'divisionIpc__tipo_division',
         'variacion_intermensual',
-        'variacion_interanual').order_by( '-anio', 'mes','valor')
+        'variacion_interanual').order_by( '-anio', 'mes','divisionIpc')
 
 
 def panel_ipc(request,  context_keys, template):
     meses = Mes.objects.all()
     variacion = get_variacion_ipc()
     ipc_division = get_variacion_ipc_division()
-
-     # Inicialización de contextos individuales
+   
+    # Inicialización de contextos individuales
     variacion_historico = []
     error_message = None
 

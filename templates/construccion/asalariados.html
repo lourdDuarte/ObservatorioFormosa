@@ -12,25 +12,26 @@
           <div class="div-content-l">
             <div class="content-button">
               <button type="button" style="background: #003763; " class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal1">
-                Tabla Indice precio al consumidor por division
+                Tabla variaciones intermensual / interanual
               </button>
  
             </div> 
             <div class="content-description-l">
-              <h2 class="mb-0" >Indice precio al consumidor</h2>
-              La inflación mensual para la Región NEA, tuvo un incremento del 3,3% en el mes de septiembre, respecto al mes de agosto. A su vez, la inflación anual arroja un valor de 195,1% de incremento en septiembre, frente al mismo mes del año 2023. 
-              La inflación acumulada en lo que va del año fue de 89,7%.<br>
+              <h2 class="mb-0" >Salario promedio en el sector construccion</h2>
+              En el mes de julio, el salario promedio del sector Construcción en Formosa fue de $606.068 representando una disminución nominal del 25,1% con respecto al mes anterior. Con respecto a julio del año 2023 se observa un incremento del 204,3%. 
+              Si bien, los salarios nominales del sector se vienen incrementando de manera sostenida desde el año 2021, 
+              Los salarios reales promedio se viene deteriorando desde principios del año 2022. Para el caso particular del mes de julio del año 2024, este disminuyó un 15,1% con respecto al mes de julio del año 2023. <br>
             </div>
             <div class="content-chart-div-l">
                
-                 <div style= "width: 1600px; margin: 0px auto;" id="ipc-actual"></div> 
+                 <div style= "width: 1600px; margin: 0px auto;" id="salario"></div> 
                 
             </div> 
 
 
             <div class="content-chart-div-l">
                
-              <div style= "width: 1600px; margin: 0px auto;" id="ipc-historico"></div> 
+              <div style= "width: 1600px; margin: 0px auto;" id="salario-historico"></div> 
             </div> 
    
 
@@ -41,7 +42,7 @@
      
       <div class="content-filter-l">
         
-        <form method= "POST" action="{% url 'ipc-inicio' %} ">
+        <form method= "POST" action="{% url 'asalariados' %} ">
             {% csrf_token %}
             <div class ="content-error">
 
@@ -99,13 +100,12 @@
                           <th>Año</th>
                           <th>Mes</th>
                           <th>Valor</th>
-                          <th>Division</th>
-                          <th>Var. Intermensual</th>
-                          <th>Var. Interanual</th>
+                          
+                          <th>Salario promedio</th>
               </tr>
           </thead>
           <tbody>
-                      {% for  data in ipc_division %}
+                      {% for  data in sector_construccion %}
                       <tr style="color: black;">
                       
                           
@@ -115,10 +115,9 @@
                               
                               <td>{{data.valor__valor}}</td>
     
-                              <td>{{data.divisionIpc__tipo_division}}</td>
+                              <td>{{data.salario_promedio}}</td>
     
-                              <td>{{data.variacion_intermensual}}</td>
-                              <td>{{data.variacion_interanual}}</td>
+                            
     
     
                           
@@ -145,52 +144,31 @@
 </div>
 
 <script>
-  function datosVariacion(){
+  function datosVariacionConstruccion(){
    
 
     let intermensual = [];
     let interanual = [];
     let meses = []
     let anio = ' '
-    let valor = ' '
-
+    let valor
     
   // Obtener datos interanuales / mensuales
-    {% for data in variacion %}
-      intermensual.push({{data.variacion_intermensual}});
-      interanual.push({{data.variacion_interanual}});
-      meses.push('{{data.mes__mes}}');
-      anio = {{data.anio__anio}};
-      valor = '{{data.valor__valor}}'
-    {% endfor %}
-  
-  return [intermensual ,interanual, meses, anio, valor];
-  }
-
-  function datosVariacionHistorico(){
-   
-
-    let intermensual_historico = [];
-    let interanual_historico = [];
-    let meses_historico = []
-    let anio = ' '
-    let valor = ' '
-
+    {% for data in sector_construccion %}
+      if('{{data.valor__valor}}'== 'Formosa'){
+        intermensual.push({{data.salario_promedio}})
+        interanual.push({{data.salario_promedio}})
+      }
+     meses.push('{{data.mes__mes}}')
+     anio = {{data.anio__anio}}
+     valor = '{{data.valor__valor}}'
+     
     
-  // Obtener datos interanuales / mensuales
-    {% for data in variacion_historico  %}
-      intermensual_historico.push({{data.variacion_intermensual}});
-      interanual_historico.push({{data.variacion_interanual}});
-      meses_historico.push('{{data.mes__mes}}');
-      anio = {{data.anio__anio}}
-      valor = '{{data.valor__valor}}'
-      
     {% endfor %}
-  
-  return [intermensual_historico ,interanual_historico,meses_historico, anio, valor];
+    console.log(intermensual)
+    return [intermensual, interanual,meses, anio, valor];
   }
 
-  ipc()
-
+  construccion()
 </script>
 {% endblock container %}

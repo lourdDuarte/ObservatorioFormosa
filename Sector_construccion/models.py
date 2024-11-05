@@ -20,7 +20,8 @@ class SectorConstruccion(models.Model):
     total_puesto_trabajo = models.CharField(max_length=200, blank=False, null=False)
     salario_promedio = models.CharField(max_length=200, blank=False, null=False)
 
-
+    def __str__(self):
+            return str(self.valor) + "-" + str(self.salario_promedio)
 class Indicadores(models.Model):
     anio = models.ForeignKey(Anio, on_delete=models.CASCADE, related_name='+')
     mes = models.ForeignKey(Mes, on_delete=models.CASCADE, related_name='+')
