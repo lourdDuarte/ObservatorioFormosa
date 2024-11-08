@@ -29,8 +29,9 @@ function graficos(funcion, titulo, id_grafico){
     let [intermensual, interanual, meses,anio, valor] = funcion();
 
     let[maximo,minimo] = max_min(intermensual, interanual)
-
+    
     return draw_line_chart(intermensual ,interanual, titulo + ' ' + anio +' ' + valor, meses,maximo,minimo, id_grafico)
+
 }
 
 function graficos_columna(funcion, titulo, id_grafico){

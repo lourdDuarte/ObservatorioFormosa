@@ -29,7 +29,9 @@ def panel_construccion(request,tipo_dato, context_keys,template):
    
     # Inicialización de contextos individuales
     variacion_historico = []
+    construccion_historico = []
     error_message = None
+    error_data = None
 
     # Año y mes por defecto
     anio_default = 6
@@ -37,7 +39,7 @@ def panel_construccion(request,tipo_dato, context_keys,template):
     dato_default = tipo_dato
 
     variacion_actual = variacion.filter(anio_id = anio_default, valor_id = valor_default, tipo_dato_id = dato_default)
-    sector_construccion = construccion.filter(anio_id = anio_default, valor_id = valor_default,)
+    sector_construccion = construccion.filter(anio_id = anio_default)
    
     if request.method == 'POST':
         # Validación de filtros recibidos en el formulario
@@ -50,12 +52,16 @@ def panel_construccion(request,tipo_dato, context_keys,template):
         # Aplicación de filtros en función de año y valor
         if anio != anio_default and valor != valor_default:
             variacion_historico = variacion.filter(anio_id=anio, valor_id = valor, tipo_dato_id = dato_default )
-        
+            construccion_historico = construccion.filter(anio_id = anio, valor_id = valor)
+            
     context = {
         'error_message': error_message,
+       
+    
         context_keys['variacion']: variacion_actual,
         context_keys['variacion_historico']: variacion_historico,
         context_keys['sector_construccion']: sector_construccion,
+        context_keys['sector_construccion_historico']: construccion_historico,
         'meses':meses
     
     

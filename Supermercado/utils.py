@@ -102,7 +102,6 @@ def panel_supermercado(request, tipo_precio, context_keys, template):
         context_keys['variacion_historico']: variacion_historico,
         context_keys['venta_articulo']: venta_articulo,
         context_keys['venta_total']: venta_total,
-       
         'meses': meses,
     }
 

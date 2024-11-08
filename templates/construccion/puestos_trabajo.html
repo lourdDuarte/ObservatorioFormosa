@@ -34,8 +34,9 @@
 
 
             <div class="content-chart-div-l">
-               
-              <div style= "width: 1600px; margin: 0px auto;" id="salario-historico"></div> 
+              {{error_data}}
+              <div style= "width:800px; margin: 0px auto;" id="puestos-trabajo-var-historico"></div> 
+              <div style= "width: 800px; margin: 0px auto;" id="puestos-trabajo-historico"></div> 
             </div> 
    
 
@@ -70,8 +71,8 @@
             <select class="select1" style="width: 130px;" name="valor">
               <option value='0' selected>Valor</option>
              
+              <option value="1">Formosa</option>
               <option value="2">Nacional</option>
-              <option value="3">NEA</option>
 
             </select>
            
@@ -142,9 +143,6 @@
 </div>
 
 
-
-
-
 </div>
 
 <script>
@@ -157,8 +155,56 @@
     let anio = ' '
     let valor
     
-  // Obtener datos interanuales / mensuales
+    // Obtener datos interanuales / mensuales
     {% for data in variacion %}
+     
+        intermensual.push({{data.variacion_intermensual}})
+        interanual.push({{data.variacion_interanual}})
+     
+        meses.push('{{data.mes__mes}}')
+        anio = {{data.anio__anio}}
+        valor = '{{data.valor__valor}}'
+    
+    {% endfor %}
+
+    return [intermensual, interanual,meses, anio, valor];
+  }
+
+  
+  function puestosTrabajoData(){
+   
+
+    let numeros = [];
+ 
+    let meses = []
+    let anio = ' '
+    let valor = ' '
+    
+    // Obtener datos interanuales / mensuales
+    {% for data in sector_construccion %}
+        if('{{data.valor__valor}}'== 'Formosa'){
+          numeros.push({{data.total_puesto_trabajo}})
+          meses.push('{{data.mes__mes}}')
+          anio = {{data.anio__anio}}
+          valor = '{{data.valor__valor}}'
+        }
+    
+    {% endfor %}
+    
+    return [numeros,meses, anio,valor];
+  }
+
+  function datosVariacionPuestosHistorico(){
+   
+
+    let intermensual = [];
+    let interanual = [];
+    let meses = []
+    let anio = ' '
+    let valor = ' '
+    
+    // Obtener datos interanuales / mensuales
+    {% for data in variacion_historico %}
      
         intermensual.push({{data.variacion_intermensual}})
         interanual.push({{data.variacion_interanual}})
@@ -173,7 +219,7 @@
   }
 
   
-  function puestosTrabajoData(){
+  function puestosTrabajoDataHistorico(){
    
 
     let numeros = [];
@@ -182,8 +228,8 @@
     let anio = ' '
     let valor = ' '
     
-  // Obtener datos interanuales / mensuales
-    {% for data in sector_construccion %}
+    // Obtener datos interanuales / mensuales
+    {% for data in construccion_historico %}
         numeros.push({{data.total_puesto_trabajo}})
         meses.push('{{data.mes__mes}}')
         anio = {{data.anio__anio}}
@@ -194,6 +240,8 @@
     
     return [numeros,meses, anio,valor];
   }
+
+  
 
   puestosTrabajo()
 </script>

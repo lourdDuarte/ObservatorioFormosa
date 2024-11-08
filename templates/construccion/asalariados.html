@@ -155,11 +155,17 @@
     
   // Obtener datos interanuales / mensuales
     {% for data in sector_construccion %}
+      
       if('{{data.valor__valor}}'== 'Formosa'){
         intermensual.push({{data.salario_promedio}})
+        meses.push('{{data.mes__mes}}')
+       
+      }else{
+       
         interanual.push({{data.salario_promedio}})
+         
       }
-     meses.push('{{data.mes__mes}}')
+    
      anio = {{data.anio__anio}}
      valor = '{{data.valor__valor}}'
      
