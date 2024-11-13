@@ -10,17 +10,12 @@
 
  <div class="content">
           <div class="div-content-l">
-            <div class="content-button">
-              <button type="button" style="background: #003763; " class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal1">
-                Tabla variaciones intermensual / interanual
-              </button>
- 
-            </div> 
+            
             <div class="content-description-l">
               <h2 class="mb-0" >Salario promedio en el sector construccion</h2>
-              En el mes de julio, el salario promedio del sector Construcción en Formosa fue de $606.068 representando una disminución nominal del 25,1% con respecto al mes anterior. Con respecto a julio del año 2023 se observa un incremento del 204,3%. 
-              Si bien, los salarios nominales del sector se vienen incrementando de manera sostenida desde el año 2021, 
-              Los salarios reales promedio se viene deteriorando desde principios del año 2022. Para el caso particular del mes de julio del año 2024, este disminuyó un 15,1% con respecto al mes de julio del año 2023. <br>
+              En el mes de agosto, el salario promedio del sector Construcción en Formosa fue de $629.960 representando un incremento nominal del 3,9% con respecto al mes anterior. Con respecto a agosto del año 2023 se observa un incremento del 184,5%. 
+              Si bien, los salarios nominales del sector se vienen incrementando de manera sostenida desde el año 2021. 
+              Los salarios reales promedio se viene deteriorando desde principios del año 2022. Para el caso particular del mes de agosto del año 2024, este disminuyó un 12,1% con respecto al mes de agosto del año 2023.  <br>
             </div>
             <div class="content-chart-div-l">
                
@@ -63,14 +58,7 @@
 
 
             </select>
-            <select class="select1" style="width: 130px;" name="valor">
-              <option value='0' selected>Valor</option>
-             
-              <option value="2">Nacional</option>
-              <option value="3">NEA</option>
-
-            </select>
-           
+            
             <button type="submit" style="display:block; margin: 0px auto" id="btn" class="btn-filtrar">Filtrar</button>
             
 
@@ -84,59 +72,6 @@
     </div> 
 
 
- <!-- Modal 1 -->
- <div class="modal fade"  id="modal1" tabindex="-1" aria-labelledby="modal1Label" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content  modal-lg">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modal1Label">IPC por division</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <table id="example" class="stripe row-border order-column" style="width:100%">
-          <thead>
-              <tr style="color: black; " >
-                  
-                          <th>Año</th>
-                          <th>Mes</th>
-                          <th>Valor</th>
-                          
-                          <th>Salario promedio</th>
-              </tr>
-          </thead>
-          <tbody>
-                      {% for  data in sector_construccion %}
-                      <tr style="color: black;">
-                      
-                          
-                              <td>{{data.anio__anio}}</td>
-                              
-                              <td>{{data.mes__mes}}</td>
-                              
-                              <td>{{data.valor__valor}}</td>
-    
-                              <td>{{data.salario_promedio}}</td>
-    
-                            
-    
-    
-                          
-                      </tr>
-                      {% endfor %}
-                      
-              
-          </tbody>
-        </table> 
-        
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-      </div>
-    </div>
-  </div>
-</div>
-
 
 
 
@@ -144,14 +79,14 @@
 </div>
 
 <script>
-  function datosVariacionConstruccion(){
+  function datosSalarioConstruccion(){
    
 
     let intermensual = [];
     let interanual = [];
     let meses = []
     let anio = ' '
-    let valor
+    let valor = 'Promedio pais / Promedio Formosa '
     
   // Obtener datos interanuales / mensuales
     {% for data in sector_construccion %}
@@ -167,13 +102,45 @@
       }
     
      anio = {{data.anio__anio}}
-     valor = '{{data.valor__valor}}'
+    
+    
+    {% endfor %}
+   
+    return [intermensual, interanual,meses, anio, valor];
+  }
+
+  function datosSalarioConstruccionHistorico(){
+   
+
+    let intermensual = [];
+    let interanual = [];
+    let meses = []
+    let anio = ' '
+    let valor = 'Promedio pais / Promedio Formosa '
+    
+  // Obtener datos interanuales / mensuales
+    {% for data in sector_construccion_historico %}
+      
+      if('{{data.valor__valor}}'== 'Formosa'){
+        intermensual.push({{data.salario_promedio}})
+        meses.push('{{data.mes__mes}}')
+       
+      }else{
+       
+        interanual.push({{data.salario_promedio}})
+         
+      }
+    
+     anio = {{data.anio__anio}}
+     
      
     
     {% endfor %}
-    console.log(intermensual)
+   
     return [intermensual, interanual,meses, anio, valor];
   }
+
+
 
   construccion()
 </script>

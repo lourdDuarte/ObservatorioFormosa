@@ -24,13 +24,20 @@ function validation(anio,valor){
     return { anio, valor };
 }
 
-function graficos(funcion, titulo, id_grafico){
+function graficos(funcion, titulo,tipo, id_grafico){
 
     let [intermensual, interanual, meses,anio, valor] = funcion();
+    console.log(intermensual)
 
     let[maximo,minimo] = max_min(intermensual, interanual)
+
+    if (tipo === '$'){
+        return draw_line_chart(intermensual ,interanual, titulo + ' ' + anio +' ' + valor, meses,maximo,minimo,'$', id_grafico)
+    }else{
+        return draw_line_chart(intermensual ,interanual, titulo + ' ' + anio +' ' + valor, meses,maximo,minimo,'%',id_grafico)
+    }
     
-    return draw_line_chart(intermensual ,interanual, titulo + ' ' + anio +' ' + valor, meses,maximo,minimo, id_grafico)
+    
 
 }
 

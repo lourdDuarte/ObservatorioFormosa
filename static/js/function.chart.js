@@ -1,6 +1,6 @@
-function draw_line_chart(data_intermensual,data_interanual,titulo,meses,max,min,id)
+function draw_line_chart(data_intermensual,data_interanual,titulo,meses,max,min,tipo, id)
 {
-
+  tipo = tipo
   var options = {
     series: [
     {
@@ -33,6 +33,14 @@ function draw_line_chart(data_intermensual,data_interanual,titulo,meses,max,min,
   colors: ['#007D9D', '#859222'],
   dataLabels: {
     enabled: true,
+    formatter: function (value) {
+      if (tipo === '$'){
+        return '$' + value.toLocaleString(); // Añade el signo $ y formatea el número con comas
+      }else{
+        return value;
+      }
+      
+    },
   },
   stroke: {
     curve: 'smooth'

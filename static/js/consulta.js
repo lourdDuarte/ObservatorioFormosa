@@ -7,7 +7,7 @@ function grafico(funcion, titulo, id_grafico){
  
 
     return draw_line_chart( intermensual ,interanual, titulo + ' ' + modelo + ' ' + anio + ' ' + valor,
-        meses,maximo,minimo, id_grafico)
+        meses,maximo,minimo,'%', id_grafico)
     
 
 }

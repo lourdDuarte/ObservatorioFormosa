@@ -45,6 +45,8 @@ urlpatterns = [
 
     path('asalariados/', construccion.asalariados_construccion, name='asalariados'),
     path('puestos-trabajo/', construccion.puestos_construccion, name='puestos-trabajo'),
+    path('evolucion-trabajo/', construccion.evolucion_construccion, name='evolucion-trabajo'),
+    path('empresas-construccion/', construccion.empresa_construccion, name='empresas-construccion'),
 
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -1,5 +1,5 @@
 function draw_base_imponible(){
-    chart = draw_column_chart(meses,data_evolucion,  'BaseImponibleChart')
+    chart = draw_column_chart(meses,data_evolucion, 'BaseImponibleChart')
     chart_historico = draw_column_chart(meses_historico,data_evolucion_historico, 'BaseHistoricoChart')
 
 }

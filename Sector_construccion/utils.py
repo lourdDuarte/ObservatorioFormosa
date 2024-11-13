@@ -29,7 +29,8 @@ def panel_construccion(request,tipo_dato, context_keys,template):
    
     # Inicialización de contextos individuales
     variacion_historico = []
-    construccion_historico = []
+    sector_construccion_historico = []
+    evolucion_total_historico = []
     error_message = None
     error_data = None
 
@@ -51,17 +52,19 @@ def panel_construccion(request,tipo_dato, context_keys,template):
 
         # Aplicación de filtros en función de año y valor
         if anio != anio_default and valor != valor_default:
-            variacion_historico = variacion.filter(anio_id=anio, valor_id = valor, tipo_dato_id = dato_default )
-            construccion_historico = construccion.filter(anio_id = anio, valor_id = valor)
-            
+            variacion_historico = variacion.filter(anio_id=anio, valor_id = valor, tipo_dato_id = dato_default)
+            evolucion_total_historico = construccion.filter(anio_id = anio, valor_id = valor)
+        if anio != anio_default:
+            sector_construccion_historico = construccion.filter(anio_id = anio)
+           
     context = {
         'error_message': error_message,
-       
-    
+
         context_keys['variacion']: variacion_actual,
         context_keys['variacion_historico']: variacion_historico,
         context_keys['sector_construccion']: sector_construccion,
-        context_keys['sector_construccion_historico']: construccion_historico,
+        context_keys['sector_construccion_historico']: sector_construccion_historico,
+        context_keys['evolucion_total_historico']: evolucion_total_historico,
         'meses':meses
     
     

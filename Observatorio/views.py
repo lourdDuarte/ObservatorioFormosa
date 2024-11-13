@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, logout, login
 from django.contrib.auth.decorators import login_required
 from Observatorio.utils import *
 from Patentamiento.utils import *
+from Sector_construccion.utils import *
 from Supermercado.utils import *
 from Supermercado.views import *
 from Ipc.utils import *
@@ -45,7 +46,10 @@ def consultas(dato, año, valor):
      elif dato == 'Indice precio al consumidor':
             indicadores = get_variacion_ipc()
             grafico = indicadores.filter(anio_id=año, valor_id=valor)
-            
+     elif dato == 'Puestos trabajo - sector construccion':
+            indicadores = get_variacion_construccion()
+            grafico = indicadores.filter(anio_id=año, valor_id=valor, tipo_dato_id = 1)
+    
      return grafico
 
 
