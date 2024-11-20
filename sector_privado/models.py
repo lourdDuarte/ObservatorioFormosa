@@ -30,6 +30,9 @@ class IndicadoresPrivado(models.Model):
     diferencia_interanual = models.CharField(max_length=200, null=False, blank=False)
     diferencia_intermensual = models.CharField(max_length=200, null=False, blank=False)
 
+    def __str__(self):
+        return str(self.anio) + " " + str(self.mes) + " " + str(self.variacion_interanual) + " " + str(self.variacion_intermensual)
+
 class CantidadesPrivado(models.Model):
     tipo = models.ForeignKey(TipoDato, on_delete=models.CASCADE, related_name='+')
     estacionalidad = models.ForeignKey(Estacionalidad, on_delete=models.CASCADE, related_name='+')
@@ -38,8 +41,14 @@ class CantidadesPrivado(models.Model):
     valor = models.ForeignKey(Valor, on_delete=models.CASCADE, related_name='+')
     cantidad = models.CharField(max_length=200, null=False, blank=False)
 
+    def __str__(self):
+        return str(self.anio) + " " + str(self.mes) + " " + str(self.cantidad)
+
 class RamaPrivado(models.Model):
     rama = models.CharField(max_length=200, null=False, blank=False)
+
+    def __str__(self):
+        return self.rama
 
 
 class RemuneracionRama(models.Model):
@@ -52,6 +61,9 @@ class RemuneracionRama(models.Model):
     variacion_interanual = models.CharField(max_length=200, null=False, blank=False)
     variacion_intermensual = models.CharField(max_length=200, null=False, blank=False)
 
+    def __str__(self):
+        return str(self.rama) + " " + str(self.anio) + " " + str(self.mes) + " " + str(self.remuneracion)
+
 class AsalariadoRama(models.Model):
     rama = models.ForeignKey(RamaPrivado, on_delete=models.CASCADE, related_name='+')
     trimestre = models.ForeignKey(Trimestre, on_delete=models.CASCADE, related_name='+')
@@ -59,3 +71,6 @@ class AsalariadoRama(models.Model):
     mes = models.ForeignKey(Mes, on_delete=models.CASCADE, related_name='+')
     valor = models.ForeignKey(Valor, on_delete=models.CASCADE, related_name='+')
     cantidad = models.CharField(max_length=200, null=False, blank=False)
+
+    def __str__(self):
+        return str(self.anio) + " " + str(self.mes) + " " + " " + str(self.trimestre) + " " + str(self.cantidad)
