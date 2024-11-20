@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'Mes',
     'Anio',
     'Valor',
-    'Comparacion_temporal'
+    'Comparacion_temporal',
+    'sector_privado'
 ]
 
 MIDDLEWARE = [

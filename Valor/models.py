@@ -8,3 +8,10 @@ class Valor(models.Model):
 
     def __str__(self):
         return self.valor
+    
+
+class Trimestre(models.Model):
+    trimestre = models.CharField(max_length=200,blank=False,null=False)
+
+    def __str__(self):
+        return self.trimestre
