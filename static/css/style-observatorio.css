@@ -283,7 +283,15 @@ body {
     
     background: #e4e2e2;
 }
-
+.content .content-flex{
+  display: flex;
+}
+.content .content-chart-div-l-float{
+  flex:1;
+  margin-left: 15em;
+  margin-top: 5em;
+  
+}
 .div-card .card-data{
     padding-top: 6em;
     height: 350px;

@@ -21,6 +21,7 @@ from Ipc import views as ipc
 from Patentamiento import views as patentamiento
 from Observatorio import views as observatorio
 from Sector_construccion import views as construccion
+from sector_privado import views as privado
 from django.conf import settings
 
 from django.conf.urls.static import static
@@ -47,6 +48,9 @@ urlpatterns = [
     path('puestos-trabajo/', construccion.puestos_construccion, name='puestos-trabajo'),
     path('evolucion-trabajo/', construccion.evolucion_construccion, name='evolucion-trabajo'),
     path('empresas-construccion/', construccion.empresa_construccion, name='empresas-construccion'),
+    
+    path('evolucion-privado/', privado.evolucion_sector_privado, name='evolucion-privado'),
+    path('trabajadores-privado/', privado.trabajadores_sector_privado, name='trabajadores-privado'),
 
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -1,0 +1,148 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head_content %}
+
+    <title>Evolucion de empleo en sector privado</title>
+
+{% endblock head_content %}
+
+{% block container %}
+
+ <div class="content">
+          <div class="div-content-l">
+            
+            <div class="content-description-l">
+              <h2 class="mb-0" >Evolucion de empleo registrado en el sector privado</h2>
+              En el mes de julio, la cantidad de asalariados del sector privado disminuyó un 0,6% con respecto al mes de junio. 
+              Asimismo, los puestos de trabajo disminuyeron un 18,6% en comparación a julio del año 2023. Expresado en cantidades, en el mes de julio se registraron 21.759 puestos de trabajo, 121 puestos menos que en el mes de junio. La diferencia de puestos de trabajo, con respecto a julio del año 2023, representa una disminución de 4.977 puestos. Hasta junio de 2023 se observan 25 meses consecutivos de crecimiento interanual, 
+              en el mes de julio del 2023 la tendencia se rompe y pasa a ser negativa. 
+            </div>
+            <div class="content-chart-div-l">
+               
+                 
+                 <div style= "width: 1600px; margin: 0px auto;" id="evolucion-privado"></div> 
+                
+            </div> 
+
+
+            <div class="content-chart-div-l">
+              
+              <div style= "width: 1600px; margin: 0px auto;" id="evolucion-privado-historico"></div> 
+            </div> 
+   
+
+
+
+          
+          </div>
+     
+      <div class="content-filter-l">
+        
+        <form method= "POST" action="{% url 'evolucion-privado' %} ">
+            {% csrf_token %}
+            <div class ="content-error">
+
+              {% if error_message %}
+
+                {{error_message}}
+              
+              {%endif%}
+            </div>
+           
+            <select class="select1" style="width: 130px;" name="año">
+                <option  value='0' selected>Año</option>
+                    <option value="2">2020</option>
+                    <option value="3">2021</option>
+                    <option value="4">2022</option>
+                    <option value="5">2023</option>
+                    <option value="6">2024</option>
+
+
+            </select>
+            <select class="select1" style="width: 130px;" name="valor">
+              <option value='0' selected>Valor</option>
+             
+              <option value="1">Formosa</option>
+              <option value="2">Nacional</option>
+
+            </select>
+           
+            <button type="submit" style="display:block; margin: 0px auto" id="btn" class="btn-filtrar">Filtrar</button>
+            
+
+        </form>
+
+     </div>
+
+
+       
+
+    </div> 
+
+
+
+
+</div>
+
+<script>
+
+ 
+   
+function variacionPrivadoActual(){
+   
+
+    let intermensual = [];
+    let interanual = [];
+    let meses = []
+    let anio = ' '
+    let valor = ' '
+
+    
+    // Obtener datos interanuales / mensuales
+    {% for data in variacion  %}
+      intermensual.push({{data.variacion_intermensual}});
+      interanual.push({{data.variacion_interanual}});
+      meses.push('{{data.mes__mes}}');
+      anio = {{data.anio__anio}};
+      valor = '{{data.valor__valor}}'
+    {% endfor %}
+  
+    return [intermensual, interanual,meses, anio, valor];
+}
+
+function variacionPrivadoHistorico(){
+   
+
+  let intermensual = [];
+  let interanual = [];
+  let meses = []
+  let anio = ' '
+  let valor = ' '
+
+  
+  // Obtener datos interanuales / mensuales
+  {% for data in variacion_historico  %}
+    intermensual.push({{data.variacion_intermensual}});
+    interanual.push({{data.variacion_interanual}});
+    meses.push('{{data.mes__mes}}');
+    anio = {{data.anio__anio}};
+    valor = '{{data.valor__valor}}'
+  {% endfor %}
+
+  return [intermensual, interanual,meses, anio, valor];
+}
+
+  
+
+  
+  
+
+
+  
+
+ sector_privado()
+
+
+
+</script>
+{% endblock container %}
