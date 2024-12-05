@@ -50,3 +50,12 @@ function graficos_columna(funcion, titulo, id_grafico){
     return draw_line_column(numeros,meses, titulo + ' ' + anio + ' ' + valor,id_grafico)
 }
 
+function graficos_circle(funcion, titulo, id_grafico){
+
+    let [numeros, ramas,anio, valor] = funcion();
+
+   
+
+    return draw_pie(numeros,ramas, titulo + ' ' + anio + ' ' + valor,id_grafico)
+}
+

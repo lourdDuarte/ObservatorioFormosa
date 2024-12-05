@@ -51,6 +51,7 @@
            
             <select class="select1" style="width: 130px;" name="año">
                 <option  value='0' selected>Año</option>
+                    <option value="1">2019</option>
                     <option value="2">2020</option>
                     <option value="3">2021</option>
                     <option value="4">2022</option>
@@ -59,11 +60,13 @@
 
 
             </select>
-            <select class="select1" style="width: 130px;" name="valor">
-              <option value='0' selected>Valor</option>
+            <select class="select1" style="width: 130px;" name="trimestre">
+              <option value='0' selected>Trimestre</option>
              
-              <option value="1">Formosa</option>
-              <option value="2">Nacional</option>
+              <option value="1">Primero</option>
+              <option value="2">Segundo</option>
+              <option value="3">Tercero</option>
+              <option value="4">Cuarto</option>
 
             </select>
            
@@ -86,65 +89,52 @@
 
 <script>
 
- 
+  function ramaPrivadoActual(){
    
-  var options = {
-    series: [44, 55, 13, 43, 22],
-    chart: {
-    width: 600,
-    type: 'pie',
-  },
-  labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
-  responsive: [{
-    breakpoint: 480,
-    options: {
-      chart: {
-        width: 200
-      },
-      legend: {
-        position: 'bottom'
-      }
-    }
-  }],
-  title: {
-    text: "Trabajadores por rama Formosa 2024",
-    align: 'left'
-  },
-  };
 
-  var chart = new ApexCharts(document.querySelector("#trabajadores-privado"), options);
-  chart.render();
+    let cantidades = [];
+    let ramas = [];
+    let trimestre = ' '
+    let anio = ' '
+    let valor = ' '
 
+    
+    // Obtener datos interanuales / mensuales
+    {% for data in cantidades_rama_actual  %}
+      cantidades.push({{data.cantidad}});
+      ramas.push('{{data.rama__rama}}');
+      trimestre = '{{data.trimestre__trimestre}}';
+      anio = {{data.anio__anio}};
+      valor = '{{data.valor__valor}}'
+    {% endfor %}
+  
+    return [cantidades, ramas,trimestre, anio, valor];
+}
 
-  var options = {
-    series: [44, 55, 13, 43, 22],
-    chart: {
-    width: 600,
-    type: 'pie',
-  },
-  labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
-  responsive: [{
-    breakpoint: 480,
-    options: {
-      chart: {
-        width: 200
-      },
-      legend: {
-        position: 'bottom'
-      }
-    }
-  }]
-  };
+  function ramaPrivadoHistorico(){
+    
 
-  var chart = new ApexCharts(document.querySelector("#trabajadores-privado-historico"), options);
-  chart.render();
+    let cantidades = [];
+    let ramas = [];
+    let trimestre = ' '
+    let anio = ' '
+    let valor = ' '
+
+    
+    // Obtener datos interanuales / mensuales
+    {% for data in cantidades_rama_historico  %}
+      cantidades.push({{data.cantidad}});
+      ramas.push('{{data.rama__rama}}');
+      trimestre = '{{data.trimestre__trimestre}}';
+      anio = {{data.anio__anio}};
+      valor = '{{data.valor__valor}}'
+    {% endfor %}
+
+    return [cantidades, ramas,trimestre, anio, valor];
+  }
 
   
-
-
-  
-
- sector_privado()
+  sector_privado_rama()
 
 
 

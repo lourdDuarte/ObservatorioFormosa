@@ -1,8 +1,9 @@
 from .models import *
 from django.shortcuts import render
+from django.db.models import Max
 
 def get_variacion_privado():
-    return IndicadoresPrivado.objects.select_related('mes', 'anio','valor',).values(
+    return IndicadoresPrivado.objects.select_related('mes', 'anio','valor').values(
         'mes__mes',
         'anio__anio',
         'valor__valor',
@@ -11,6 +12,62 @@ def get_variacion_privado():
         'variacion_intermensual'
         
     )
+
+
+def get_cantidad_rama():
+    
+
+    return AsalariadoRama.objects.select_related('mes', 'anio','valor','rama', 'trimestre').values(
+        'mes__mes',
+        'anio__anio',
+        'valor__valor',
+        'rama__rama',
+        'trimestre__trimestre',
+        'cantidad')
+
+
+def panel_ramas_asalariados(request,  context_keys,template):
+    meses = Mes.objects.all()
+    cantidades = get_cantidad_rama()
+    error_message = None
+    
+    cantidades_rama_historico = []
+    # Año y mes por defecto
+    anio_default = 6
+   
+    ultimo_trimestre_id = cantidades.filter(anio_id=anio_default).aggregate(Max('trimestre_id'))['trimestre_id__max']
+
+    # Filtrar el registro asociado al trimestre "último" según tu criterio
+    cantidades_rama_actual = cantidades.filter(
+        anio_id=anio_default,
+        trimestre_id=ultimo_trimestre_id
+    )
+
+  
+    
+    if request.method == 'POST':
+        # Validación de filtros recibidos en el formulario
+        anio = request.POST.get('año') if request.POST.get('año') != '0' else anio_default
+        trimestre = request.POST.get('trimestre') 
+
+        if anio == anio_default and trimestre:
+            error_message = "Seleccionar año y trimestre es obligatorio para aplicar filtros"
+
+        # Aplicación de filtros en función de año y valor
+        if anio != anio_default:
+           
+            cantidades_rama_historico = cantidades.filter(anio_id=anio, trimestre_id = trimestre)
+           
+    context = {
+        'error_message': error_message,
+        context_keys['cantidades_rama_actual']: cantidades_rama_actual,
+        context_keys['cantidades_rama_historico']: cantidades_rama_historico,
+        'meses':meses
+    
+    
+    }
+
+    return render(request, template, context)
 
 
 def panel_sector_privado(request,tipo_dato,estacionalidad, context_keys,template):
@@ -23,7 +80,7 @@ def panel_sector_privado(request,tipo_dato,estacionalidad, context_keys,template
     
     
     error_message = None
-    error_data = None
+    
 
     # Año y mes por defecto
     anio_default = 6
@@ -32,6 +89,7 @@ def panel_sector_privado(request,tipo_dato,estacionalidad, context_keys,template
     estacionalidad_default = estacionalidad
 
     variacion_actual = variacion.filter(anio_id = anio_default, valor_id = valor_default, tipo_id = dato_default, estacionalidad = estacionalidad_default)
+    
    
     if request.method == 'POST':
         # Validación de filtros recibidos en el formulario
@@ -43,9 +101,9 @@ def panel_sector_privado(request,tipo_dato,estacionalidad, context_keys,template
 
         # Aplicación de filtros en función de año y valor
         if anio != anio_default and valor != valor_default:
+           
             variacion_historico = variacion.filter(anio_id=anio, valor_id = valor, tipo_id = dato_default, estacionalidad = estacionalidad_default)
            
-       
            
     context = {
         'error_message': error_message,

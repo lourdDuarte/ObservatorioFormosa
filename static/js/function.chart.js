@@ -195,7 +195,36 @@ function draw_line_column(data, meses, title, id){
 
 }
 
+function draw_pie(data, number, titulo, id){
+  var options = {
+    series: data,
+    chart: {
+    width: 750,
+    type: 'pie',
+  },
+  labels: number,
+  responsive: [{
+    breakpoint: 480,
+    options: {
+      chart: {
+        width: 200
+      },
+      legend: {
+        position: 'bottom'
+      }
+    }
+  }],
+  title: {
+    text: titulo,
+    align: 'left'
+  },
+  };
 
+  var chart = new ApexCharts(document.querySelector('#'+id), options);
+  chart.render();
+
+
+}
 
 // function draw_pie_chart(lista1, lista2, id){
 //   var options = {

@@ -50,7 +50,7 @@ urlpatterns = [
     path('empresas-construccion/', construccion.empresa_construccion, name='empresas-construccion'),
     
     path('evolucion-privado/', privado.evolucion_sector_privado, name='evolucion-privado'),
-    path('trabajadores-privado/', privado.trabajadores_sector_privado, name='trabajadores-privado'),
+    path('trabajadores-privado/', privado.asalariados_rama, name='trabajadores-privado'),
 
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

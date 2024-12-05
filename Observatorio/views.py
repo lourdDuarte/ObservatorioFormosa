@@ -8,6 +8,7 @@ from Supermercado.utils import *
 from Supermercado.views import *
 from Ipc.utils import *
 from Ipc.models import *
+from sector_privado.utils import *
 
 
 
@@ -49,7 +50,10 @@ def consultas(dato, año, valor):
      elif dato == 'Puestos trabajo - sector construccion':
             indicadores = get_variacion_construccion()
             grafico = indicadores.filter(anio_id=año, valor_id=valor, tipo_dato_id = 1)
-    
+     elif dato == 'Privado - evolucion de empleo':
+            indicadores = get_variacion_privado()
+            grafico = indicadores.filter(anio_id=año, valor_id=valor, tipo_id = 1)
+     
      return grafico
 
 
