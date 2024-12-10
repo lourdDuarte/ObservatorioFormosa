@@ -46,7 +46,10 @@ INSTALLED_APPS = [
     'Anio',
     'Valor',
     'Comparacion_temporal',
-    'sector_privado'
+    'sector_privado',
+    'Dgr',
+    'Energia',
+    'Transferencia'
 ]
 
 MIDDLEWARE = [
