@@ -24,7 +24,7 @@ class RefsaUsuario(models.Model):
     cantidad_usuario = models.CharField(max_length=200,blank=False,null=False)
 
     def __str__(self):
-            return str(self.anio) + " " + self.mes + " " + self.tarifa + " " + str(self.cantidad_usuario)
+            return str(self.anio) + " " + str(self.mes) + " " + str(self.tarifa) + " " + str(self.cantidad_usuario)
 class RefsaUsuarioVariacion(models.Model):
     anio = models.ForeignKey(Anio, on_delete=models.CASCADE, related_name='+')
     mes = models.ForeignKey(Mes, on_delete=models.CASCADE, related_name='+')
@@ -34,7 +34,7 @@ class RefsaUsuarioVariacion(models.Model):
     variacion_anual = models.CharField(max_length=200,blank=False,null=False)
 
     def __str__(self):
-            return str(self.anio) + " " + self.mes + " " + self.tarifa + " " + str(self.variacion_bimestral) + " " + str(self.variacion_anual)
+            return str(self.anio) + " " + str(self.mes) + " " + str(self.tarifa) + " " + str(self.variacion_bimestral) + " " + str(self.variacion_anual)
 
 class CammesaDemanda(models.Model):
     anio = models.ForeignKey(Anio, on_delete=models.CASCADE, related_name='+')
@@ -45,7 +45,7 @@ class CammesaDemanda(models.Model):
     cantidad = models.CharField(max_length=200,blank=False,null=False)
 
     def __str__(self):
-            return str(self.anio) + " " + self.mes + " " + self.tarifa + " " + str(self.cantidad) 
+            return str(self.anio) + " " + str(self.mes) + " " + str(self.tarifa) + " " + str(self.cantidad) 
 
 
 class CammesaVarDemanda(models.Model):
@@ -58,4 +58,4 @@ class CammesaVarDemanda(models.Model):
     variacion_anual = models.CharField(max_length=200,blank=False,null=False)
 
     def __str__(self):
-            return str(self.anio) + " " + self.mes + " " + self.tarifa + " " + str(self.variacion_mensual) + " " + str(self.variacion_anual)
+            return str(self.anio) + " " + str(self.mes) + " " + str(self.tarifa) + " " + str(self.variacion_mensual) + " " + str(self.variacion_anual)

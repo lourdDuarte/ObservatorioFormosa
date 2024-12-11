@@ -15,4 +15,4 @@ class Transferencia(models.Model):
     variacion_anual_real = models.CharField(max_length=200,blank=False,null=False)
 
     def __str__(self):
-        return str(self.anio) + " " + self.mes + " "  + str(self.variacion_anual_nominal) + " " + str(self.variacion_anual_real)
+        return str(self.anio) + " " + str(self.mes) + " "  + str(self.variacion_anual_nominal) + " " + str(self.variacion_anual_real)

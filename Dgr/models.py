@@ -24,7 +24,7 @@ class Indicadores(models.Model):
 
 
     def __str__(self):
-            return str(self.anio) + " " + self.mes + " " + self.tipo + " " + str(self.variacion_interanual) + " " + str(self.variacion_intermensual)
+            return str(self.anio) + " " + str(self.mes) + " " + str(self.tipo) + " " + str(self.variacion_interanual) + " " + str(self.variacion_intermensual)
 
 
 
@@ -38,4 +38,4 @@ class Recaudacion(models.Model):
 
 
     def __str__(self):
-            return str(self.anio) + " " + self.mes + " " + self.tipo + " " + str(self.recaudacion) + " " + str(self.recaudacion_acumulada)
+            return str(self.anio) + " " + str(self.mes) + " " + str(self.tipo) + " " + str(self.recaudacion) + " " + str(self.recaudacion_acumulada)
