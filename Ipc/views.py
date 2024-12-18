@@ -2,6 +2,7 @@ from django.shortcuts import render
 from Observatorio.utils import *
 from Ipc.models import *
 from .utils import *
+
 # Create your views here.
 def datos_ipc_panel():
     anio = obtener_anio_actual()

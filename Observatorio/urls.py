@@ -22,6 +22,8 @@ from Patentamiento import views as patentamiento
 from Observatorio import views as observatorio
 from Sector_construccion import views as construccion
 from sector_privado import views as privado
+from Dgr import views as dgr
+from Transferencia import views as transferencias
 from django.conf import settings
 
 from django.conf.urls.static import static
@@ -52,5 +54,7 @@ urlpatterns = [
     path('evolucion-privado/', privado.evolucion_sector_privado, name='evolucion-privado'),
     path('trabajadores-privado/', privado.asalariados_rama, name='trabajadores-privado'),
 
+    path('tributaria/', dgr.view_dgr, name='tributaria'),
+    path('transferencia/', transferencias.panel_transferencias, name='transferencia'),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

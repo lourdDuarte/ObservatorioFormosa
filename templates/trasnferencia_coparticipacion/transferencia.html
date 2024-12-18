@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head_content %}
+
+    <title>Autos - patentamiento</title>
+
+{% endblock head_content %}
+
+
+{% block container %}
+
+ <div class="content">
+          <div class="div-content-l">
+            <div class="content-description-l">
+              <h2 class="mb-0" >Transferencias automaticas por coparticipacion, leyes complementarias y compensaciones</h2>
+              Las transferencias automáticas en concepto de coparticipación, leyes complementarias 
+              y compensaciones evidencian un incremento nominal del 171,3% en noviembre con respecto al mismo mes del año 2023. No obstante, al deflactar la serie por el índice de precios al consumidor, se observa un incremento del 1,6% en términos reales. Si bien se observa un incremento real en el mes de noviembre, la disminución en términos reales de estos fondos en todos los meses anteriores refleja el impacto de la recesión nacional en los tributos coparticipables e implica una reducción en la capacidad de la Provincia de Formosa para afrontar sus obligaciones, 
+              llevar a cabo inversiones e implementar políticas públicas.            </div>
+            <div class="content-chart-div-l">
+               
+                 <div style= "width: 1600px; margin: 0px auto;" id="transferencia"></div> 
+                
+            </div> 
+
+
+            <div class="content-chart-div-l">
+               
+              <div style= "width: 1600px; margin: 0px auto;" id="transferencia-historico"></div> 
+            </div> 
+   
+
+
+
+          
+          </div>
+     
+      <div class="content-filter-l">
+        
+        <form method= "POST" action="{% url 'transferencia' %} ">
+            {% csrf_token %}
+            <div class ="content-error">
+
+              {% if error_message %}
+
+                {{error_message}}
+              
+              {%endif%}
+            </div>
+           
+            <select class="select1" style="width: 130px;" name="año">
+                <option  value='0' selected>Año</option>
+                    <option value="2">2020</option>
+                    <option value="3">2021</option>
+                    <option value="4">2022</option>
+                    <option value="5">2023</option>
+                    <option value="6">2024</option>
+
+
+            </select>
+            <select class="select1" style="width: 130px;" name="valor">
+              <option value='0' selected>Valor</option>
+              <option value="1">Formosa</option>
+              <option value="2">Nacional</option>
+
+            </select>
+           
+            <button type="submit" style="display:block; margin: 0px auto" id="btn" class="btn-filtrar">Filtrar</button>
+            
+
+        </form>
+
+     </div>
+
+
+       
+
+    </div> 
+
+
+
+
+
+
+</div>
+
+<script>
+
+  function datosTransferenciaActual(){
+   
+
+    let intermensual = [];
+    let interanual = [];
+    let meses = []
+    let anio = ' '
+    let valor = ' '
+
+    
+  // Obtener datos interanuales / mensuales
+    {% for data in transferencia_actual %}
+      intermensual.push({{data.variacion_anual_nominal}});
+      interanual.push({{data.variacion_anual_real}});
+      meses.push('{{data.mes__mes}}');
+      anio = {{data.anio__anio}};
+      valor = '{{data.valor__valor}}'
+    {% endfor %}
+  
+  return [intermensual, interanual,meses, anio, valor];
+  }
+
+  function datosTransferenciaHistorico(){
+   
+
+    let intermensual_historico = [];
+    let interanual_historico = [];
+    let meses_historico = []
+    let anio = ' '
+    let valor = ' '
+
+    
+  // Obtener datos interanuales / mensuales
+      {% for data in transferencia_historico %}
+        intermensual_historico.push({{data.variacion_anual_nominal}});
+        interanual_historico.push({{data.variacion_anual_real}});
+        meses_historico.push('{{data.mes__mes}}');
+        anio = {{data.anio__anio}};
+        valor = '{{data.valor__valor}}'
+    {% endfor %}
+  
+  return [intermensual_historico,interanual_historico, meses_historico, anio, valor];
+  }
+
+  transferencia_coparticipacion()
+</script>
+{% endblock container %}
